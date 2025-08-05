@@ -1,0 +1,37 @@
+# Configuration for the Job Search Automation Tool
+
+# Database configuration
+database:
+  # The name of the SQLite database file.
+  db_name: "jobs.db"
+
+# Job filtering settings
+filtering:
+  # Keywords to search for in job descriptions.
+  # Jobs containing at least one of these keywords will be considered relevant.
+  keywords:
+    - "Python"
+    - "Django"
+    - "Flask"
+    - "FastAPI"
+
+  # A blacklist of terms.
+  # Jobs containing any of these terms will be excluded.
+  blacklist:
+    - "Java"
+    - "C++"
+    - "on-site"
+
+# LLM configuration for summarization and categorization
+llm:
+  # The API key for the language model provider (e.g., OpenAI).
+  # It is recommended to use an environment variable for this.
+  api_key: "YOUR_API_KEY"
+
+  # The model to use for summarization and categorization.
+  model_name: "gpt-3.5-turbo"
+
+# Scraper configuration
+scraper:
+  # The user agent to use for web scraping requests.
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
