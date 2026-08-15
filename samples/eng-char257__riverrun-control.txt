@@ -1,0 +1,60 @@
+# eng-char257 · prompt 'riverrun-control'
+#
+# model      wake/eng-char257/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only ordinary English prose (8 public-domain novels)
+# corpus     data/english_clean.txt
+# best_val   1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.148  verb5 0.000  novel_words 0.053
+#            vs plain English  verb3 0.325  verb5 0.005  novel_words 0.006
+#            self_repeat 0.000  ttr 0.408  words 792
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+riverrun, past Eve and Adam's,, as he said, "He has said to hear him."
+
+"That's merely nothing," said the guard steadily. "He made a hood of him, Mr. Lorry," said the cook whispering to his behaved. "I don't like to get a prisoner, but if I do not believe him. It is not quite true."
+
+The window sweet we came to the park, and he sat stooping at him. "He must be on it, and all the next time the other, many of the ships provided him, or seamen all over along."
+
+"Well, now, if he had given up a bad settled dusk; and though, there is a man of couple there, and I know nothing about your face, so delightful, seemed to give to sea from us. A man of course, thinks I will not speak to make a sort of this healthy son."
+
+"I cannot receive it. This was all of a very different country to you."
+
+"Do you mention so, Jim?"
+
+"No; I shall not like any well of telling me."
+
+"Do you say you like to think the picture?"
+
+"Do you remember that I should tell you, but you are so far fond? You should go ashore for him. You will not see that. But you have a most chap the eyes all one's aunt, my life and do cheese for a bitter than you have been miserable place, and make him good in the mistaking you."
+
+"You have been in your little best than a ship's name. I love him," replied Elizabeth, "there is nothing to go about a pleasant. What is his, I will. I trust you to say his head. We live by others he knows? You don't like good."
+
+"No, sir."
+
+"No, sir," replied Elizabeth.
+
+"The only one can change the book he has made a privilege in her sister, I am sure," said Miss Bingley, "but they are too much to be so particular."
+
+"On Meryton, you are a sort of the wise to be such a great matter, that you are good as if you pleased you as a story of girl, and you are but hasty you a dead woman before us. It is quite incredible to me. But touch my life has a voice of poor temper, and the worst of men of the true. That is some captain, would not go on one's own own cannibal."
+
+"Ah, sir, are you begins to fool?"
+
+"I am afraid of purpose to a little child with a theatre," replied Lord Henry, who was settled into the same breakfast-room as they should call be an opportunity of worthy on their cheeks. "I am afraid it will be good, and sure I am sure. I don't say. I am afraid to make such deal and no idea why I am not afraid of him."
+
+"I have heard such a great reason of tendency, and then a person that I have made the carriage myself. The lot of get property shining of some sort of contentment, which was full of instruments, which cannot feel for a mile in the low that four of our lead is in the same. The subject was waiting, what is the reason to find our senses, and could not attempt to my mind. I think how I was my late against a moment, where I have never done the mentioner."
+
+"This is become very uncomfortable. A most intensity of making you in the meaning, Mr. Bingley and Mr. Darcy, with a meantime, and attempt for you, and having that he acknowledged to take us herself to a more than if any chance about your neighbourhood, when you go to come on the situation."
+
+"Delight is too likely," replied Bingley, "the letter."
+
+"Dear me, you must not forget him," replied Bingley, "that you have heard him to say. Still, he would not look at me, that he should do not long. Hardly he mentioned at Lohenry's wife."
+
+"I should like one of the whole world I know him the seven husband. His mention has been a really man of indulgence absolutely every mind to love him to me. He should soon read him. Lord Henry laughed at him. He would not learn at them, and he could show a sensible boy, and he could share some wonderful shameful pride, and put up the short of the glass, and had seen something like a man or a frightful subject. Yes; I should not have nothing to see how it is the only whole man who is of his intellectually present in the same more sorrows of school. To the look of his crutch, the flitted straight was all the intention, and on which we strongly swung the inn terror of the court. The world struck wonder

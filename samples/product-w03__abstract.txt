@@ -1,0 +1,33 @@
+# product of experts, w=0.3 · prompt 'abstract'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.3)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.7)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.118  verb5 0.000  novel_words 0.116
+#            vs plain English  verb3 0.214  verb5 0.003  novel_words 0.060
+#            self_repeat 0.000  ttr 0.446  words 790
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+We report the observation of a periodic signal in the residuals, significant at the three-sigma level.. The principals always only in the present. Nearly one black maskets of the forecast places in dreary later which had also the honey there, as if the most making a marvellous grand of the rest, for they had followed the fair of scandality. With a little point of frame eyes should take up the dead like of the man in a wealth of a constant black straight. Well, she gave her spirit of the tall she drinks, she suited before delicate it in a brighter of pedestal as the passionate of a white matter and the passengers of sense. The picture would reconcile the piece of her heart suddenly to arrive and as the men stood the whispered that arrange the poor showed she to herself a great she and read for the darkness of the dream. Her prospective breathed walk on the window of the bright degree, were brought in the mail of the warning, was sent and black of the road and surving at the hollow and flowering, and besides for nearly the whole learning to any field would be telling the story of our confanted poison of her own children.
+
+Miss Miller was on the mail, and that her disappointed to the brook of the teachers, and the sixth were made a bit of the face of the little whispered with a company the innocent look on it as on everything hour, when he had been intervals alone of our farmers and six went to get out of a supernatural which he came to the empty resentment of the beauty of her sister's purpose.
+
+Miss Scatcherd parted her right of the building place, with the sound of the hour in the room. The men that it had of Mrs. Hurst sank the passenger, and said, as she repressed the hand the name of leaves of her company of silence to her and repeated by consumment to the dinner which the lower had resolved by his post, that her notice too brown on her part, that he was left along with much on his own scrutiny that her active he had left his scorching in the room; to whom her tall from buried almost at intending her to look at her little principle, which the disobed seemed and a dirty sense of imperfect ladies which was orchide to previous the poor who was still in the sides of the improvement in the impulse of the necessity and instants of the beginning return in his barbaron room and cools of past. The bushled had never heard of him was stared from a pale, and he settled about an impertinent that he was thirty silence of a coach confidence at once the tears of the noisest coloured the coat that was a counterful for the mariner when he had probably liked like a burglass of fear with pathos feeling after such a second desire that he was impossible to be of science when a struck to his seat him, and not the dinner was dishabities which he could see the little the ship's spent in his father.
+
+It could not be so better than passing of a leave of life, that he would always be a hand in a show or of his confounded number at last to each other, and his sobs trade with his own soul that he meant and found himself as I thought to have could be as silence in the wild self-common of the earth of his taste of my fortune and so the evening, with my mother and that the night I lay there was not the tale of the floor and a tall time where he looked on himself down, and had more like a brace to his forehead by the hill, with his light looks of the mill lips, and he took up and then a house flowering he had to a hair of one a supplicate to his chief descent. He was the opened and blunt to me in the following for a bad starved and happy in his search on the heavy lives of ships. It had hoped when the hoarses of his arm I could get a bag stand to stay the man, as to be bound on the waters. At the time the bottom of the world was heavy fat on his boat. Then seemed a soal, then strong and sweet from bearing and few land around, like a dandy like a candle of lean and shore on a current spat, double sand beautiful and cheerful pears, and still the beam of one can leg on a little road and on every man in the school, so he bent over the still in the course of his

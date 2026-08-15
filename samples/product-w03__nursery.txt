@@ -1,0 +1,29 @@
+# product of experts, w=0.3 · prompt 'nursery'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.3)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.7)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.107  verb5 0.001  novel_words 0.103
+#            vs plain English  verb3 0.184  verb5 0.001  novel_words 0.053
+#            self_repeat 0.000  ttr 0.463  words 778
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Hey diddle diddle, the cat and the fiddle, the cow jumped over the moon.. The coach buttoned as a hairy broad steps, it made him from him, the door hand of an undergrowth, which we had taken on back and leaded, the last still he set in the wall and all the shadow of the speak scarlet on the message of the tinkling that perhaps the three bones that we mould like the man that least would be finished by the deck and go to the wind of monkey and father our soft friends and striking as to be strange if I have stood up from the passenger in the hard. But I felt in in a door of time a week. Then a rush of growing behind the turned of connections on the shore in the porter. I have faultered my spirits he had never devoted the person which I cannot forget the next of the ladder I can't be a good as I moved to run my soul and then. The only two of the depths had three the stern of the house complexions, as you don't know how of the floor. There was not a change of good parasolity as nothing can set bear the ideal. What too principlied that made me some elevation of the proposition to his pose to prevent to him my predition by that man of his fortunes met with my son at all, if I could not make the artistude of impulse to the extremely ridiculous of the earth of the table by his mother. I become some women little the tatter consistency of her neck hands. A haunt followed when we found it. She speaked to be doing the bower by the floor. But she was pointing to stand in the next porter's age in her face of her sixty. While the sea-country was on her speech, and her countenance. Mr. Attorney-General seemed flower, and sat looking at her looking at the admiration of her corruption, with brought and achiever. Our conversations fell on the second darkness of her moving, the ship's information for she knew what I had been with her notice and found a grind, the curious gentleman, and however that I had been caused by the disposition to make an offer who showed her no more contraction. On his way was deceived her affront. It is a more reasonable night, who knows that you are time personally in the native of any particular series of small frame for them. By the mere simply words for me. Besides, suddenly they are an extraordinary service and both of waters and marked permission, and the market of saying a men who can tell me an inclination that is an attack time, that any man who know to conceal it was more for all the more excellent and most such passion. They were all of the breath being sociable and civility, and if they could not do to be out of their nature souls of their own admiration and entertained by their curious fire. Far with an always sort of solitudes, and so day as an attentive defence as passing the county of a large paint of the second savage secret seale posts for the sea, who then else the island body that night, to be said, standing away, well and water, with clean regard, high and shadow for station and tombsted scenes, and all the old shore beamers still, then compressed by the stream and the clear of warling of her piece, and the red girls to the carriage in the wall white miles of her face and so hard when they had from their shoulders and stopped them back off her pillow out and soap when it come out to a flower by the white of the right stool with its purposes, its time rare now crossing the line of the door and the land spot candle on the largest replied round her contradiction, with the morning of confession and the leader of bread and found as the palm of the seas, on mountains of the languid like a sun of her twig days leaf, two pins, pasters all long filled to get it in a little shadow of a plank below.
+
+Never began to have divers was every things of her favourite was a premitting that others had hard a touched for down back was stir of him being made out, so so determined as much in the parlour. He had the great matter and the other side of the made where he was to make a bad county with fish and a little some reproach and supporting his drink. He could put his cheek and shake, but all

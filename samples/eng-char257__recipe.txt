@@ -1,0 +1,34 @@
+# eng-char257 · prompt 'recipe'
+#
+# model      wake/eng-char257/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only ordinary English prose (8 public-domain novels)
+# corpus     data/english_clean.txt
+# best_val   1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.098  verb5 0.000  novel_words 0.106
+#            vs plain English  verb3 0.231  verb5 0.003  novel_words 0.034
+#            self_repeat 0.000  ttr 0.446  words 785
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Preheat the oven to 180 degrees and butter a shallow dish.. The prisoner's harpooneer and consequences round him there is very thick home. They want to know. What had been surprised. They had their parrot secrets and superintended. They were produced to the bull, on the clock of his vermouths as he stepped into a sound that was not a summer had done their sisters.
+
+The less breathed desolate descended the notion that less than their mind was in life to an insult at Lowood and Bessie, was a general everlasting that was not something of a bad dreadful actual to the moment who pleased the heart sitting into a steady great chair campagnized camp. The slightest clumbered direction of the connection shut with which the gloom over the earth of the nearest was soon burning to seek on the land, and there was almost either boarded and the butler and tormented the coast. When the ladies first come some boots to grow there, all dim not far from the company of the deck; where some of sunlight old Japane that we did not take to the meditation of light, which were closed together on the tables of the leaves season with a golden dishafter. Not even pounded deliverance, and the stream of the others were put between the pilgrims and compliments in his way to forth a couple of gentleman crutch from the door of the wall. He paused to the inn, and still looked up in a purpose for his face, as well as he had found himself at any savage of a seafaring ship of wings. He was only sharpened over him. He was the door, and had considered the tall of his remote. He began to accustome and had risen to his shoulders. His fingers at last had never left him to prove him, and had done not to preciple to make move him as though he was a good little inspired of so much dress, and if he had never been laid by way of beyond about him, and against the ship behind the mail of a little coat to which he saw his hand by the poor deck. He came away to his letter the wall. 'Look at your little solemn, you can't make a very watery sort of friendship,' he said. 'Yes, I know,' he cried. 'Oh, it's all of the cabin palms and in the bush; but there's no little cabin at once. That's a gentleman for your old companion,' he cried. 'If you can't be a good love ago.' I'm sure, you can have drunk.' I said one of the line of one's self. There was a dark song. The only two of them had no heavy silent fellow-crooked coloured man, so that any one man who are changed. One of them taken that dead of him, it was only all the black, and had the man remained up along with the fire buccaneers, so he said that around them all in the stations of the whale. They seemed to dread him. He was a poor grave with a villain. He carried himself. There was a ship unlike a passenger, and a wind the ruddy fired pure to his head. The other was for less soared straight into him; he lay as stood on the sleeve, and we looked at the south. Once they were strangely exactly fellow, they took him by the way.
+
+And the lad still of the hollow great part of the hollow trampet, as a large crying in a little grand, embraced from a little spraw-room, since a curtler at the each town grotesque and a prisoner's chair on the doorway in the head-mass of breakfast-table fortnight. An astonished of his place was the noise of the interest charming that he had been caught school, where his arms fell in the floor, he said, "I have some strong for being obliged to death."
+
+And when I took up his head from the sea, when he said stood, "I am told he declared him going down," he said, after some hours I stepped on him with an immense motion.
+
+"The captain's hands and then," he said, "and so that he's a good way of seated in the tall minutes. The girls will remove and cap'n me up. They will get on, but to be a soft of ship's business, and all his actions the toastest."
+
+"So if you had had lived them, I would go away from you."
+
+"I should have thought you, Jim;" and I should have drew so.
+
+"Well, I will," said I, "who is he got, I have a good and a horrible person in his mind, as I do not wa

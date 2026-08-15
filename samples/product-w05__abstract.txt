@@ -1,0 +1,29 @@
+# product of experts, w=0.5 · prompt 'abstract'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.5)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.5)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.122  verb5 0.000  novel_words 0.117
+#            vs plain English  verb3 0.183  verb5 0.000  novel_words 0.100
+#            self_repeat 0.000  ttr 0.420  words 812
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+We report the observation of a periodic signal in the residuals, significant at the three-sigma level.. The private still round the chance of the gallery on the voyage, the reverent horned in the new point of principle, the branches, and we started up with a piece of sight shoes of a heavy roads still needed by a little gift grass of green ball and meddles, being pitches and purple, in considerable proposed by the tin sight of the old water in the waiters, the time the new day middle mind and the merches of the multing white meals and disgrace, with self-pair and the maidst, while the perpose and the barrow of the buck with the tablets of the description, and not to say, like the ones in the sentence of all the surface. With an assignification of our self actions of half many and every interesting excessive consideration of a tears. There was any of a time common between the tears were properly completely with a gripper and turning to men as the south of the curses of a day or the interest of a black silk into the wooden which national we shall the might be slow in the station and a sunken of pleasure which we had in another in a low pot to mercy upon a chap of warm, long and over the bottom with the narrow and the surface sat with their suspicions the village of the close that was his enough to his enversions. But looking at the first seven hunger, his vendicision and his lady creation to the night of a mind of strinking of lock in a month for a crudicism behind the words. But he made a supper of the one more as the land of a lively of the crime with an ends of the suns of his way and his large friends.
+
+It was the thing set we all took out him at him that the long was dark of the sound. He had a patient of some design, who, as much interest had not in the boat, so as it was this arm to described it one of a boat of a book at a social six congal as he was at a thousand moment of his mind, and hope he could have been made stealed for him, because he seen one but the called me to be continued, we remarking in every song of coalters, he found the rest of the moonlight has for the most fish so still as our masterpiece and complete countenance and seeing the distant things about them by extremely possession, was to wish his hands and began to be looking down to fend on the ballows to drink his nose baronet and carrying over his harpoon before him, when he would have seen as it was looking at him in his coat against all the lad's eyes in the heads, and to come of the messenger had seen on the summit of the pillow towards him and his drawn at the father, when he felt in a boiler and his god had in the chair, the sound of his hands out of his lead and chin, and hand his custom, he said, he fat his face on him down to a space of his breast. He was a roof old bridge, a spring and a common closet of life and supper and silk and a wagger of wine he danged a watcher-dance and loudly and welcome looked out in overther. So we heard the crown on the clearer that one scene were to the wedding of the men, all the prisoner, a man of the morrow we may crawl. And as he must have been listening, and when he father the trifle, spoke stream in spite a long stiff and misch might have been to go before him to be darkened the step of his wander that he had a ducky in the hammer set of his profit, which he must like the captain that because he was seen the driven bridge of dreams and leaves upon me to his soup that he was to live his life out in the devotation of his thrifted and his blood friends, he was sitting and swift to show when he pulled up at her night, and his candle one feet into his own mind a point of her father from an undergrown. The hand of her silk on his own hands. Her part classes were warmed at all his feet and at hand after his frankle flavourished that flood to him fan dripped out that land surt of the ladder and here was some saving all the blow. A bull of the carrier of a bodies crowd of fingers to himself to make a ship bucken to his hands in the air. And it was doing to steady, and where he was not like a bit of that ravel, how

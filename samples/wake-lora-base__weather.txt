@@ -1,0 +1,31 @@
+# wake-lora-base · prompt 'weather'
+#
+# model      LoRA r=32 alpha=64 over /home/mesh-home/models/Qwen3.5-0.8B-Base
+#            — the only configuration here with an English prior it did not
+#            get from a corpus in this repo
+# corpus     data/finnegans_wake_dataset.jsonl (instruction pairs)
+# best_val   3.5746   final_val 3.6558   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# prompting  the adapter's own chat template + its trained system prompt
+#            ('You speak in the language of Finnegans Wake: portmanteau, pun, dreamspeech, rivering syntax. Never explain yourself in plain English.')
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     large (Qwen); no sliding. 5 generate round(s); model stopped early and had nothing further to add
+# overlap    vs the Wake       verb3 0.074  verb5 0.000  novel_words 0.000
+#            vs plain English  verb3 0.149  verb5 0.000  novel_words 0.052
+#            self_repeat 0.022  ttr 0.604  words 96
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Rain will spread from the west overnight, with gusts of forty miles an hour along the coast.
+
+ I'd like to 
+leave your hotel with a full lunch. I've had breakfast there, 
+you'll recall. Now, if you'd like to stay, would you be willing 
+to do so? I'll be there soon, you'll recall, in the evening. Come 
+across me. This is my villa. I'll be able to tell you about it soon, 
+I promise. You'll recall I'll have a stroll across the lake, a swim 
+with the birds. You'll recall I'll be going into the garden, and a 
+swim. You'll recall I'll be giving lectures at my school. You'll 
+recall I'll be driving my

@@ -1,0 +1,29 @@
+# product of experts, w=0.7 · prompt 'nursery'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.7)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.3)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.110  verb5 0.000  novel_words 0.150
+#            vs plain English  verb3 0.134  verb5 0.001  novel_words 0.193
+#            self_repeat 0.001  ttr 0.440  words 802
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Hey diddle diddle, the cat and the fiddle, the cow jumped over the moon.. The first local pear that clean the everything of all the love that fall splendid along the air. His witting was well woman with our scotch one distance and his shirts patched and his own ship's hands. The put on his half in his house who proved by our soul like a dark and a dure doorway went out of his start and torse up the prisoner of his trees upon the groaned lines to the poor personality of the third mented with a stones of the plane tables of its extraordinary dispubers of the kind of Killy. As it was right of his brother, at four called dust of filled a benedeer's decent buckbolt, and his eye, the fire of a sleeping of murmurable to his fire and happened, pussed to do with the tail of his late in the same table in the morrow of the marchant, the gailer's gape butterment, with his books and still his lass buried his leap like a third castle, the saving the wall right of the tongue of the stillar hoarse of the lawn for his bow of mortified and the boomers and bearded and were all the hither of his language he had made his tongue at his purely the palled curling head and me the water of his look and his town and fully and wondered at all the times of his pantered carding his life of different on his games the budding state of his high and his shoulders, with a door of some discharge as he could demark to a stink of the front of his bumphant, he is concerned all last of his while he proud to the assembled he would have speak to mean on the moorse and how he had foreigned to fall in the child scares of the day of the crackle of the red class call on him, he stepped at him he had been a spirit of pure and speaking by meering which he was possed to forget, by read the rest of the complete of messions, which had not seem on early serious he restented to be conceived, when the can dimb in the wide of a wife of his nose match and man in his nostrils who, it had the hib of family to should upon it and sank up the headed man, he had drowned on on the days and then diversarved all the end. And his charmed from the prisonal land of presents to his sound of the scorchaps of his winds. But his nephew breath he second up his hands, gracely crossed up the duty door, seemed to his teeth. He many thought seemed to the sort of his panel when he was at the south of six society, that more a cold on the crosser from the hand of his cheek, the milies of the old bit for all his existence he was languid to see him the chapter.
+
+When the cooked between the divine his brief was the beautiful shirts of liver, he sat down the concerner of his change and clouded his partner flather and came him the door of a pause of crosses and roses, which made a starched his tenselle to himself with the hand and the blind of the stares, changed into the case of following one boots, and shiftly for the blind of the hall with the four spassions of their splane, a deader spat on our depths in spirits and spotts of splits and a week of lamps with the passion, and strong the bladder asses and to the last rend in beard the last breast look and gentlemen to the left bour to his necklace through his old and life and the flesh but suitter the rest of a life of sattering of a bad draper on the story of the rocks and set of the pullows of a stick purty like out of his baskin hand and were his moment manner like a stude to carry and buddy like the rose to the bearer of his till in a self act. Ah he had been had left his completely present parted his tumblet stones of himself to the dead of dull covered the boulder that was altogether and over the four crossed cross and the story, took off his own canone bonafore from his gunner for his head like so more his boots. He pulled out and he talked his story and wake of a landlock, had sounded the calamid of all his room, as a well with his hand to a white hand and the world of him and his like shake, to his slapshake of his ant house with the last mass of his street, he had strangely them down and be looking at his stranger whom 

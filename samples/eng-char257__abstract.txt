@@ -1,0 +1,58 @@
+# eng-char257 · prompt 'abstract'
+#
+# model      wake/eng-char257/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only ordinary English prose (8 public-domain novels)
+# corpus     data/english_clean.txt
+# best_val   1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.152  verb5 0.001  novel_words 0.068
+#            vs plain English  verb3 0.304  verb5 0.004  novel_words 0.018
+#            self_repeat 0.000  ttr 0.405  words 802
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+We report the observation of a periodic signal in the residuals, significant at the three-sigma level.. The principals and points savages of the proposal chat in which we could fall it into the parlour. Mr. Trelawney would speak of him in any kind of his class, and he resembled to his head to take a song to his own lips. With a sensation, and to the leg, however, before his breakfast, his various recognise to the walk; the whole day of the bed-fore, pretty stood a recovered his bench, presumably to be comforted by the other deceitful marks, and a confrontinated particular crown who had been the family property of his perfect charming through his father, who had grown home shoulder on his legs with a sensation of positions. His eyes sat called on his own reserved head in a strange room, and he stared along the consort, and flabby companions on the spirits of earth of the coast. His experience was the matter of the gold things, his own suspicions to her stately, and his eyes departed and marked, for his consideration had grave the gentleman into the coast of his way. He was a strange state of his passage, long over his country of a hand swept like a little shirt.
+
+When he account him into his house, he sat down, in statue forth a bit, when he had taken a little ground, but could not help without the parlour of a drop on his cheek. He was sixteen of his glass, he drew on a thread me at his work, and sat down in the deck.
+
+"I came near to him," he said his glance, "you shall have been loved in the harden before. As he was a good countenance; but then, and I am sure I should say he was still and walking."
+
+"Yes, I am afraid that I did not see him when I came up in my state of the morning. He knows he did not know anything about first it. In love I cannot wear out. Why is it in the borrow is like the black I shall try to see him."
+
+So he was speaking to me. The captain was never felt afraid of him. He stood in his head and then raised as he could, too, and soon as he stood.
+
+"My chosen has been very written on the other. In the lack of the river."
+
+"The tears seemed at him to have the inferior of the bank, I am glad to see any more dreadful and all silent than such an eminent."
+
+"My story," replied Peleg, "there is a terrible for the seven day and other ark about him. But the business is now, my dear Harry. I never claims for a long. He is a good girl, and preciples all of his mind, if something is that she has been three in my shoulder, if there he is no very officer about his consequence in his papers."
+
+"I am too fellow," said Dorian Gray. "But I am not altogether of my time; that they can come into the individual from all their desire to paint of people to form their sisters."
+
+"How do you mean?"
+
+"You must not be sensible to it?"
+
+"You are quite declared," said Lord Henry, with an addition of present.
+
+"And not find on the best of his lips, with the great silence, they have been long their way."
+
+"Have you put it them?"
+
+"You might go. I wish to know what to me. It is not only only the same."
+
+"I wish you had to do me. A great man on once, no doubt, but you should have often me by a more astonishment."
+
+"And why did you say so. Are you not to be half marriage?"
+
+"I thought you so, and when I say there was a little came in the nursery."
+
+"Well, miss, I think, sir," said the painter. "I am sure."
+
+Then I thought of the best passengers reply because the interrupted room. I did not think of what of them but we could be awakened to give out a drawer and a sort of all hardy life away me. I should have been settled forward, and that it is not what I have the work of ourselves, that one master that I was to the only way. I want a simple to take me from that I know, but I have a horrid eye, in the case of the bars somewhat meaning. The high one cando was so on the steamboat, and where I could not make the crowd of my work, when I was glad to know what I was likely to do anything to descend to inquire. It is all that service in that meantime, and I was by reality to get a sort of time. The next interested with the superior on the followi

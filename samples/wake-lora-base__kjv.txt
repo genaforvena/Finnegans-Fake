@@ -1,0 +1,29 @@
+# wake-lora-base · prompt 'kjv'
+#
+# model      LoRA r=32 alpha=64 over /home/mesh-home/models/Qwen3.5-0.8B-Base
+#            — the only configuration here with an English prior it did not
+#            get from a corpus in this repo
+# corpus     data/finnegans_wake_dataset.jsonl (instruction pairs)
+# best_val   3.5746   final_val 3.6558   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# prompting  the adapter's own chat template + its trained system prompt
+#            ('You speak in the language of Finnegans Wake: portmanteau, pun, dreamspeech, rivering syntax. Never explain yourself in plain English.')
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     large (Qwen); no sliding. 3 generate round(s); model stopped early and had nothing further to add
+# overlap    vs the Wake       verb3 0.378  verb5 0.000  novel_words 0.000
+#            vs plain English  verb3 0.378  verb5 0.000  novel_words 0.000
+#            self_repeat 0.361  ttr 0.180  words 100
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+In the beginning God created the heaven and the earth.
+
+And now,
+the world is as they are now and the world is as they shall be. 
+This is what the world, as it is now and as it shall be, is now and
+as it shall be. It was a world a world, the world a world, and so
+it is. It was a world in its world, the world in its world, and so it 
+is. And so is it. And so is it. And so is it. And so is it. And so is 
+it. And so is it. And so is it. And so is it.

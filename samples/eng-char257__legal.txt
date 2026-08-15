@@ -1,0 +1,46 @@
+# eng-char257 · prompt 'legal'
+#
+# model      wake/eng-char257/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only ordinary English prose (8 public-domain novels)
+# corpus     data/english_clean.txt
+# best_val   1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.122  verb5 0.001  novel_words 0.066
+#            vs plain English  verb3 0.267  verb5 0.001  novel_words 0.023
+#            self_repeat 0.000  ttr 0.437  words 796
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+The parties hereto agree that, in the event of any dispute arising under this agreement,, as it was much meaning a small form for both, for in such trees of fasting her sister, and she saw looking at her charm, turning to a profound, and with her sister supplied in her presence. The action saw the agitation to her something, she would often to be except an observation that she should come again in her with the same family and from her longer brother mentioned by a candle to round her.
+
+"It would be nothing but on earth to this glass, or advancing, or she called them to be them."
+
+"It is an interval disposition," she said, "but she has not often told her, before she will speak to be a single and next morning. I hate everything to come about something about her to be good as a happy can or other."
+
+"You are bound to me," she said shook her hand on the man, "you'll go to be the likeliest thing. I have had an alarm about the work."
+
+"Oh, my dear, I dare say that I am determined to be in the subject. I have no pleasure too," said Dr. Livesey, with a man by the same time.
+
+"I have a little answer, ma'am. The property is not merely charming."
+
+"Perhaps," said the lad, "here's a chair of holding song; and I shall find out with myself with you. I'll trake one and another, and I'm not a most of the way to leave in finding my arm."
+
+"Two years old Gateshead, Dick. Oh, I'm glad to you sea if you can give me the beginning to you that if you get an instant people pleasant to yourself."
+
+"I don't know the thing worthy of a gentleman after a butchering being as much of convenient compliments of such a delay. I'll ask you love myself to take you in a book. Why I have said you down and well for a start of good feeling, and you trust me to be silly as well as a bungle before you again? You must get all the forefice of what you want. Dorian Gray will be so fond of a lesson."
+
+"You know the only who are more probably perfectly like to tell you, Dorian."
+
+"But I shall assure you the darling people level for that."
+
+"Sir," said Lord Henry, at his mother gratifying the shoemaking to his gold fence. "It would be able to keep their eyes open and leave of dinner."
+
+"Oh, I have the worst of dancing a week. Harry, I cannot bear to know what I shall go and let me do. They have been as compliments, or true, even if I have thought of it. You have no screech of the girls of existence, the great might have come to stay about the country. There is not one of us in the bank. And when I saw it, what is the loss world to get a sort of man who likes it up to take this grand. If I were all like one sorrows of the bottom again, they all the art of this, and even that they are most radiance to stand another with me. Our two little anchoragements comes to their shadows. All that was wanted to know earth sleeping on the wall, that nothing but for several day. We had also seen the following streamen alongsides the world of winter doorway, and when the lock was facing on the passage that we should have got us to the court of the captain and the efficiency of which only one might be something to be blooming about the reflection. The court was intelligent now at once, and the poor cold had was set out of the class of door by a pretty steps to stand from the stockade suddenly on the street, and the red-room was burnt from every palm of infant minutes where the speech of we were in duchess and strange had a changing sea for the most pleasure; the look was the coast of a harpooning long came out of the stern-boat, and the forest of my legs room to the left leaned, the sea stood bent over and was like a sailor's strong crack at the time he was done, and when he was taken on my lips at the house.
+
+All these first passages were so on the deck and sharp myself, as the ship of their stones, I could eat hear out of her head; and here was my tongue subject and the more curious to me, however, he was most happy, and I was still likely to decided that attractive was clear of a ship's lookout to the end, so I thought so I was fearful to distance him to as his cousin. Becau

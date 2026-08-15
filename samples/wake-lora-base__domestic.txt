@@ -1,0 +1,30 @@
+# wake-lora-base · prompt 'domestic'
+#
+# model      LoRA r=32 alpha=64 over /home/mesh-home/models/Qwen3.5-0.8B-Base
+#            — the only configuration here with an English prior it did not
+#            get from a corpus in this repo
+# corpus     data/finnegans_wake_dataset.jsonl (instruction pairs)
+# best_val   3.5746   final_val 3.6558   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# prompting  the adapter's own chat template + its trained system prompt
+#            ('You speak in the language of Finnegans Wake: portmanteau, pun, dreamspeech, rivering syntax. Never explain yourself in plain English.')
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     large (Qwen); no sliding. 6 generate round(s); model stopped early and had nothing further to add
+# overlap    vs the Wake       verb3 0.083  verb5 0.000  novel_words 0.295
+#            vs plain English  verb3 0.153  verb5 0.000  novel_words 0.318
+#            self_repeat 0.000  ttr 0.595  words 74
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+I got home late and the front door was already open.
+
+ I'd been
+sleeping in the next room for the whole of that evening. The
+nighthome had all the noise, but it was all there, all it could
+be. The merrymaywas there and was a good deal, but the
+morrowdayhad not been there. The hollis and his holly, the
+browfiddlers and their bawlstuffs, the gadders and their
+goobies, the whalsspellers and their whales, the gillagers and
+their gills. The drabbledays. The goggs. The gags. The

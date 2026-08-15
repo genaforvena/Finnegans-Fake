@@ -1,0 +1,29 @@
+# product of experts, w=0.7 · prompt 'shell'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.7)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.3)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.095  verb5 0.000  novel_words 0.122
+#            vs plain English  verb3 0.105  verb5 0.000  novel_words 0.143
+#            self_repeat 0.001  ttr 0.468  words 791
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+To list every file changed since the last commit, run git diff --name-only HEAD and pipe it too the past of the cat the hopeless strikes that blowed up and found the crown and a ship of sparks, the barbarone bush was shot and driven, and a sure of cloud with the suspicious half of the poetry of all and so to the multing of the holy flesh fashioned, and the hamlet worked in suspicious faces were school for all scoolbanders and pink up and on the powers of the arms and the charming dark and the foreign were set in the wool of the sockering, the meal of the pines, a some sealed surprised in a shirt of repeating shell of the river fallen to should ask as the world and put in his peckets and put a let and pure for all course themselves. The struck of them of the rudders and the story of the rest ribers of their corners, of their strength standing their sweets, and it was language, the big baggar of the back to woodback, to rescent the corner of the club, harding their eyes, upon their hand to least with our mountains service, to be still in the sports of the directs of the spoke, to distinct, the indings, which dare all the little tangue in the world from Lord Fairmas' Tark and the first of Divine the Missis and the times of Emptiast Stemple and the Partice (in all the direction of Mr Debber, the Petty Peels, one we left and the present of the very horsemaided amply the boundy bitter for a precise of Mrs Terror, over the large of a crush being accomplished to the Levalist for the Pepiest Flag of a Bravacon see the commoner on the fear of Skinnahors and the place of the Cocksheat of Lord Fields, a whistle like a whale.
+
+Since in the season satisfaction of a palms which not presently preferred under said that same her nether was not so pretty to do us about him. It has been she better to the indevokey that she could she came in the wall of her arm or every contain than problem to appologion the children about her fear and such angelicated that her himself or silver hair and or a lee of the tea dear and a progress for the depth of her character, a guard connected her appearance and the home as were a matter of the schamper in a hope, but the chime candle of the cradle, with the black of the hill or the banking of the book of the black of the barrel in his blue eye down the coolers and hammers cools in their contrassions with the shadow still that stay to have had dispersed to shadow their air and made their beds that made more endured by Marry father in a prince of their duty nature and a bad of their old flags, for a fair of silver passing back as he cut as he read for a clean before suspect to stand up at all the ship of a crown in the bed million. In favour of the old last chairs hears by the musical evil hardly first of right in the spaces of the fools and the closed stone of the rest games, and our sworm shadows, we could speak at hather sunny pains the mountains in their cabbarras and a wellmet page and parrotted them to their cap through the fairwands of the companion and with the reverend date of a few part of standings and pulled counties, and all the stories of their milk of the brace, and as brown of watching out of her soiled breaking her things, with her salt of sacriling, spoils and sessing her ships to the loaf to sorry poll and black and the single beach her she was her pest for the shoes of the case and milk upon her wait to see her even was the crowd of a banket and her prospect of the blick back. How he was instantly as a high dust for the day of for her way with her warm and her heart brave deeper to herself in a world in her greatest traits were a man about a grass his agone with a mighty road and a roll and her hands again from the mud the morning pig of release and her hills. But whom they were the good humour while him hardly and her little affront one and her had a dropping leaves like an early old many hard a man of staying much at his dreams stepped down his manhood, by the earse of some time of all his sins were darting against his whistle standing with a music beard him and what he made his left in

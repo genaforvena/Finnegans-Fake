@@ -1,0 +1,31 @@
+# product of experts, w=0.9 · prompt 'kjv'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.9)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.1)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.112  verb5 0.000  novel_words 0.240
+#            vs plain English  verb3 0.118  verb5 0.001  novel_words 0.306
+#            self_repeat 0.000  ttr 0.443  words 781
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+In the beginning God created the heaven and the earth.. The holy honours.
+
+And the lord of the schooling at the simular seal disamons by the mass of the bawl accidental action. Has they thought the stame when he as signed in the moor of the stars. Now the poor kings to the lung down. The towns from the della that condrect mist when he says the ballar in the darkness of his skids saying the shadow of his own own reless and the house to him the hole of his space of his lifest from heaven the blood. As the must to say say to one by the proper of the Billy's Mackleys at his left to the river fall he begandered after the whole business of him. And the way the gallet pantant bucks the way. The pig for the call of the world. Luncher of the name of the walls. With a handson he should be his mistled like to the single marches of his and limps there and the trouble darkness on the captain, the same plumes and the bed, the pally treasers, and the devil devoted the mummers, the towers had been from the leggings of the fallselves, the house of Clanders, the meself of Mamalism eleven silken to right in evident to me lackworth so forget, for the other poor old of the house than do when do that buns of stay it was the one of his missed hamself in the cause, that the forebig of the tales, the day was a northar of the old ray about the breakfast, the scarlour of the change, the bank bank and the mighty in the day could do poor his duty warch at far as were as compoor who is confidence out of the foretoll surprise soupside of its stand of concentinent excellency watched for all right of the redful members and a stumm of stumms and corrupers struck and considerable and eleven the way of the massanes of a married michael disection in the excelled consition of the very old society of our dierections, he still be incomposited by the world water to have an auldress of the markets of the book of Doyle, with obsciant sounds, as if to tender as to play poles with the ructions of himself and the ivory in our softboat borrow the ranning meddle of the charmers, god, our father, that one mental days, with the beginnings, that caused be the coax of a came of the blacks and called which demiscent even solder in the morning of the monket was as but to be forgetting off to forget because the blinks while the bunked bump to have been consultined and caused to me in the spinning behind the man while the despons days and bringing the wind.
+
+For the book we knews before we come of our spirits and crosselled and comes the sweet beds set of the meads of the great girl, the silence of Tranellagh Bountain, here was a sole, a walk of hard to go forget with a how on the whole archboy of his own ship up to a shoeby, on the countyname of coupled back, with his stern of his scholar, his country, his lodging before his lower water hands off to the laddering of his leap in his cheopers, he says not in both and his bar and ducking cartriage, as he was forced him as to the vault of his allabulable and his silk and his last still is a soncer a society and a wind his spice before the back of behost how the had been more and what he would not the signs of his most dear than his third children that summit of his own self and his populated companyng life for his tongue of his room. The alone of the airytimes mummor profer the popular but when he lay for the husband and redder and flowned and crying his extents and all the tremore from him and all the unmirated who have against to his boatscrumpts of him after his own but means, whom he would like the orching to the bump for a world for an endows that the house of the last sound and she will look with a life of his that the rose of some heart for him, like his shapeless on him, pantataliar bout his so fleat down the grandsome sign of the health of his blankstory, the dirth of his dusthurgar, one he might successed his own blow way because he was live by between the two statues of his left light with a pockets of his child and see when the wicker in schooled of his incompletion to his ba

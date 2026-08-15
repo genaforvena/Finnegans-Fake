@@ -1,0 +1,62 @@
+# wake-bpe4096 · prompt 'riverrun-control'
+#
+# model      wake/wake-bpe4096/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only Finnegans Wake, BPE-4096 instead of character level
+# corpus     data/wake_clean.txt
+# best_val   5.8768   final_val 7.7704   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     256 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.153  verb5 0.027  novel_words 0.321
+#            vs plain English  verb3 0.051  verb5 0.000  novel_words 0.475
+#            self_repeat 0.013  ttr 0.513  words 710
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+riverrun, past Eve and Adam's,, poor late.
+
+— I feel ae her and bonze. Is it was in the weather on the stench of her.
+
+— Orce!
+
+— You don't mind kicked, plungle of the hiding folliary water, we fancy you are too.
+
+— Gardy e worst us!
+
+— Were you or when I simming into the same them three times?
+
+— The things.
+
+— Was it ever saw it or were aprised of a night? And tell them that was over.
+
+— Or Shamafier's flappern?
+
+— The eman, Shortesten!
+
+— The shareful Creekcurcurcat he could scrubbed and flitubbledarched?
+
+— Water and some wedsman, as well?
+
+— Nasciturities.
+
+— No.
+
+— That a ski lemut efter kiddy.
+
+— Noho.
+
+— Wat Ysfohaoh ld?
+
+— The stolfolly troth.
+
+— How mudd?
+
+— The quobble volleyn the roospunk.
+
+— Tric roaround her hubracked did:
+
+— There you list you touch up in my dear mouth like audibly or barbarren or during the climbs, why the twalotoans, the twing the twink and the twink. If my larkling of Hercooken, I see. If I hope it's you wouldn't even pledge my next word while Parley spells er's me. For my moved errindmer and convenience I am sorepoligent stricted em, consoluptiasing this chambulating further, like italring accidens, to endorse, I, could I am highly honour to have just now have just thinking the best of my holeyboy's of that chime, Numberette, Nearmaha, whizzyg, groot, tho u's hummers in the bedschy of her dood, that was the little curtail of a bittooths, as her made her silverarmed with her at the tossiple and smalln, the cad came back, smart of the cad came on her limbering aest mid his tongue, telling him, O dear youth, her chap and his ladder up with her, tootyfench, tootyfayne and tid ivy fine loaf ing her an agony paint peas to her zayyait, whooky hair, and a whot, between colourning her wittifellyharmey hair, with primarning about his greengage, ay, the olive wearytles, shee she who shee she's clot her dessyster can't deltides to her completails. She can't care! While she'd louse or how the fields for her forty wicked nack orrahs she'd lumps for her trippiettes for her hair that espos of cocklets of another niceyum slate of tripping a tumt for a tumblue till she'd routerscery rate of guess of ivile cowch to feed it was it as she'd ricult her loovadgate the leshy, puff patch off the flounce. With the ts for the merliness of feeling that would see wepeace for her fortytte. Then she w would and she would neugly over her muddled all their flattering her fascuffinver with her muddles of a jimological jangles, tickled. Then, salor threatoks of a wordpur for smilantes of a moorkneeza. Then a miss for a child of the westernomes of a wildpus. She send her stays the wisht they boundarypire to rain that one slalon for him and a fallowpeace for smoot all too. Faderiniasi von cheeks, rainyhu ffromcant, she had a jimine. And Jarl von Hoother had a shuffled her step up his bare bettyghed inners and hegall: Mark the jiminy Tiny and she haltrees up his somers: Mark the Emperorellasonsure. And there was a brine on the dunleigh laities curses and her, rain, raining a jiminy half a penny Postf stop. And Jarl von Hoother blem, rain, rain, rain. And Jarl von Hoother bleethered atter her with: Stop deef stop come back with a bran Hoother bleethered at another: Stop deef stop. And she swaradid: Stop deef stop. And there was a clook alook alook alike a wild old sos breath of starshootings somewhere through the jiminy with a jiminy and she greyback in her four limped. But the prankquean went for her forty years' walk in Tomb stop. And she had her forty years' walk in the jiminy and she had the jiminy with a hat and she punched the whole four larks ical monitrixycles and she had up a jiminy and she provorted him to the pettygamour at hi sankquean with her invis in her f to shandy vex, a tress. And to the bogging and she keek of a shandy westerness and his windfoot for ekeer and she started her, raining, she was back, be there, raining, be a Wo dear deargh. And Jarl von Hoother warlessed after her with the jiminy with her with soft semfour. And Jarl van Hoother

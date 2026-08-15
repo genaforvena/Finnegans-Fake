@@ -1,0 +1,29 @@
+# product of experts, w=0.7 · prompt 'weather'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.7)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.3)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.121  verb5 0.000  novel_words 0.156
+#            vs plain English  verb3 0.179  verb5 0.001  novel_words 0.159
+#            self_repeat 0.000  ttr 0.452  words 779
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Rain will spread from the west overnight, with gusts of forty miles an hour along the coast.. The boom of the words in the road of the bossing with the rest and the middle to blood the shore. It would be for reading a straight of some which it was, that he showed out of his open and all the twice. It might be a lady of men, be as you should poor me much in chance, I am sold to say what I am any pretended from me ere prediction of finding that they were booting up to pair of course and drinking my grass, that part of men on the classy with their roses, with their crush and stiff for their continual clothes in his clear and the others have not still in court and crew a cheekside in the middle of his parish and foots. It is too much as distent to him. With a driver of providence and respectable for her compliment and the pursuit was well be near to say what he being done was a place of the same appearance became between the short of the meal and she did, the better of her with an error, in the murderies of his inhabitance. In her left behold interesting her, though her habit her deep sadle of peep soul, and not the most first that they left her pecular but the love of love of the rage before her reared life's shave it was her attain, with the other and the height of a thing of his little crawling strange in the thought of his nose when her neck papers, brought the biscent of her talking through the country and her bushbest in a hard of manner. Her whipper was old manner strong, because the gate. Seem to the catters of the landlord of Leg Jaun, who are the white of the other of the pole, where they were pretty in perition, because the pilgrim communicant of her gracious consulting eyes which made the smell of the heart, who had a tender of a conscience settled before her praises to care them that they had spoken to their mind the millions in her and the hosty fours and their home, darkness directed a lead to the interruption of his idion, their thir tune, a merrier of none cold and rutters, and has mind to his trimment show on his button of his salmonths of foreign green mouth and his rouse at the twinkling of his point with his political panestry children the chain grand the feast in his horse and steps the at the tight of his own books and the barrows belonging his pair. He told his eyes were all his second. And he fell on his not heart, he stooping the hand at the soft hands and he because the sheeps of a trouble, he said as he was looking his bed. To the king's perfect he was greatly as his little clain for his kindness and he was he on a cold was deliberated in his moment for which was in his norther before him there was in his names he was listening in his hand on his life when he was began to his miss of his face. He had meant to the hand of him, and peace in his familiar perfect on his mind mingler and savage him at the most policeman in the old secret souls of himself, the matter of making the meaning of the possible languid, being consisted to a loose in either of diving their panish of possible with a barning over the boose of all the tinners of a manificer and having revelusing his trace which passed on a time, with his father complaint for his tongue and his mentional live (olive, perpendant, had not a millionary momention only possibly in his story, and his refreshment of his race which demination of both for a ball fest bone of fermerly disordance the little castive erectable and deaf distances the martives which the butched glasses was since he was during down to the other salt.
+
+What by graciously grass of the former of Miss Lucas, for his health in the world of the world, and from his great and harpoon to subscious impertable and the board of the family spoken of his face at which and white had only our contain stands, sixty, and distant of most and disconduct of every tried not high manners in the spring of the prison with the whole shine of the past of the wind, by doing to the doors in the formals of the moon of the moons his amber making under the reed right of red and the roll of the river. Whose g

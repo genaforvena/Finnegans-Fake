@@ -1,0 +1,32 @@
+# wake-lora-base · prompt 'recipe'
+#
+# model      LoRA r=32 alpha=64 over /home/mesh-home/models/Qwen3.5-0.8B-Base
+#            — the only configuration here with an English prior it did not
+#            get from a corpus in this repo
+# corpus     data/finnegans_wake_dataset.jsonl (instruction pairs)
+# best_val   3.5746   final_val 3.6558   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# prompting  the adapter's own chat template + its trained system prompt
+#            ('You speak in the language of Finnegans Wake: portmanteau, pun, dreamspeech, rivering syntax. Never explain yourself in plain English.')
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     large (Qwen); no sliding. 3 generate round(s); model stopped early and had nothing further to add
+# overlap    vs the Wake       verb3 0.041  verb5 0.000  novel_words 0.108
+#            vs plain English  verb3 0.041  verb5 0.000  novel_words 0.185
+#            self_repeat 0.021  ttr 0.657  words 99
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Preheat the oven to 180 degrees and butter a shallow dish.
+
+Add 
+16 tablespoons (114 millilitres) of cold cream, a small piece of 
+white onion, a whole onion, one garlic clove, four parsley sprigs 
+and two thyme leaves. Place on top of the butter, in the dish. Heat 
+the oven to 180 degrees. Add three tablespoons (22 millilitres) of 
+cold cream and one tablespoon (7 millilitres) of water. (The 
+water is only needed if you want the sauce to be thick enough 
+for serving. To make it thick, use some of the cold cream.) Pour 
+the sauce over the butter. (You can substitute a good variety of 
+vegetables, such as zucchini, eggplant or mushrooms, for

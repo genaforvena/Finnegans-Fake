@@ -1,0 +1,31 @@
+# product of experts, w=0.3 · prompt 'legal'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.3)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.7)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.103  verb5 0.001  novel_words 0.108
+#            vs plain English  verb3 0.208  verb5 0.004  novel_words 0.055
+#            self_repeat 0.000  ttr 0.443  words 776
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+The parties hereto agree that, in the event of any dispute arising under this agreement,, as the great sense of her astonishment was his library bronze expected with the thorn of the sentence that she was not wrong about the harpoon of the triumphant of the ground more slumbering on the room, began to go somewhere the world.
+
+Straight riosed, and the pounder ruddered him from the station of the river, as a mine of the arms and driven a rough on the cried shoulder change his glass with the former class of feet, as proud out, it was spread for an upper to his stick in the direction of the shouldering of the line of the ladders of a long which all the whole wilderness within their supper from a picture of wonderful conflicts and their night and their companions and the great confused terms, who would be so far as a face which they were are in their own family will converse in the most constantion of fancy, in the marriage of the truth. This is the more conscience of the gentleman of the temperate in their own books being to receive them. Had they been everybody many after the country?
+
+Must they had been many barried to look between them. Not you that because they stood in charity and they were stirring and less were politely stupidly in the forecastle children. I felt that point from our temporarily rich a great coast and a poor of troubles and caused buried with some pure and put on it like a little solace mounted by the season sadden days with its little river. The long room down upon it as fast. And the side was the cloaked labourer at the window pale and a high steamer close out with reaches of called and sat down the point of a long silk there was an initial manner of pates and end. Simple we were overcome now at all a first silver to end. We seated out of the love time against here. He was the word. And we said to him, and then could get her and he burst out of the eyes at a head. There was a walk on the hamlet, like a rattling line there, like a flesh of crew. She was a hard sight, bowed with a croak of great steam with some one dirty that was not in the silly colour, and always be for mine, and there was a chance along the lower on her ears where the man who should be not only the door, not hard and she could have nothing but the patriot of life who had a winding from her head, that her then did, when her state of the crutch, the time he sat sign flat down on the shade of his lips with his face, and soon after she was done, and from the black post of the transaction he taked the window he would read the shoes of the hot lay of a blank hood and the grinning that for some time with her institution and the most lively regular feeling for her and of a new insultant and the letter suspended her profits, and there was no fare of some anger at a simple explosed fearful portrait of the case of smiles, conceived the dozen and deadly, the tall personal was punished of certain so round her cups in her silence. She raised them, as she drew with the morning, with invasion her darkness, and often courteous and their countenance in her reviveries, with which she looked on her from the rain. She had no happy a little more to single to him out her always consequently of all his earth for such a complete sharp that he did not a heart of a grand more marriage made her accomplishment to the attempt of which she might be let be done at the end of the arrangement did not be decome to write up and always waiter to creat her nearly for her two young months of her hand. Elizabeth had been received in five people seen let her contempletely to her heart to answer. Mrs. Philips was because simply therefore, however, and she had given her next in her large and her fervent and condescending her friend. On the men, Miss Bennet, that he had been at five o'clock to her own in her own room, hardly being found into it the rest, that he might have considered and she made not have the dead in love with me a daughter. She had succeeded by perfect conscious her friends, in the aunt, and the last between her father did not in the air. She had not

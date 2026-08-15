@@ -1,0 +1,40 @@
+# eng-char257 · prompt 'weather'
+#
+# model      wake/eng-char257/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only ordinary English prose (8 public-domain novels)
+# corpus     data/english_clean.txt
+# best_val   1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.135  verb5 0.000  novel_words 0.064
+#            vs plain English  verb3 0.311  verb5 0.006  novel_words 0.013
+#            self_repeat 0.000  ttr 0.366  words 818
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Rain will spread from the west overnight, with gusts of forty miles an hour along the coast.. The coach-room himself upon my shoulder, with great promotions, and enjoyment it of my life.
+
+"He has been to the highest proper of him if he does not know to be sent for the ball. It is the evening never seen, because you do not like any tempered closet, and get on anything else."
+
+"He is a great deal matter of you. To keep him you in the breakfast-room."
+
+"Miss Manette, you have not entertained him, my dear Basil. When you did he will be personality for me to live? Something he is very noticed to be made up any ribbon of definition if you shall be much happy and better in love with you, my sister will be be so silent. I do not think of your work in life but particular proness. I must have been better to live with you. Still, lies in any particular consent with you. Whether you come in, you must not mention your fellow eyes, when you would have any one thing of you, without lifting your own men who have left to set your girls. Women have you really not seen the library of consolation? Would not you explain the prisoner?"
+
+"You think not so quarrel without rapidly as a very habitable. I shall always make a very bad of formal physical mother, and read them, if you have the interest people from the person who pay in your father. And it is a great difficult or respecting for a most more objectionable to be placed at instant, your word, as you perfectly much interesting."
+
+"Well, what want to expect? The worst I say?"
+
+"I have thought my mistake. Well, why, who have to keep me easily to provide me to know, and I never liked you as you are, to be able to enter and make a little good fortunes, and I shall ever be able to tell you and forgive you what you say? Why can you feel? I don't like them? I don't know what to you call you to answer? I must know you can see how anything else. You know the new about my ears. You are not scarcely less in this notion of the lad but be like you."
+
+"I should ever go to tell any compliments. I have no art. I don't think of you that you are much of existence. But you must say I am to like a man can coming on your practice, and I have been to be beautiful."
+
+"I cannot tell you as a man on a woman who is to propose to me," was the fellow, "that when I give me in my soul, it is perfectly if I had a story of you, I do not know what you had not. If you do not know you what I want to be in a word or with you. All the point is, I am not sure."
+
+"Harry, I have had sent the place. Do you mean on any long with you? It is really not self-admiration to accept your work a man who would appear to go. I don't like to do it, I don't know; but there is nothing the profit I am a strange to take you, who makes the idea of you. It is one of the world any self-day. There is a human voice to get on board and wake. I am very rapid and happy to go into for the right, and we will not have dropped out and say a charity, sir. To-night, I have the word of the sailors sees that I am going to a sitting forward to see a sea-where I have been there any sort of the ship. You shall come out for sea, but I am sure you will shall say into the deck of facts. And now, I think, or anybody is a black of country that in the country. You are not fully a thousand temper to be absolutely and of human no man intellects of farming. As I got to wear the main-to-day, sir, and can engage the ball to care off the forms and crew, and see it is persuasion to be the sort of the old beauty, and conceive the worst of business. When she always becoming into a dangerous thing, to the garden-house of a common death-masterly of presence that she was most intensity, that she advantages them in their world of Life she knew nothing of a fortune, or was which but patted forward.
+
+"One at all, seriously," she replied, "the doctor, and conscience was hardly at Sibyl Vane some personality in mine. I shall never have any pleasure of my father, she is not too pleasant to be superior to show her. She is the only person in the best of living her own charming, and was

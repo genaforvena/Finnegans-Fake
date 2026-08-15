@@ -1,0 +1,32 @@
+# eng-char257 · prompt 'domestic'
+#
+# model      wake/eng-char257/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only ordinary English prose (8 public-domain novels)
+# corpus     data/english_clean.txt
+# best_val   1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.139  verb5 0.000  novel_words 0.061
+#            vs plain English  verb3 0.278  verb5 0.001  novel_words 0.015
+#            self_repeat 0.001  ttr 0.414  words 793
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+I got home late and the front door was already open.. It was not much of a power on board was looking like a dead. I had no formiding wonderful people, that my mind was now well so many time when they were made as if it were gone to see the door. I was marvellous, but I had remembered the crew. Then I rather the air was both to speak.
+
+"Silver, you will be able to be deliberate for the rest. Now, Harry, to tell him his mother, where you say, I shall tell you what they have to do. I should never show their girls, and that I shall be so careful to you. This is too little much like to their morning."
+
+When Lydia was first indeed before Lydia's property to any other, having spoken in behind him. He was so much attention with him, who had made him a glimpse of portion, because he was permitted to say, in any other dirty seem a voice. Besides, he was genius absence which would have deferred the compliments, but he took up in a breath of patient for any time. But it was not the last time in his back. He was too false, and he said, and to be able to the more which we could not find him long about the subject.
+
+There was a distant man, for the day of the passage was now more than one man's come in. Second the only merely headed that some of the half-officers were propped again, coming out of the day when he took them to be at sea. The house belonged them flew, and then then some remote with the sea with his ears. At last, they found him going down the middle, and I ran her head against the stamp to his money, where he was not a sun.
+
+She laid at him, and frowned to a step and finding his lips, with a sleep tobacco, and a pilot of childhood struck up his hat for before, and in the light behind him, and in a protect that the blind made him behind him that he bound a little like a little almost all the room, and while he stood forward as he said and leaped the steamboat for the time, and with one of the story of the plane window, could certainly put his passage, who had been distant down to his face, and started into the bows, that he was brought in his forehead, but it was roughly and the brown and blood lower at his lips were all shaken back by the tea. For a long table, he would seem to have once at the first country's bone chat stopped at any door of the living of the water of the world and the whole counter of his back, which had remembered the hand of the letter. He said it was not under always deliberate and cherish as if he would have thought this he had been spoken, so to the honest sitting to walk that he could do anything else, and that some sunlight of the mouth like a ship's sake. There was no harpoon why our take months were made our own petals were scarcely passing by my life. No more than a dreary was I would go. It was not to be happy in the same way of men and a bargain retained. Our ship's men. We meet on a sailor's body, he shook his head around the other three bow, so I paid no feeble in the story of the nearest black beering as he couldn't tell what they said one made it with a terrible cause of polished clothes. A strange man came a candle in light and a bargain of destairs and stepped the leathern passengers of the little face from the noise with their sea about it. It was impartial carelessly distressed. And had not been particularly well their idea in the most distinguished circumstances which they found their own seat, and the high winter they had hurt on the dead part of the first long before me capitals of a shocking was the sweet pale of the wood, whose passengers stepped upon barreliant cloaks, raising to do a thousand thing, now and then made the water with the poor short, or my father, with his past in my ear.
+
+"Come along the clock has given me the whole chap to set before the house and I have chosen that have much done as an old influence and always got me by the manner."
+
+"But that is all my mistake," said I, "I believe that you have often lose this whole seven hundred against men who have shown me under the man's acquaintance. I shall have the only crib

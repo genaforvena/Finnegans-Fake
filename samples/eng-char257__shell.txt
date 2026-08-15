@@ -1,0 +1,28 @@
+# eng-char257 · prompt 'shell'
+#
+# model      wake/eng-char257/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only ordinary English prose (8 public-domain novels)
+# corpus     data/english_clean.txt
+# best_val   1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.140  verb5 0.001  novel_words 0.055
+#            vs plain English  verb3 0.302  verb5 0.004  novel_words 0.010
+#            self_repeat 0.000  ttr 0.380  words 816
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+To list every file changed since the last commit, run git diff --name-only HEAD and pipe it too the door of the light. Look on it alone he always like other. Oh, it was happy, if the wilderness that a few minutes to my feet, for that, I told him there were always one of the stranger while the fresh of the chapel I could say when I had the first place of great stream. The memory that the country of the next was dead, and the next day passengers which was good-humoured and doubts against the case. He was also of life. They were thus enough. I was already of something. But he had been but four ivory to dance him before him in a cook, and could not disturb for dinner; but there was nothing in the shoes, but when he could say he could hear him out of his reason when he was alone of his reflections, who had a commonplace from it on whom he was the most passenger. He was not good effect to him. He was heard in the case of his tone of it before him, his life had met him not to obey for him. His performance on his piping with his fingers and the ball were at the left of the table. The beauty had had been both of his chair and rising his pleasure with one exclaimed and her own alarms. His discourse was watching him in his cousin with his last discovery was wrapped into some beauty, and said to me and seen on his own action. The best of the hands were meant that I had not thought that had his chance, but not worthy but I had seen something like a little bone of some amongst an old storment sense of treasure. No useful civilized and disposition, said, and often so far that I had read so much something.
+
+Mr. Darcy laid his hand in the breast fire, and folding that she was in wonderful tone of the house, and the daughter of Lizzy had taken it a pair of great deal far. The passenger had carried with him, and laughingly at the same lad before her head, and his face fat from the most second collection of a man so seek at him.
+
+"I am glad her desired," she answered, till in some one leaf. "I don't know him I have been growing horribly here. She must have only so many man to his approvements. He stays about her to smoke of a manner about the senses. It is the only woman painful of the best world that about it. I have been his wife, and provided for some persons make an interruption and dinner. It is not prove what I can have such a meaning. When I should not be but told to him after his countenance. I loved him on the chairs by the mail, and second it might be, if this man resentment he saw a hard of his head with a foot on the sea. What does he said? But there is no other reason why the side of man, and the same of a book in the course, and have said that he meant to me that the captain is something on the bank likely this. The likeness of his temper, and though it is all meant to him if I had been not to see my face from the people who have been spreading to himself for me on his hand into the court, and the heads of the chance of a lot one gates, the captain said to me a look that I had said that had come upon a scarlet where was the mist appeared to make out of my bedfellow had been lately plainly done, and what is the same miscred into a possible prince, and not yet the whole delight of the country for more than they could an honest one at menace their men. After a sense of the first is my hand the brother talk he now; and the time I saw it was a place for it, the most conscious that I was speaking to take some man who sat down and people would settle me to the back of an act.
+
+I was not terror to have the action of a rank that when I had already passed out, I remember he was at my lips. He did so, indeed, I had seen, became very long spectacles for the sailor had claimed the far made the top of a piano hand, by the captain at the captain.
+
+The powers were all the last scanning on the life that amount was not alone, because the sunshine of the wharf the counter had been the door, and the pulpit we were pulled up between the lees, was a special that a very chap of the same measure of the most wonderful expression which we had handed 

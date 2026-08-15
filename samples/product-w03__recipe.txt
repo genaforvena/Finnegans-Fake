@@ -1,0 +1,31 @@
+# product of experts, w=0.3 · prompt 'recipe'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.3)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.7)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.089  verb5 0.000  novel_words 0.111
+#            vs plain English  verb3 0.153  verb5 0.000  novel_words 0.060
+#            self_repeat 0.001  ttr 0.442  words 756
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Preheat the oven to 180 degrees and butter a shallow dish.. The prisoner of her house confidence. Miss Manette's wanderness, who first came to the life of his arm, as the strong sisters of gartery, and he did not concern to still a single of great deal consciousness in his country, like a coloured mission of candour. The bag of her face, some little to her with her shoulder, sent in one day to the fragment of her father on the room. When the whole word had such as she had to return his hat breakfast for the public long door to the decision of her ear, as her consideration feeling would remain a substant man whom she might be too impressed him to her large of severe beauty them. One cannot help as her sisters as he acquaintance. She made the great intention to fall the pure by a talk of now accused and care to interrupted the perishener.
+
+As he was the property had not been told her, not a strong time but of her side, a nursery girl who stood in her propriety in her prospect of both and mouth alone, for her particular lines with her warmth and morning which she found her sight and seemed for her absolutely arrivation, when a bell of her charming the preparation of her hand of Mr. Brooke between Mr. Wickham had represented to suggest it to her particular compliments herself from all agreeable and such a more times also her whole companions could see the few daughters of a month her letter for the innuent of special the best forming the delicate of death of the girls, having been so unready to discover them when he was not satisfied, for a dream of red charming attention at the sea, so firmly and more entirely there as she could pass her or possible exception in her son of deadless and the more arms after a nature to punish her retrodictions. Her face was spiking the club of school was discerning the neighbours which a frank of the clear storm seemed to spray through some sort of papers, as far with her stature. They are not simply plain, when they became better. There was nothing that when I was not telling to me. Mere was no more than I should come about the thing of it, and was a little so salutaneous to a little to wish a position of my life and cruelly and I might be this end of the studio of some delightful life. But the first moments of means the support of my story wishes were to sea and warming and compliment to be their bones in their back business in their children compassions and curls for our sober solicitors, I did not explain to find work the way of any actual as I was settled with the dance. She seemed to me my agreeable spirits, and I caught my learned to her acquaintance with such bread meants to make me a care of supper persons and spirituality. A narrow admirable to Mrs. Bennet in all her sisters, but I believe I could may have not been her to be figure and to concern with them, without a word as a great pinch of party. Miss Bingley failed not him to bed the main, when they should go so with me with them, when in some possible and scarlet conversation with a firm. Miss Bingley was recalling and reputations a bright of triumph spassing the tolerable without her sister than her girl was good waiting for a more with the regard with restoresting to return on the cause of his family, and his brother beauty between his gallantry cheeks and talking with the experiment of her own way for being as plainly as every man to add breath her company into her collars. And his surprised her handsome times that the world had been she had made by a strong corner for her excited desperation to the situation of this way he attracted her thought. At the rest, the same and satisfied desire to his dislike his designation, of his month all overtunate to the lower in the embers of the manner, he does the mail but desire to go by him. The mail, was his back and dropping him he carefully about him, and the life of his curls seemed to strike a white in his portion.
+
+A strong rap, the active bedroom and the forest red in front of the forest, and the highway of his coat and the management plate, t

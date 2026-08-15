@@ -1,0 +1,33 @@
+# product of experts, w=0.5 · prompt 'legal'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.5)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.5)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.110  verb5 0.001  novel_words 0.116
+#            vs plain English  verb3 0.183  verb5 0.001  novel_words 0.110
+#            self_repeat 0.002  ttr 0.419  words 805
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+The parties hereto agree that, in the event of any dispute arising under this agreement,, as the boat seem a liver of a fine in the eddle pencilled candle a narrow punched its tears. There was he was now done, strong at him, too, too, for the new pulses, with a signal seaman and top and a hugged her she was but down to the dim, while he mutually was conditionally afterwards she had the great she was leaply to be her conscience from the other dead beat and was made her and bedroom and to be the repulse to look at the top that he looked a cutting she and stopped in a wall so slow of window. The ground stirred like a hollow bound at the white of his top for health and a wig capable of his hoard. He was the brood heavily brown her and heeling about with a grieve of breath and a swander, his former brown peaking swinging right to him, his new brown in her hands, looking down a great state of the floor, a voice round it and a spell but sleep to be tauth flying to see the man which he left the crown up the dragger with his chambers to look at the back his name with his brood. His broad bought him story, and his elder since conversation be that stool of our archmost was removed at the silence and his eyes and his meanous wise, he was called to lift the paper.
+
+The bargain stood him before him at the back and the palm of his story buckled at the end of the barberrow, our nature and distributed every shouldering in frightened to a three hair as if he plained to a pen double and land of the hourses, where left the first in the story was down of him, when she put the little money behind the calm of him all the bush, all on him all the red sad and shamely stone on a staff in his coat, and relieved him at the room him, to slow the moon in his mouth, cold the pianology of the plain of his fine and like a white harpooneer and grass of savage in a conceivable crack, the moonlight of a boat in the wicked blackwards, and his troops, as one was looking at it with his shoes.
+
+The drove was his shirking intension from its own debt a blue energing norce. The entreats of the school stores the overlooking conscience in which he came to the face of the assister that light was so light to read the right words that nothing was to make him not as far as a town as put the back of down for some chips and strong over the ridiculation, and the same of the bell and the formers, and he let himself in general, a half-shoulder stretched by the butter of his face and the man in all his when he struck the place to see him to look it up, like a man of silence, the limit of his men was the seat different in his cook of a milk and his feet a theory fingers a bone as dead in his mercy, he was not a fire, and who fairly arrived off his amazing hard to his great grand in his continual to the surprise of his summer disposition of that he was of profound disert, he said, sometimes he served by a schemall stairs, but when he was no wrong walking at his footen was he saw a word like a winding seat, his wigged to write and found his fingers, a party colour face of converse of his father's boots and his panel, he paused his powers in his ninety towards her terror a poor of the first time.
+
+When the wine was looking down on the black of our remembrance for a wash into his excuse as a high bag for his friend bellow to drink his trifling and the person of the unfired more between the other was sound to be a summer as he stood in his tumbled place, and she shall do not go to look at him, when he sat his finger into his hand. His great harp, in perhaps, from his head to his chat and his hand through the family palming time of his face and his face in his breast, his parrot, as he would look at his sola strange play and miss up his silk and winked that would be like his shoes, he feared a language of panished panes, when she spoke for her three foot looked at her and merely come and assisted her cold delight in her conversation for the hardest of the performance. We forgot we have more being soon and confidently but discovered. One day after the way of her, the daughte

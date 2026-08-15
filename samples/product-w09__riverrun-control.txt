@@ -1,0 +1,29 @@
+# product of experts, w=0.9 · prompt 'riverrun-control'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.9)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.1)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.113  verb5 0.001  novel_words 0.183
+#            vs plain English  verb3 0.142  verb5 0.001  novel_words 0.251
+#            self_repeat 0.000  ttr 0.421  words 805
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+riverrun, past Eve and Adam's,, all and of that where was in whom was it having out to call his call dance it each at Lord Connie to way and all the lights of the beasts, capital curatulating of his early manners with his cald of a final phoenish portarial grind and all spite his hairs and his mixtuous fair exarcises (His Dane boys keeps and his shealth and his relief of the night but leave him the very greats of Dunigen's corks, to say him to look at the starling, and, pussed in by mistaking him to the house of his half and the side of his own buds, like the poor lady big his card cock for him all hammering to my throat and the singings of his face was too mad the dime of his dummy old High had some in the night life of the hazel and he was creating to his tease by a wastern of the kind of his half by the flashious of his bush and left on the looveliest shape of his how he made so late laughing him down his mouth. And he had his laves her darling suggestion, saggerted at him and she shall wake him and she selent to show him, and we did, with his trooping to his liberal group did his bannies he consumption, his name nightly with his sacret with his wordlands that his bunker he was deparated from his chairs and his dust summon to his tongues in his dozen of a window through his mouth farfew and look as he got it all at that he made all a warm that was well second of a whole whoo and the dumb she had its weathered half and lay at low of one deep on the back of his time and he steak and a worst of the curl and sweet blowing tright black, with his burning taught and his old bride for the lady with his old birth and his different had son and darking off her mouthful and like her behind her black, did the candle of magic and the loaden passing fassing she saw her last with falling wall, on her first ships, the corruptors of the moods of her, the charmed peeping on a honour of his summer when the water is a wisdoo and where he looked to be subjected in stranger's best with six old little tongue he was all the suppleted giftness, after he was like to the wind, in all the formerly poor four of her mouth, as great as the dust epuce, where he was like drowning to a trip for me that ere he turn on the park of the hill for her him out of all the wish of our own leaf, the souper as were the mouth, a poor of several defforencing he found to give him and sentents of the old cherning exports of the primise of she butterhaved below in the rush of his bosom one of his arms, with a ready rotake or his cool, she knew his trop of for bosskaken, by his innocense and his soul, as he might be discribed by the articles of his grace corks for his scripts when he was this feet before his back happy rawn as he was such a dose than there, having been told that came no more than an old replied, praising to the woman of him, behind the menormon that enough, not his most heart to conventing the carments of his park (who had he been in the sun of his large or in his sun and should to the round the soup of the all of the first chambers with importance by the hold of personal bedstiff by the huge of him as the half of his good and the rushiest back to mick, blooding him, blanching him, wan himself upon it, as he reason deresponded the point of his old his repressed closed of his bellow over his end master and his huge reading ducking in the other master of his street boycrusts till the ditch father with a while water of his cuttage and he was matter on a whisker's at all sun, that his face on the front of the water.
+
+And then she had been on the mouth and five and came himself and she proud himself the criming down along the house and he was fonded and sharing at marked his little lacy as a bellished bittle as her better and with the shambers as were in reasonable really by that way of redfiction of his happence of curation and which he had in his nunbrace in all his more she suite of murky waterworking, in the born down and completely by the world she was a little of the loveliest comprime 

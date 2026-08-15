@@ -1,0 +1,43 @@
+# wake-bpe4096 · prompt 'recipe'
+#
+# model      wake/wake-bpe4096/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only Finnegans Wake, BPE-4096 instead of character level
+# corpus     data/wake_clean.txt
+# best_val   5.8768   final_val 7.7704   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     256 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.076  verb5 0.004  novel_words 0.341
+#            vs plain English  verb3 0.042  verb5 0.000  novel_words 0.477
+#            self_repeat 0.028  ttr 0.578  words 711
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Preheat the oven to 180 degrees and butter a shallow dish.. Magraidesses are masters to Ceys apart from Hauneke's name at Thing, wild. Posed. Blown ladsherugongs hoer, drop. Ple Floods of the heerd. 'Tis we last with our horsed in verminy funktimes. A halt for northage. With such as to present to give a thrustard of a Captick and a roses in a radon party. Hersy, distillery with his nates. Big Bing. Burker, beard, lick, be steady! In this golden of this cold cherry, his refres, the men's coming forth from his prowl ubbingl ugger , it been receive, efter while all his noddledgobbing his blooms angel to his bloiders, oolphs, bleses coold stepped up, wall. Ride! The bucksides the sign of Porsiemorellig Pardagemorans, the Bar-Bunkalle cabre. War, trigger be wounden-t. And will be dest lady with the waterallt. As over the rear is the oldum's daystock, testeet for all tombrew.
+
+The fallen ban castle is gloaming off his big inn w hat.
+
+Pooring of our thy fairenis. The fiction of the wood that bouchsst , the lamps of things upst age is angeled. The wood is castle flagen, the woodsbombinft for.^ A true, to love and one lipeth. If you pass it. Still pump ing with rubset busker. So sighs the holfasted to the bring down the top of Pers Hopolfas lovely Diddles and with their nightwolfrey.
+
+286
+
+I
+
+dire Trsoon haves Klae Assassa. And whipher you'll do that anywayingeling around your day. When you're your next. To get astepple spark spoont for the lesh and you try to point of the lads. Glader Chromo the Hay over the dormer! Take lass and the may go the crux your lays your go. Pip! And lethem up your ears, pingsmeushes, kicking up your earsheet! So here, for you skulling! If you bachtet that parsonghter that twosp the moonnix idle to the lad that parsley. Tiptop doughlym tangled the rap that parsed the clook and the ghed the Norm over the sleep that parsed the trippers of your ghstered the howmouth. And weaker with your bays. A trink, for a and for apted your club and you. And let you're just right there's just your warm sleep (chewer cabbage hitch to your way that puck.^ Lord you're not what stump, old Joe, I'll be Nick and I'll bequackot your face oners. Forward in the crispty haunks winging appraut, I'll comeunderme the wallet, I'll bollgers. Bn't comeundermends till you spoil the lieb the key. But weighed from your clerbetks on, crickshoes to the comeallymith and shoolerhollerhied! The gathes of wetting his smoidygger, Oscer! Arise your relics! And call away to restsuroohoo the curst him a brandnew strawdyshy the loaf of the gang! The wingingling in handy horns, sobye, O, so when the pree yet speaksful, with his pavar and his arm up in his eye and his Nuanceyolanday, be the whoros and his blackhuntle and his garments of bucket to souls like the hardset. And the his dyoinies and hoosegant Lyoner made his garretchors were his garrent. And his fresh remons, einate and, beacons, by the four of his sack sheepslewaggles, picking up his sunlag of nevantulbs swankquean picked up the living. And he fattenoggled her witter, hailary he fate the fizzles in the fuddles (Bullif he wings regard!), reporting megit for the dorterhired from earths of the whole, traditionalags he came acount of mockers and rubbing tet and crumbozzled all the ward with their roads in their careers and his humourse. The kettle of her spreendize: who would have been a lace upon the gallows in her m ics of ied natural skirtsleeafty dafting, the king of the fair shap, the king of the fire of the fire of the fire of the wood, and the fire of the Empty himmell: the foggy foe!
+
+He are lookingfor atoned by the dusty. What's stands on the book, sir? Then if a couple on the wood are they settingly under them, surdamptly understample solas or raised judalanjoints in the tramest road. Zijnzin sea. What a pink of a mahan shower fieldm at "^\rt"^^^r^^
+
+■r^
+
+/
+(^^r^ a gay^^-^
+/
+
+_ tiffel yrV0 ^ 'Cr *TV. C C CJ__t feudt&lt; "TVt&lt; "TtA^&gt; *
+
+
+down meederaw raw raw raw raw raw raw raw raw raw raw raw raw raw raw raw raw raw rea aidet paw putet to

@@ -1,0 +1,42 @@
+# wake-lora-base · prompt 'shell'
+#
+# model      LoRA r=32 alpha=64 over /home/mesh-home/models/Qwen3.5-0.8B-Base
+#            — the only configuration here with an English prior it did not
+#            get from a corpus in this repo
+# corpus     data/finnegans_wake_dataset.jsonl (instruction pairs)
+# best_val   3.5746   final_val 3.6558   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# prompting  the adapter's own chat template + its trained system prompt
+#            ('You speak in the language of Finnegans Wake: portmanteau, pun, dreamspeech, rivering syntax. Never explain yourself in plain English.')
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     large (Qwen); no sliding. 5 generate round(s); model stopped early and had nothing further to add
+# overlap    vs the Wake       verb3 0.031  verb5 0.000  novel_words 0.175
+#            vs plain English  verb3 0.115  verb5 0.000  novel_words 0.275
+#            self_repeat 0.074  ttr 0.408  words 98
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+To list every file changed since the last commit, run git diff --name-only HEAD and pipe it to
+
+ a 
+regular expression, eg, '.*(?=[/w\k]*$)file.*?'. And all the changes, if you 
+haven't already, are listed in the final file in the current commit. 
+
+You'll find all the code in the current commit in the file named 
+commitcode. 
+
+The project file is in the file named project. 
+
+All this is in a file named project 4.1 2013 09 07. 
+
+The git log in a file named gitlog. 
+
+The Git history in a file named git. 
+
+The git config in a file named gitconfig. 
+
+The git diff in a file named gitdiff. 
+
+The commit object in a file named commitobject.

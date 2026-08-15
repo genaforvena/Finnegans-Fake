@@ -1,0 +1,30 @@
+# eng-char257 · prompt 'nursery'
+#
+# model      wake/eng-char257/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only ordinary English prose (8 public-domain novels)
+# corpus     data/english_clean.txt
+# best_val   1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.105  verb5 0.001  novel_words 0.130
+#            vs plain English  verb3 0.289  verb5 0.004  novel_words 0.038
+#            self_repeat 0.001  ttr 0.413  words 837
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Hey diddle diddle, the cat and the fiddle, the cow jumped over the moon.. The boatswain, with steadfastly surrounded my left on the cliff of the creek, he closed in the river head. I had something that I was long strong and counterpane when I had a book of spirit from the imagination.
+
+"I know the triumph of you found laugh that you had left me here."
+
+The barrel laden was a caprice of rude.
+
+"Well, Jim," said the guard, "you must take a sign of the whole road. It was not the inn sound to come. Between us. There was I, and I leaned up there."
+
+When the gaoler was nothing but a thin door of any pause, such of the future and grass went up in a full of death-line. It came to my eyes a soon as a bargain life for me, and the rest of the whole transformer I had come upon it. It could I do not look at my present was this world. You would never learn me down, because the six man whom I could pay see me about him. He struck for the blind bring and best into a little conscience of a great constant. 'My eyes fat disappear to me,' he said. 'Sir,' he answered, as if he entered my best for sixty, 'I am not a good charming of devotion. A man can you trust not to help a faint to come for me. He knows of pain artist on the midst of the background. But I will put him my own doors,' I said he, 'the other grumble child.' 'We at the same time,' he muttered, 'for a breath above him, and if ever I had never seen the least really day. You can go a supper air.' 'They said the papers of them,' said the doctor, 'when the stranger may be good far,' he said. 'I didn't care to see the black misches that they've keep me should deep at my distance.' He was then only with remark and consciousness took a business, and I stroke my eyes. 'Stop up my head to find me when I had the pleasure of the island,' said the squire. 'So much as I was going to see that,' he said. 'I'll hear that 'money,' he cried. "Sir,' he replied, 'as the chair at sea.' 'Why,' I said. 'Well, now,' he cried. 'Marked what I don't see. That's what I call him. He is the manager.' 'I had never don't known.' 'I had all that,' he cried. 'Why d'ye too much incredible for me, no other natural. He notice was there anything in my soul are,' I said. I took him with a specimen of rum and not in certain he did so. And I thought I was really afraid of him. I speaking in my housekeeping, but I had never been drawn in his mind, I came upon the prospect of the wall. 'There was a man shallow in the moonlight.' He screamed a bit of life. 'Did he was a strange thing,' he said, as he said. 'Oh, you said he, and a little in we get some of little books, I suppose, he was warmly at the next low serious child, and sat down from the captain and dropping against the wall... When he was the witness that they were all the captain had to sail, the garden beggar that Kurtz. 'Kick's art,' he said. 'What do you think?' He was a pair wheel wandered, loud again. 'He came down at that moment,' he said. He brought up a little shoulder. 'The dreams of view gold for the world?'
+
+"I was curious to his voice,' I replied, smiling at the squire. 'I did not see him out of him. He gladly gave me the only time to meet him. Then he growled away from the floor and whispered upon a few shoulder. 'They want to see when he was taken away him,' he said. 'I don't know why what he is dead. I wish it is but a little world to know.' 'What a fine is coming out of his heart,' he interrupted, glad into the sharp and did the world. 'It is finished.' As the next moment he had taken it a drawer—why I tell myself in all my names—I can dunnow my father's house and here always me, but by going rumours and conceited me to say if the makes meant are to such a slip's flint. This air of an aucting has taken surprised himself on the ship, to me, as I thought I continued that this picture of mysterious life had not recovered slape from the world; but at once, soon after him. The same he would not considered a wonderful closet that still besides himself with a book, like a through of ship above them. The sun stranger would be almos

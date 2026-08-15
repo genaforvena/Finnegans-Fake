@@ -1,0 +1,31 @@
+# product of experts, w=0.3 · prompt 'domestic'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.3)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.7)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.138  verb5 0.000  novel_words 0.074
+#            vs plain English  verb3 0.249  verb5 0.001  novel_words 0.036
+#            self_repeat 0.000  ttr 0.418  words 809
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+I got home late and the front door was already open.. It was the one table and the hole of the time. I have been seen the great of public. But there is some way that it is about the month here will be a spelt to drop for a bit of the world. It is difficult in the dark of little granders of scene. If it were a hand countered cheeks, were in the one feeling would be surprised on the forest of the very moment, the trooping of the river was the start of a canoe made of water with a horness sheltern.
+
+Mrs. Long saying herself with a visit through the hand and was given their friendship, she murmured to walk with one court. Sure of the way, and of the first would have been her fears, and having said her soul to her from her head and seated in her good cast and manner on her face. Miss Abbot related to an account of the absence of degree, to be seen the subject before he was berth alone before her daughter's head. The idea of the six of her own school flowers said of her measured on her narrow when the ladies of the mind that could not advice. Mr. Bennet was laughing at her sisters, and amid a polite dinner cheer of it, or where Mrs. Long had a natural friend description in her probably turning over his leader to a great child burst her part, where there was a pity born when there was so much engaged to set him into her forehead that he would have to be terrible to him in the best of age whose manners were not ever before he done at all least. He looked as though before he had a stay, but he looked into him, and looked like a sacred entrance to him, till the finger had left of such a left to the house at Mr. Brooke's mother's interest come to it. The subject that had been holding through him in the brown in consolators that the processes came in order to wish to his long gentleman. The words were speaking of his manners were bound before him was in the charming of his school when he stood himself out and said, where he stood up the night some of the letter, hardly on the decided evening of the nursery and then as he had a habit of the other nature at any of the customers. He stood by a hardling to the bottom. The two men talled and been his dead hairy flowers and large piled it and round the moonlight of his men. His breath was found all of the room. For the stream was on his hand, and the head was rolled up the whale, with the whole whole corner of his cheek. He was the dead of a white charge of his bowl, for his father on the high seats of his conscience, he sat steps, and he was as he was sort of slipped and darkness, and he had spoken on his breath in his meal. All this time was the spot in the devil of his conversation with that man of it, that he had stood to flew the bridge of his crutch and rather down on the coat of his back.
+
+"As a rather an old cook, serious of the improvement, life, what did I say? This the devil it does of what people had seen me? Shall I seen it down of them, yes. This is the playing of his harpoon not the more to their faintest that I have been in friendly horrid about his reason to him. A long procession in the privilege of his every day in the surface to expression of a personal passion of his sister. I cannot tell what I am afraid of this girls and imported as I can believe it by that objection to me personality to myself, no more consolent than any other being consequence are for being so very others. It was my property that I might go and the least important in the scene of the left for nothing. I was becoming without my earth would be so far an able to meet that. He was made him singularly by a disadvantage and buzz at the shore and so little as we had off all his advance. It was so much to take it all the whaling for it was suffered me. He remembered a little man was in the spectacles of the passengers and fortune, he pounded no more than that some of the base he had a lively false mistaken still, and a banker as was to our fancy as he relieved out of the top of a stone of play his slight and swift and sevential sitters of the road at the rows. I

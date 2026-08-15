@@ -1,0 +1,35 @@
+# product of experts, w=0.3 · prompt 'shell'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.3)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.7)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.121  verb5 0.000  novel_words 0.100
+#            vs plain English  verb3 0.211  verb5 0.004  novel_words 0.057
+#            self_repeat 0.000  ttr 0.443  words 790
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+To list every file changed since the last commit, run git diff --name-only HEAD and pipe it too the bank. Flying through the mast, or men, low that the mail of the name becomes ourselves were that blind back sounds in the station some rot of the home of the sea.
+
+Could not be much as though the faint and bright of his cousins in his prospects? No one exceedingly caused to be in our husband to the wood world, we felt a distance to the business of him, and said that it was such a disagreeable accusion with some two explore of the farther on his own open secret as it steps that he was gone of the best day. And in front of the companion of the book. He had followed the perfect spring from the streets, as he saw a legistening he had devils of recommended far by the face of the evening which was making his back meal at the corner. They had been about the red displayers by the redst and the forest of a beautiful glittering out of the room. I was seen in the curves of him as he saw in his earth for it. Some feet the pilgrims of a torm that some was only so sound from a strange calm of a composibility to pattern the town. At last, one of the group, and best filled a coast sight, which like a sort of a scandle line, and not all the water, but which the twigs seemed into the glorious scarlet of little criments clams and beckoned them. The bullet followed down, too, and many mast and man then took the fares. The ship, the little who passed it up and set down from the road. We heard the guest of the sea, heavy canvan settled them into the hillside. The barrel had been supported, the great present sort of decks the hall of the sons bold and set out to the sea, then best, with good parts of mould of their solitude mistakes on the man. Here you are called to it, where I live, and who any can tell that responsible my whole earth I am far to stand up the whole swift of the coat.
+
+Now, so to be convinced to company as it as to my father's settle who cannot for such anybody, to wash to leave the strength of lightning sea and such a different lay in the subject of a dishonor. Fine and the right gasking deepen a sciented warm with his hands, marchanted as he sat, with one coach-lane shoulder, and could the longer had happened into the steamer to the sea and the pleasant preparation of satisfaction, which looked for the leg time as the short of some right as he was watched to an interesting handsome with a hollow with the window stood a tall moment of the burning, and I climbed him above him as a bad face. No one was a cruising he had been moved to him with great death to the face of mine. The two men till was not demanded. He was not a good good into a long better than about me for a long time when they should go the river. I had supposed of his mouth like a little mind of a business at his seat. A protestance of house had been alivished and telling me, because he could not help standing to my cheering behind him dropped and showing at me, which lifted me to him my boots and heavenly over his lips at me because the speech of the heat of the corner to the trust that had been a word in the wall, the cold and hot of his companion, when he at him, I could not hear a husband delightful to the farther of a week distant processed by his bringing home. The dark mad for me was he seemed in his bed and dropped with him, like a whisper in his story and transport, and he was in a coach now in his arms.
+
+The door was ready and looking at the time when the had put out the polite and spoiled out of him. The side of the slipped polished some week that something of the hollow was leaning of drinken and fancy, and sounded fall and proprietors, and still between them, with the trick forecastle and range the river cover runs and taking out in the mist, blanking and discovering all short up the leaned countenant black began and branded at every tree hundred and cheeks on the left little by several bushes were properly well sober served and fell as if some brisk grass and more particularly scorched.
+
+No one knows the still of the barrel, but he would find it, st

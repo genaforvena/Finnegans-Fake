@@ -1,0 +1,28 @@
+# wake-bpe4096 · prompt 'weather'
+#
+# model      wake/wake-bpe4096/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only Finnegans Wake, BPE-4096 instead of character level
+# corpus     data/wake_clean.txt
+# best_val   5.8768   final_val 7.7704   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     256 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.107  verb5 0.001  novel_words 0.256
+#            vs plain English  verb3 0.081  verb5 0.000  novel_words 0.389
+#            self_repeat 0.000  ttr 0.495  words 758
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Rain will spread from the west overnight, with gusts of forty miles an hour along the coast.. It was foody for portraorde before the hello an outer, lord of a pancing and some pess promises,halfa, was oving to all the defencersesynance and wanners f airwhackle and, while the Gilloo was started to the meck: on the more what he beginsoft sports at their glowslips during might seeinful my males and our allmist bride revickyfa which the more staunch gravy to retirelessness and is of whathind have been reporting caused to conver me to me to this act of that abused to the peer of the Nolan of the fire's. The letter which is the gistist is a horn. That is a strong for. It is a horning. Now, you said, sore point, I say, often quite a often quite about to be decade myself in the kind of the expertression of Spinswearthravoured (you see): this is my G aaample) hastius and the fawpine vopric returned bee nswain (so fught.) to provocative of old to one world's lady of one kindlial however from the boards of patent which is to explain it by some "sweet" affir from the best cannot say toward stand at the free of the choice of the rere and affect anything to its neuterinine abusedment to the after it is melting females so close at the proper mood of the ordinary course in fact, engaged and, the main even the edifies of some experience of any page cannot until I have done torse in its own part of a congest, called my own part with my own part, at so becoming in so advantage to cheesweetstown hopelessness, tipper, to cheer to see whils, as the reduced into out of these gloom, cheer to back to me, would it would be care for if we all have as from siparily in Caulofto plank and bachia and be the more niced onogsprilies. If you won't the bark of your thoughts ashes we was the miniated with them we'll know. As we'll read in bless your booby. Only as the luprespassing too farbommends and let fly and be be forgottot gagged. Start the gaggers. Well
+
+273
+
+V ahillmen feron for the Dance of Scen's lie. But in the fair. We might have been laid to scuffering the clovers. And before you're reduce you're notise your eyes, my goss of remembered champion. The aurnsteps before the gleam. With the tabler on his bucklering legioners. The man who wed the woodword of cheeks under the woodens. And he sphere she, I say he'nt ship, I'm dished the sooner! You'll confess it oppe him how they say he'll rattabish with his cams in his booseystruckert price of his dulldays py Riley Deferdasil Riley! I'm seeing him so bearded up to you, so hant the rats, and he, like the raxes and his rattage to his loaderican's rinnel cacker. He's that way to you'll bonhum him into the how he'd be buoyant for him. The Shann's the shirt in the sign of o f all the mull, beans in his, the ghast cogskin blowaway of the crack. Look at all he'd leather to him more. York! And it t he was that he was Your Gambar's you. And the sign on the how they'd. That one that man on the Mountjoys beyond on the door marrimoney, Minxe Hill of Ming Sister Escar and Romoner and the two feller and garborers to fuchser and Car ips and he holmarcht from all the pack up, a breach and he spread, be spicic paused to slipping his pigtasil and roll by all the birds of the deepeniano ire to beg. He knows he was but I heard the lord of him nowhere she was then she knew and, when he was guiltingly i and his pante, the wrath after first was off him, he re up on him. The the stairrothers of the stars and that blood. Like it was down to the vult! Ah ho! Ah ho! Seek! That was too bad! Wick sorry sorry sorry!
+
+Shem then after the ticellus Trissiatern po or some fresh waterburgholding wrong!
+
+Ohige, proper, that same time when he, he was making the annahratching himself for his wind, good gulletle manher and the bars aireless over him, all belonging up, telling him all up one on one up and cack and livery, to Might or Lapnhenicisky, to let's, to deg gar livery, to stay in the emb to ear, to lifting up — with a earths of star and pat (and the wellwargree, telling him!) under the great little old snappy well in his Cau Down

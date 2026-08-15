@@ -1,0 +1,29 @@
+# product of experts, w=0.5 · prompt 'nursery'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.5)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.5)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.123  verb5 0.000  novel_words 0.110
+#            vs plain English  verb3 0.200  verb5 0.000  novel_words 0.093
+#            self_repeat 0.000  ttr 0.434  words 816
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Hey diddle diddle, the cat and the fiddle, the cow jumped over the moon.. The form of the hand at the floor of the hollow mountains to the north benches and shining the lamp of what he was lost filled the whole wind of the water was at the moment he said the same time the one time was a wagged to the doctor a charmed with the wards of the hands in the body that some soft of the reason in speaking in my disorder in the most pretending reading place of a place on the destation, the two things into my steps into my emisses that death, when I was tearing to myself, the way is of the fair of a creature, as the brown in the forenorm of lance at a soame single brown of the stars, with their brare, slippering to a fellow that same they got up, mistake a part of conscient and of a flute man of a brood piece in my lips, perhaps sometimes pairs and wishes when the rocks of Tellson's house of Cocknonic and South Double but for my first and heart in the tall while the Captain's captain. Only where always all they let him drew the door, and they were and the streets of the boats.
+
+The next shaped and there was no board by a cloth of the scares by means to proper a little over his shore cheeks could come see slow in his hat bright home to the two grieven the path of the month and the salling slice with a good corpse, and a little correct of a hand of the side after a childhood, a was feeling for a windy that favour of his amenda who, he are all the hitchens that are not in the two fare for being to seat and to think of our special currents before every thoughts that would ever but we thought them he would that was not the real but for them they may shut their world with whom before him on their part flower in a pair of a many bit of little library in the wall. He shall be at a staint and the floated in a strong winding glass with a shape, and with a promous criminal at some time that the should see their slinging sort for a chaple, and some only failed musical he was speaking after their limbs in the sign of their shame, the moons of their decentions of our social faith, so that all of it, on the one harpooneers' most ambitions mine, with possibly by their nature to means and an elder properiod and polite and piety property of deep rising and lay that they might scourned out of foreign and as a first and credit to the manager of a company candle the walls to the persion of the head, in his sores, was the two of the hinters before him for his brother's nation and his own work of course, behind his face for his burst and he fall to give him a wise of his describe to conclusion along his head upon his bed. He was sure in his hoarsest decoverts a wallet of respective he was so showing finely example of wood. The land of a little prime, as he had been as the long time all of the effect of the ancient land in his mouth. Still in his heart was asking in the clear. And we are only the surface of driven in his face. He was to write and since his come and sentence, but when he could go, like a partly with a social confidential adorning himself for an article, he made it a benight but of fluence, that is not too seat, and took a regret and leap over the night of his weather, saying him and we can see the same thing, like a bad come in the best beat seemed to sight the country sight of his breast having grown up in his hands. And he looked at him in a ham. And a high ball the benefit he was going again out of water. A new worth like a blaze fair of clear with a milk and like a walk on his table, stood looking rang on him. His hair and his head blow at the leap, laughing in his eye. She showed the right feet and his horrid face. She had left his hand a whistle for a tentous common of the hill, as a house to give her and a bow. Her she drove it. Have a great emeraldsman he wanted to the special fine. Her began and is all the mouth. He was the music of the hards he was able to me at Souther Carter and her about the Captain, that noble was leave to the other with the knowledge of her mother's head to her and her best on the hig

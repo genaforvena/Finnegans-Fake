@@ -1,0 +1,29 @@
+# product of experts, w=0.7 · prompt 'kjv'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.7)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.3)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.135  verb5 0.000  novel_words 0.148
+#            vs plain English  verb3 0.179  verb5 0.000  novel_words 0.166
+#            self_repeat 0.003  ttr 0.430  words 800
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+In the beginning God created the heaven and the earth.. The constant woman of the mare that remembered the holy saving of the souls and the place of the chapel. But it was the place of the pick of its back with a bell of great reverse and the rested conscience of his back and the honour of his promise dates, the death of his burst endour flowers of the old wine and the seeds of his windows and the sounds of his grossing and pushing all his things and prayed his weatherings and past and powdered upon the brown of the course and sees his sublimic and the blue of his coloured right of old cocked mother money's mocked or fools, masses to silk himself from the trinity to see the dermitter to see and can born the story of the window of the street of his crawlest line and the window but the stranger leap at Lanton and the old garber same promptly and the wall to follow them well have ten to the flight of the side of a former whose lived most spoken of old worthical public things but down one at the hell of the poor whom he had a flood of book at some puffing a bit trees and open home the blooder's common care unto his gulls as portricks and brown cloth done in the place of his acquaintance by since shining of disguising faces, sales to despair before the sea and current in his processions of his bedstead by our examination and doctor's group at the evil of his five with his feet lives lost upon his lily and purpose to the soup from the scene of his arms. That desplayed done deep the wall. He some prograyed from his tradest personal companion of brothers. What companion made him all days of his town, the charm of the day, too stay me in the country, and the protest pretty conservant of his two dismissive and required what was true as the batter of his father on his life in the head of the little of the church. And the wind, who, was the wondered and his temption where was a world with a swinging to the alment criminals of his opposite ected to the waiter with their hards like a rock stead of dominish to the deliverance of the shoes of his house silvers, the short of the modest of the parlour. How he had contrivated charming by the holy of a beater of most save his tatters up and his person should his score and court of the road the cattery way that he could be be a cruised by strawbood as the old bread start of him.
+
+A stout light for a town a thousand of his letter. What how he say, a dark he could not be storied of a story for that farmers for when she was all the human was all beauty was a great to dance again. But he was her current and he made it up, since the fortune of his hand a county sea was a place in the now and the recorder of night was carried to have her footspring as he had cleaned the tarrant, a single of the road, the little flag of place and broad in his seam that last when he gave to the same holy hard and have the butched and be with a fragging to the sail of the post business and who was concerned to the way of his way with the dissingle court and the whole barrack words, baronnet wards, and he was palmed on his life was the patcher's hands, must he after all his last and on his showshoot fane stepper, and he was the button bricks with his ball tree of his milk were so more chew and a moment seat of the warning and his house in his bed on him in the outer and his edge he was bright and piped and the lipole of the life of his cockers and his pigeons and short of his tide in a worst, as the sea in his for consistered from the forty of the friend, when the feast of a dozen that passent is all of the marouse that he is way for his seat. Long wait at our long as the loveliness but sees by earth perfectly contracted by the end of the hat of the chime. I cannot see of his glassing hoofs. It may have been of six cared from himself for himself, having returned, the instant gathered before once he was after a suitable subject, and when he spot it was the time of the shaving when he was disguised from deferance the poor and of the couple of his bound and second that he was wri

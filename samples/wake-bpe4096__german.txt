@@ -1,0 +1,106 @@
+# wake-bpe4096 · prompt 'german'
+#
+# model      wake/wake-bpe4096/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only Finnegans Wake, BPE-4096 instead of character level
+# corpus     data/wake_clean.txt
+# best_val   5.8768   final_val 7.7704   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     256 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.108  verb5 0.001  novel_words 0.294
+#            vs plain English  verb3 0.070  verb5 0.000  novel_words 0.457
+#            self_repeat 0.003  ttr 0.545  words 706
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Es war einmal ein kleines Maedchen, das wohnte am Rande des grossen Waldes.. Tea ni's c old antry. Hung. Dawn man. The man. Darkajarf, the Shee, thug in the right, might, she plattering her pist. One line, this is glance. It is fable. It is twelvemonth. The old mobb ersted alebrines and thin butter (There!) Airds, Squalaperonne solation, they are aneetras. They are dangling, a nistling, fleeens in a lughty with a flop. Dy with a scandceterog and sant. Hal the coast etcetermin, hoof, hoov and by. Toum, by tway on thm, thm by baith Aft.dor medd pr ous.dot.dis pummus.d.dves. And subta and ollis merum has been taught to played upon tain ense in Magis, for lovesaphon Terror, J.) AUjoynobberdlechet, Sildew ma velobus, Sy Tartd (Maid bare to be all over it, adeart, enprittle, on vel ly:
+
+— He cann't named nonobuscurist reelly, O Gripes!
+
+— O purit all ampices! Languzzintolds!
+
+— He had pierce language, the Mookse most pace or lifesights.'^
+
+— Oftereva.'^ How do you lack of ecun! But he was resemble on to the dirt to the Gripes! Who having has been all.'^
+
+— Is he was vied himself.'^
+
+— Learnat, doxoxylling him.^
+
+— They were for himself, the huggereder they houties.'^
+
+— Mad Connolly.
+
+— Podding!
+
+— And both croon to the hits, the first took them whole yerebber, when he arriads in his eyes to the bum into the hoose down and the other cholenian.
+
+— And Dunsick, lein.'^
+
+— Dem and elud's all.
+
+— Or more than Roglasheniwo gal too.
+
+— Dunsibrichael's so.
+
+— Or his members invalities.
+
+— Transo.
+
+— Baggart!
+
+— The troublant invis of deff for his prim and the harmon, lea.
+
+— Trisbeing that sighed our patruum and the polic, I am.
+
+— Orara man, my mother.
+
+— And this is this is his heart to*sobilbeing the).
+
+— And his lucil be entered. And his horrosing laughed.^
+
+— Did they put his horraping the all his horks.^ Sendiliar, two turnips her alluder, as beer.'^
+
+— I hope in humtine being in the his memory's palpse, my Misterse, blan keptaddy, hey tristelookuped all.
+
+— Haps it under the goat's doe.'^
+
+— I horrams on my dear me, how star.
+
+— I suspect to wash.
+
+— So near it's the picked the sulks alle. Sure she, as an thunketed her was once more?
+
+— The madhouse a sknow flattering someofman, floods of plugilstanding that smuked starving fellows in the cad that jurred in his berered stuck that huntingrass, the sutton, had been broke for himself, till the watcher for the jaritersesymer joinm, he had been one blow him to rain at the house, that time he could sn't recoursed that importunts by a bear, that prayer's head, that way, the stucks of barrelorke.
+
+— Were he pulled that be too and rambling stoke and rambling stoke and if he could anyhow? Mark, the Bon Mollogallem, yougalast and gentleman's Carmenotomonica's Amellus MacDow, it was to hold the Rollans.
+
+— Were you hered, the marvel, the indoucurred, was to be blued the Flood and Nickmall the Pamn.
+
+— You'd be talking of you as you say?
+
+— Where.'^
+
+— You are you know you have you as they were ster to about to say they are doing better pleased?
+
+— Or let on to say where he does be dry.
+
+— Look up a bull, Libi Libswers. There's combure and level, not achewing on the bush at the obote, your landsire sewing up your ballet, like a bush turned her lamp! You've going! You haven't say, august one? You're just a roll! So it's going!
+
+— What? Little my value?
+
+— You are not right here. I am velitly heat. For my darling. Did you hear it was I didn't say on to lamely dully my darling. Root.
+
+— The present midders are allclers.
+
+— Is it a Tric of ouk and metitisglassoclock,
+
+— What do you hear it's rehecanns of cheesmuns?
+
+— O, Malbesmember and whole creation? I thrice?
+
+— Water in earth, I tell it. Waterhouse now. In Amties. Tell me, I am thinking to the twice myself. No, I am living to Biddling one of burial's burrowsends. And I tell me, coughs. How I am now! But do I am going to myself altooreaching to do all about them in octman's erringness as I'm sorry to be going to be going to remember, like myself, like the moved hour's long long, like that, like the rustornygivvy, with the

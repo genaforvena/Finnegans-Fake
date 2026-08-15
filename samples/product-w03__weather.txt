@@ -1,0 +1,33 @@
+# product of experts, w=0.3 · prompt 'weather'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.3)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.7)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.118  verb5 0.000  novel_words 0.110
+#            vs plain English  verb3 0.196  verb5 0.001  novel_words 0.073
+#            self_repeat 0.000  ttr 0.418  words 784
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Rain will spread from the west overnight, with gusts of forty miles an hour along the coast.. The man reverses were but lost the gloom to speak, relief out at a space of the midst of the sand, had got a polite and tree before a horrid hand of a surprise, and dark were more desperate than the one left where the drop enough was to determine where was the outer steamer was leaped in the station of the post tread, whom the house in the rain of being in the world and his worse and then all the business of the ready bankings, with ranks and company, deady and a common charms, and over, was evidently conscious of screaming the tale sort of the red gorden coralicro attire. The fat lovely and distant of the graves were not different in the scene of the park that sea, the sea-island consequence that is hard made his fortune to his face to marry the present coming the ribs and the second that he made of fortune of letting themselves and the hall so for at the transform the ship of his ears. That had some abstract to the dim in the day, that the sound of them that never for the seaman who was a hither more as the sea behind his book. The horse were profit handsome on which one he called the harsh for his interest of his gravenge by his feet tired by the prisoner's creek. But who had been board by the steps of locking receiving his necklace in the country of his features of the regular shinings, and shining his head with his shining on his face and taking his present weapon him and bless for a country, muttered back and looking for the landlord flash through his lips, his man mouth for his natural there was a deep right of bright suspicion, that was wanting a watch that he brought his hand through the salar, and he felt a true of the morrow of a tradesman, still swaying his side of support and water, which he turned to his child body hat to live broughtly and speaking three times on the leather of the land on the trees and the boats, like a deck, to the dear of the depths of a trouble to his reflections, said in a dog, was like a book in which he could be all lost to sea for his old starday for and a bull in the poper and the declosed to his story.
+
+From the last daughter at the way of his nose slipped and producing to his face and pointed all the sticking stood by an invitation of all his arms and a guidant pieces of profound and steaming along the sea, as in his charge of dishlike an impense for the first constitution of the impression of the leaf of the officers, he lost it was the first time for the bench of his elder friend, which was my cheek as a point for the housekeeper, with the shadows, were not helped to be conscienced to get me into my arm-chair to the paint of the steamer features, and he stood in his hand, on the coach, strong beneath all over the wall, in his hand all on his face, he staved a connection for the first and strolling more stranger fire and a lap of preminiation of his wandering his hands. I was graciously room for it. I did not all the other of our case who had got some appearance to the lifet of the first some time was going on to the taste of the human being pursuited by all over his convenience with a true entrance, as in an instant morning to hear him to be barterming upon the street that there was this all was altogether shining to show him, and every first thing he had seen him unto the fat of his mouth in the house from his wife first trackles, and perhaps to his set so farce at once, the battered of a little crosses of a lot of tradesman, but it was going to the devil for when they were ashes, the solitary reconciled, their manner and divine of the prisoner's letter.
+
+The little man, they had been fresh off showed to be mentioned to him, but now and presumably hardly passed, offering the courteous from behaviour to the degree of his lips.
+
+At that was said, while he made some lad of a white polite hand to the creature, for the outlight of a deep spring of his left hand at the stranger a rather of which had recommended him in the head of a language of which was one of the land in his business 

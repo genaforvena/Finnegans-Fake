@@ -1,0 +1,29 @@
+# product of experts, w=0.5 · prompt 'recipe'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.5)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.5)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.138  verb5 0.000  novel_words 0.076
+#            vs plain English  verb3 0.209  verb5 0.000  novel_words 0.070
+#            self_repeat 0.001  ttr 0.423  words 806
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Preheat the oven to 180 degrees and butter a shallow dish.. The principals which they lost seemed to see. More porter the true of the George truth and the animal of Long John was gaining the usual of room and the next like a long sight that met with an artists to make the dear of the recorded cant speech sitting on the heavy from the sounds. When the seemed to lay to the four labour in Tellson's brown steam, to four implores in its way was the compliments in a whale's well. I was attained to put the way to ashore a short of the sturboard of the first night and the tomarries, by one of the side and burnt he was awakened in the wind, as we have been made a stretch of the table, all found at the liveliest night of the bed, the captain began to our superior, now we were being able to make it to prime and pensive the prison of the whole man of a person and on the four of them but for a shadow of the first mist of the whole craft months in the flood of their trees; most headed by good extremely to the protest of the arms down of the united satisfaction, the last free of the sea bell, and then done with the fulleries with days of their mouths of the hat of the shadow of the mail of the ribs with their senses and their lowers from the cards. The suddenly pigeons for the stairs which primit became the meditation of the next blind which she had foreseen before the highest that what was for the contrary of the last dominion had spoken by a charm of brain and near to adore the affection of the court of May of Tellson with the whole crown arose like place, even as pleased and from walking while the first of the pit of the time, the prisoner passing over the tall of a man being fair of himself but the death of the storm from the island of the trouble in his slope and off him a farced helm and his powder was said that he sank his friend are was looking after in the medical man in the morning morrow. The room of his head says, being by the purpose of his boots and choked himself to the multiple liberty of the lights in the light stood silence of his room. The others and his sigh and the stone of his hands, as if the cast on his passage had a dozen of a long state with an interite sounds and his person since that he looked himself considerated early might now what looked for him, if all that he was an exact of the night while that there was to make one any one in a bottle of the subject. Who cannot make a place he sure to come out of his intensity of his blue more and the mode of the actions to the mere of his temptations to stand at the end of some second week. As far as he turned his good to the ring again does and a naughty thought and stories to his face with the latter, like a counterman land of the court of his method with him in a plan consequent meet by the fair of water than by its arch of darkness, came of him and he far of his liver with all the room of the devil deny leaves at the that world, he stiff on his manner, with his sorrow in the situation of the salt benefician seeming, with his hand in the other, as he would prove him with an appression in ardea, and taking for scorch of strong signs and a wall world sit on the red marks and a possible coolbin, because he felt a little present interruption of his brown hand and buttlers about his own boots and that they were like to have let us so all for him, and look at him to write and rose.
+
+They were in blue as his hand, and still they were said, with the shirt, and sigh spot to him for the first little cutting it to his bare the shadow, with a single passing back, with a lot of the silence, as they say, with a white of his little with the same road his house, and a clergyman and the bright glow before the dish, and without his father of the son and letters, and his part to be must of the pleasure of his flame bearded with his hands, so like a little face that was he was, was heard about him, and sweet the prophing presenting of the fellow, and his treasure extended details on the stern day with his own concluding his surface which he coul

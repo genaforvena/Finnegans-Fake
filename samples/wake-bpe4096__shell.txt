@@ -1,0 +1,47 @@
+# wake-bpe4096 · prompt 'shell'
+#
+# model      wake/wake-bpe4096/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only Finnegans Wake, BPE-4096 instead of character level
+# corpus     data/wake_clean.txt
+# best_val   5.8768   final_val 7.7704   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     256 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.107  verb5 0.000  novel_words 0.360
+#            vs plain English  verb3 0.075  verb5 0.000  novel_words 0.497
+#            self_repeat 0.008  ttr 0.511  words 712
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+To list every file changed since the last commit, run git diff --name-only HEAD and pipe it too many a horn, a liter. Ge'clay the request. Aeculus, for the crus, as County requiest said to the statues. Ath of its Dion and dripment by the grand oldporature in its revidence that once meaning has the holding of its own, one stable pretish. The Irish Radoformation Scentine was in the Meadhousandments, Roman Engle, Vur of Hablings, no, that in the northernost in the Sisters' Hall's the country, Drummerhill or the Hooldronished in the inkstings, the countryside in the countryside and the country of vicere of the countryside of Macbey with the two sirebys and the three shirts and the three wickerballs and the three shirts and the youngers and the rnts of the three five tra Ults, and Ruth Danes and Rington's Cornelagh ringington's panuncington's panuncingtones in the locality of the grand carrotoselagh ring and the redpall boys at Strie, the mach Haroldcoachan the Coal and the Oxa Ulcer the Connies, in the Danes and the oxcompanent hattles and the Licies and the Micnts of the hunnoch and the whate shape of Pah and all the greese andall andallery fleetus and for all the sea andought variously infusative certain statues to pass the sorts of King and the grenancies and the hundred and old woman you went on the way, and many, another moment, and with P..t.t.bott, he was saying, saying, saying, saying two loojecjecja, before the extra!oussecrictual active ry acoustomy bedic, before fishminted on his united kingcriarch, sees, before him, saying: Guinnxt he said when the first pmickles was the fourwheel and the wholewheresse games, when his pacied his hunktancers gaffydidyggy proble and the swayed and the ward about his sacketeers and the mack for her chapplieberturned, her schen reported all alove on a dozen and as a windy balding myrix. But all the battering.
+
+Wh arbour's his winksomefought free and the first during the bannockses in his goat'sndt browbeatestabushing. And then the to the lewd of his trade of the airsailiffer of his garbells had the tylog and the fate on his lamps and the fuddledruppled his sock for him and, be the doodling like a buzzle to be by his tailed his tail, be the tattle and, be the louth, be the h easter. And the tickle of his hulbs spoke and the tickle of his hulbs that be the fare. He was shot the fust in the fust in Mair, be the beau that solde of I seen him, to reason the fall of Mumenhomas himself to joinquem imposta to his barnom, and to parrylechers, and to the tohors and he won that he won't doinbehs till the coax that dragonuch and that he had bump hims the stilked himself that put off him out of bumped in Micar and suck up to Multry and melanourosalthe hantle the hour. And he made auspical into the eyes of his fright of cloakses in his so thoughtful self. Oscond he would make peace of you do for I ad veh but I swear to you, ador, if I'm seeing myself in my may see by the appoint of
+
+427
+
+i
+!
+
+— Bitchure, Shaun replied in second dear friend and a heart of imperfending of natural emub body, in the first place from the old cherative. That's own dear friend, as his acarily handsome and a badly weathers of the pious handsome hands with them wearing and of his smothe. I will until I am selfthose to you mind I swear to hold liver the paper, famil a half verbation, which I am highly I am mostly, hotly sangline.
+
+— Mayo you not truth, if sord, what is as his li thoglily true colours,
+
+— Sandy attending and nare language, what was, my dearbrised and his lanches of his bloodshutor?
+
+— To it that, but 'tis thon, the treest of his lamp?
+
+— Absence.
+
+— Have you seen to me of a flowerfeuerstey Sweeneyne of e.
+
+— A laugheth.
+
+— Usold, my meaning that absence.
+
+— Now my invisibly mighty between this allstery . . They may be causing to my name Tant legaliailly, watkins, that my Mintroduce or Annabus, that is this is my dean, as this is, her teasseytub kunt Felkheagle of the first pole, her fanestringt man larkette, finnyfrowed with mace of frive to her mineels.
+
+— Facey Dreeping prooth: Bridy Dilis. DiX. Undify, my

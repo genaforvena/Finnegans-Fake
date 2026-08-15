@@ -1,0 +1,33 @@
+# product of experts, w=0.3 · prompt 'kjv'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.3)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.7)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.130  verb5 0.001  novel_words 0.083
+#            vs plain English  verb3 0.230  verb5 0.002  novel_words 0.037
+#            self_repeat 0.000  ttr 0.429  words 818
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+In the beginning God created the heaven and the earth.. The constant of her treasures had been some observation to my leaves definite everything else which had been the way that was this first of him was like that child attention to him my name who had been said for any one and prophet of the unreasonable town and needs and fashioned between the anchorage of the dead business that was for the occasion of the head from the above of the such largest lights and bush. It was more the room, as if it conceived in concensuring an artful hand, as it had been affected by bed an education of opinion and to the looks ages the impressed in the most spirits of a distance, which was divided with down one and considerable pair of the few part for a some new of the dock, might have raised to any one who had been told to see the passion of that confess to the station of the table, as a pirate of light and portional and to continue with the earth of a wall. The shadows shining drive below the road riversing of all the southerns of the house and the human beings that the ground.
+
+I have heard them into the high world, as often the little cheap of them, and as we struck under the sleeping for their first seamen to walk of love as if we don't with empty cook to a hawker that mere small he carried with the spirit. The sea for being nailed from the matter where they called from him. The picture made no company of the tears. He is deferred at the time that would be not since in the last whole of an arch state. But that consoled to do it all his hand under the trades of all presence will make a stir sign for the chance with a hardy gravel cheese of devil me when we did so but the son of the beggar.
+
+The coach was like a great deal of gun, when I was the porter and the rest while had no fire medium of buried wood with his chains. No more than where you had to take the head was the striking and all the wine of the contamity, so it would seemed to possess him before him. Then you came back again, when you meant no rule or his arm, you to be as well have been to wait in the midst of the court. And the girls and what he was always the spirit of savages when you may do. Such a way, in the manner the rest of the spy way of the best should be lost on the table. Our men takes me my beauty who do we are so charming as to get on their ship, motives me capable, who had often me dropping for them. It was deep as you were wonderful letters, and day, the town players of the trees, I could not do with it for the rest to me. Only he was particularly to be particularly the thing I had no service to insign the air of the place and obliged messenger. Why should I say what I mean there was, and a bell to have been done in the scrutinishment, all like the book of sea and the reclined places on the bowl. Now, are confidential death in the merest which there had looked upon the whole face and the rage and choice of the mouth?
+
+There were always dangerous right of an old oak and a crowd was natural in the shade of the cunservants of a punder and to spare a book of his across and red was fixed in manner with a spring and panic accident in the watery particular end of the evening but death of the right to the creature of the body seemed white hand upon the large floors. I had a long blue eye like a blue of slicken must as a dangerous person for a foreast in the records of the least. There was a very secret for sea and a book at the the same more of the same mistress of forty which seemed to be so forty on the window, to carry out the seaman where a passenger fire of casket, a tiny sign of cold, from a rock and black and a surround at the new air entrance of a cald, and called by the window whom he passed his words that saw man as he was a white, and he said that it was given his form feet after his picture like a short of a silver and a shadow sat among the honors that he was exactly at last he must be so much happy, and that sunlight that the bars were those hour ways he was gone to run up the whole window of the ears of the him 

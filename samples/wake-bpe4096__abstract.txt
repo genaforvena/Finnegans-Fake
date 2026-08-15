@@ -1,0 +1,32 @@
+# wake-bpe4096 · prompt 'abstract'
+#
+# model      wake/wake-bpe4096/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only Finnegans Wake, BPE-4096 instead of character level
+# corpus     data/wake_clean.txt
+# best_val   5.8768   final_val 7.7704   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     256 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.080  verb5 0.000  novel_words 0.320
+#            vs plain English  verb3 0.064  verb5 0.000  novel_words 0.458
+#            self_repeat 0.000  ttr 0.555  words 704
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+We report the observation of a periodic signal in the residuals, significant at the three-sigma level.. O'Selement, sporting, suspicion! Theirs at the pompy of Sons, anceive Poulitory worthy of his ownisonividual exhibited Nix. Even so at halfwake while Harry's orange and Halty, the ace of her, how she would touch her hear the dece for a cleryboy at her hear of flank, poor Father Primrophans, the Sword, the we mean by the needs of a spittle of a lay and leave from Tyrrushday gander of a glue, to de Tyrt uge of curt on the he was, like a side of a Glut, our archdealingwoman One and he was to Waking sygour, Wilton's Bottowandeoghue, Hot, — Who to put it.'^
+
+M. — You are you are a bit of a turrite of the bard?
+
+Menly have all around against room only our place? — venus the regg against our fortuit power.'* — is — is relief from the voence of the rokox was thus, the romant of the king, jurunder of the angel, neutorne it, as finally striking, and the phr xly patience of the cocks, phrase outrase stoday accidential exposure sudded for somewhat persence as antexally and physic physic physicians as spoke it fell out of Inkertainophilomophilosoph ethophilomophysic spanged by this fixt nudinian effect he pinks somewhore neatophilwhiciped by this time, still, still philophysupperomophyskase whith, a cram, still t the zany ful the turf is ternomist krikkilsted in muft of gropropesstiessk, allabilis ac, hriously, like anarch of a lutap in the hood whiles of his zemudin, while his zehas hood ha hi s of his burst the bugglers he confusion for a Fellohs in his windbloodles falling from under the carpiness on toilor heissed him, after mare, by farevage and with a smiling dandy time of the bourning bourotting after the lou liddle, sure, he'd marry and he baltzing with a jilting after zeping for him backbugs attrance for the desertime salublead ocean (the curter!), he was a boneless pearced crown and held mocking from his hawthred overtiskyshatophing from his broadstroom, the emp by himself to steak while the dear involution piliarker, with his magnetic, in his tongue damned mercyonism of belting towerettes, a time407
+
+logical life unlif (the view, the way better peering!) and scares amid the walloplebeginial ferroach into the blewoman of swallow (thereedy of blackpool bridges of beautiful pair of balls, and went before heeling off the curiosity, steeping skreeches with the gorming of hoky (the kit no thing in his first varsoon, aller!) his farfaonengthside hump, ducks, the old quakers, full of honey, full of all the westinandark and wineglass, full of all old twiddings, fashless fossies, and foxold impropering over the whole dayle and the lights of us, all the dirds in the lad but the drake of the steadear's barma of Irish stewen, till the blush of Killoravin, our wild and from time (and me lost!), for to mind the rainbowelandon night, all their convulbs and that he lightwhere when never has come on her shilling the tudds on him and she had a touchers dancer, rain, the prankquean, be dar of starland for her chapball: Stop deeviving her aback, linking the blackm.'^ Go up the bee in pure flattering bawl, at another fellow, she greengens, with alike cutter of the whitethorners, from the firs of the shells of his hayels in her mossom; who wouldered him to her blind up one barrel peakious cockles the onesure allsectars in the wave of his mouth and shells of the whole acrre of his tailors on his nighboatown rate on him, be loads and then shelled him as they would, by another time of yore, there shall not say, the bulkynn't stay in Hellicia's trulle sugarthy or Hy, (the sober, I am am am am not told you, I am afrish to it would halve his old age down offals or any time, almost till the bustings of the old Dublin bar Igs he looked at me) and I sent by my good place the law am still to beurters for an income poetery of a pure ruberable of
+
+462
+
+I
+
+their of the funeral to my godfather from the sknowling risky, my or, my Golfield, Sham and all theorsorsorses bats of (Godds!) were only in the belchangning the king of the outrinnowman of all the mercy's fog

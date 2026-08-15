@@ -1,0 +1,41 @@
+# wake-bpe4096 · prompt 'domestic'
+#
+# model      wake/wake-bpe4096/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only Finnegans Wake, BPE-4096 instead of character level
+# corpus     data/wake_clean.txt
+# best_val   5.8768   final_val 7.7704   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     256 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.072  verb5 0.000  novel_words 0.368
+#            vs plain English  verb3 0.050  verb5 0.000  novel_words 0.494
+#            self_repeat 0.003  ttr 0.560  words 709
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+I got home late and the front door was already open.. But I'll be somewhere I'll be the choice of the gift of your side of Saint Patricapelagh is Swanny. I'll be Neary Coll's tootle and give the boy on your babblegraith,belaveran over the boy to the parapleas of the mokmast, and shoebeels and sips on me swing fieties. Follow me pirotty kurkishtorsetow, and miles on enem, brushy and fay and fel and fianje, the thrust of the conconversyrels and, for the hurry and to to greeping off the spices and the r and the rist to have the meek of my shayfeast tied, freak, a crushing, for to roam.
+
+The P for Zospumm Pictor of Persz. The Asia is ouraganelles is a frequent number thrus, The Irish pleasant from on the Week.
+
+The Vonum has it. His ownsonumance to add light in the sched sky of slave of slagments by the litchern castle. The sched fiction of bals of the pen. The book of capsound. The
+
+Loubgoing. Wave us from the joint of Gen's road to jem in the jagenotof herofante in the pal, the phillos tombos tombos her country. Res if Ess.D. Mark Crove Canticism. The curly spinentine art. Loix. Anna Stand. Form fakesinchids' And Jackin and Carmenian Lodge. That's aful. Cup. And weeting at if she don't hear the eye her day? That's just a demselle her forty wiv yet she'll noggle she'll seek a sugar while I'll tell her? Askin because she's a song of the swoon and you trystanes. And you're off her tears in a penny sossy, troop, I can't see you take her tears.'^ Did you know, she said, with the drunketing Tay chapterer Comrathies and talks, marcy chapelan, and don't you say symnee cins till you know what you did you please, she never say by Lay and fell with Lam Branching after the Shuin and Covan MacDawley's, a Cabeg24
+
+1
+i
+
+to make out of Shaun, she, rising up Til Fll That, give the no esker of the cutting up your name in the Father Mac Number Shane's Orange and your name is the Morner of Bo bow, Mothstali s and your spittering and your name is the wet window and your sport of shift and your last m your last mok of sloose and your knicksp your ghosters and your spind on the lost on the front and the day and the bringfs on the front. But the bring you left your down the Lions!
+
+Humper to aye, None of the couplease of the lost. How oner of the beat of the Lady El Donald, the Mournema's Merry Mathers and Moobone of Warava marevierraw's and Real and the Bonner. But where you were tadging a calding between townland, H it's Murklephelphelangers Moggers and the Mistoss.though the sick of the Mull with the Mist Joc. With a candlecost unwaslandsuffering Demassidal Allspellellys' a sport and a spassid cudgist.
+
+Heget, Erething takes ojoist one may the found the curled lord of bog in a door.
+
+Legetable wellespectable wellesume of your humphape! Make room for the rerieved! Four boyset of the caprics forthe L ugans, Faunty, for poor man, Gugniddy, and Road and Hosty and Road, and O'Mara sex, the say nothing, the O'Hollog and the cousy of the four confuses and the churies and feels and heave of brown Hoedaries, hem, and bull squevelyly likening
+
+492
+
+leased them, and plultipely adieins and come aggreats for the prelations of their ankeredience and the mermenots and thestrungry people in their fifteen years and the tritarian children of Kerryg, the sinstening, in Kathingling Street and Killorahzhan's speed name, as brown, enlier as a greatgrash, in honourable colle, with the braint pearful of Welwash Bush, our wine Standen chubpates Dame street and Webaders, our twined to the shortiestings round the great gods and the mac Sisterman'sleep in the boys and the Tuns, Locker Bookaskington's Sister Manoring Kille, crownington's Corner and the Marches, with the Parsee's Companish Persse, two marships teethsmels and the old skulder and the three trin hair, topsing their five threes, not forgetting the d infancy of them, the Fam Prim him, to see the Parimimaqueer, with his five sevilla, with his suddlic with his scot's brown furzozies, and dudorces of his scotde moistopes to his swar and davish crookobbles and his faceglasses

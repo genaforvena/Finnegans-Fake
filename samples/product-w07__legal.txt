@@ -1,0 +1,31 @@
+# product of experts, w=0.7 · prompt 'legal'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.7)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.3)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.127  verb5 0.001  novel_words 0.120
+#            vs plain English  verb3 0.128  verb5 0.000  novel_words 0.183
+#            self_repeat 0.001  ttr 0.442  words 792
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+The parties hereto agree that, in the event of any dispute arising under this agreement,, a few and honourable crucity he was returned, in all fish but particular was must a white warning of innocent of the first controlled that mode of the sun the cloud globe remained in the reach of the little mercity of the greater and the feel of the right same summer erring the murmury between his dear hair, and all an offering in the book of the front of the all of the charm of the pages of the flute flame stages, such their courtself so potty of sitting speech as a few feet as the button of the polly conscience there not all flattering under the sterm that confessed of serious precious manner of the poison that herself did the bones that commoner was the whole dirt of the damp of the door of a rating that shower we on the flires of a purpose that posses upon the bed case her to that world of the flip of the first sway.
+
+At the time in the first table of its words elf, the first could do a slop of her gould go there no return. In a pin it, I did not should preed the particular charge that bild come of a big passing choker, which I flowed her commoney when cramped the place sound her a bullet particular street from Shaunty Shutter of the chest of her vicility of his blinds which he thought it was the person from the ladies of the life of the life of fields, bound the bushliness of his father and father or the peace of the third family thought the heaven, in the race of the road, before the tickling way of the hands of the whole of of the living family, being the meaning and the door of the darkness of his arms.
+
+The shore be cut out, started at the bedroom, with the green of green gangles and each of the best person business. He felt before himself said, if any course his own frequent after his look, he feeled himself in boots, the door of his mothers and were taking the torn and a half a rose the single of the stream of a few of the shoe of his flights in the follow's cash by the passing for the prenition of the upper promise of some crush, when he lost preprosent all the language father and down to with his tales that he was an eventh all far bore and looking shoulder him down him to power and his retired to be late and his service as he was which we were made me of paper at an audification in a consortation of second between me from an allive with the windwalls water and wide of him, long as life as it was in on the little stick of the cure of his long, the hind of the steams before him darkness, the criming of the state of his waters at every last himself in the town with the house who would be everybody and the shouldered of him out of his chime, only the world of the world of his speech blue as nothing of organ to the growner boy for a leady of sunlear and he shall have said off him as the beck the door the dailor of his weather. Braceling his hidden the hay and looking down his heart bread. Lady and looked the bottle of the strip and scarlet her bones and how it may be free and he could could not always have ordered it, for it happened a single to the sense of the prisonal colourse, end the doctric of family of strong tripping of the dance of his bush and left the meditation to ombecially of his looking wallowers that to change his green of his good while a family good for his brace of the sluggery patriod season, and often to attend the breakfast slippery and both of the broodches and children his screamers, the lamened of the friend bows, the bushlew confused struct by light and the coasts, the beam and bawl bearers and the road on its hand to change back. He would never shall be our masters of little constant to the boil of the moon from his silk, he would do the man to it with a huge about a sentime all the living soul, that faint backs, the special more money, and hardy and still a curious of woman, the man that the house of his steps, that exhausted the other ship of his cool, the man, the scatterer of his world, the beat of his part, the old man of his shem all lean and his tongue to his petty and the pullow. H

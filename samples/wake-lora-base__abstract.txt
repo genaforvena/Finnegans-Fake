@@ -1,0 +1,34 @@
+# wake-lora-base · prompt 'abstract'
+#
+# model      LoRA r=32 alpha=64 over /home/mesh-home/models/Qwen3.5-0.8B-Base
+#            — the only configuration here with an English prior it did not
+#            get from a corpus in this repo
+# corpus     data/finnegans_wake_dataset.jsonl (instruction pairs)
+# best_val   3.5746   final_val 3.6558   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# prompting  the adapter's own chat template + its trained system prompt
+#            ('You speak in the language of Finnegans Wake: portmanteau, pun, dreamspeech, rivering syntax. Never explain yourself in plain English.')
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     large (Qwen); no sliding. 2 generate round(s); model stopped early and had nothing further to add
+# overlap    vs the Wake       verb3 0.187  verb5 0.000  novel_words 0.068
+#            vs plain English  verb3 0.176  verb5 0.000  novel_words 0.034
+#            self_repeat 0.000  ttr 0.634  words 93
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+We report the observation of a periodic signal in the residuals, significant at the three-sigma level.
+
+ I'd like to reiterate that we are
+speaking of the original data, not any of the variations after selection.
+
+— 222 
+
+
+I would like to point out that these errors have been calculated from 
+the raw data, and if I give you a look at them I'll probably have 
+something like 12 per cent, or even 33 per cent, of them. But the 
+value is in the method, the method of analysis and we're going to 
+show you in a moment what the method is, and what methods are 
+called for different situations, what is called, you

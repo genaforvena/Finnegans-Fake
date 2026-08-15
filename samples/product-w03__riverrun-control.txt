@@ -1,0 +1,31 @@
+# product of experts, w=0.3 · prompt 'riverrun-control'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.3)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.7)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.129  verb5 0.000  novel_words 0.097
+#            vs plain English  verb3 0.220  verb5 0.003  novel_words 0.047
+#            self_repeat 0.000  ttr 0.423  words 801
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+riverrun, past Eve and Adam's,, a state of a crazy will come near the waters, in all foreigns strength to cut staircase and on the landscope, standing my face at his lips and straight in a look of our own way, and I put it a good little like to the stiff of the colour, little more fool and windows, clambed at the cattering of the story and the porch we stopped at the stable of the same stretch, with a flash of some scolding round to hand brooding my carpenders, and sharp bolded as shouldering me a furniture that I saw a man by the best deep straight perpenniless that I learned him into the horness to others. But all this was a stretched deal of mystery little for his last reversions in my stories with the steam of the old seaman and a light and taking not a frenzy prison of a saving light tone, and however, stripped and strange in his conduct, I would do with a strength of darkness, but from my beach, and I shall expect to pass on speak as well as well as he would tell you that minute what I did not see how you said her altogether. I struggle to me, that it is very well gone, dear, and say, if you don't know. And of course, so with you. It is only compliment for me. They look at my heart like me at sighed in the doctor. You will keep me deep a wealth, and not you see. I will always surprise yourself on board again and too much scrub. If you do not know what sort of your darkness is your father to make my soul in my own marriage. Or do you never think I have been disposed to see the world of beauty is to go to forget that the wine would it really like to precise anything to take a peace with intention to the trouble of a brickscruped time of the bare. You can't know more in this ship's having done. I couldn't be holding on the rest of the face of The Tollson's Conson who was a book like a long sank about a blessing man. I was too much all too much for a pink of him which I gathered it out, and about the hundred time passenger I would have often seated the floor, but the blood shot would not have been watchful and hideous that world we liked a long ship's waistcoat. The stage was to do not believe the man who stepped out to with the north of the event and the seven that was he was despatching that with my mother than I was the world of my heart on the paper and a moment of the world was rather and what by hours at the door, whose like the boats, had a porter of a little cold and deck a lady, and showing off my cheeks should the starboard of me. I was pressing to conclude to it the corpses of the room for a country, not because my gratification of the commendation consecration I had still not been more discussed and every good city of even posts. You return and face my life and fell to spend of it. It was not all one earth to be reconciled without the complete suitable putting in the clue of the hill and the implacable providence. Our doubt would be an order of sight of still return that we had thought more in the one of the horses, but a sort of ware that this pleasure of the presence, that he allowed the colour of the glass, the live some last at her first to be complimented. The girls of the ladies were the building recorded, and the trials of the false whom were both more elsewhere strange beside her the silence of a soft, when pale and the white face of the room were gone to her place stood by the middle of any push. The tale took with her about the pair last who had been mother half when they were rather haunted and then about the fashion in the every hour of way of the person having come silent into every conceit of each and which poor Dorothea and looked like the last of the day.
+
+Cadolone for the first day she grow on the walk. Made before her eyes were now at Lord Henry who could pitch them to look out. Mr. Cruncher on the was going to see her with some spirit from any one sailor.
+
+How did he live her to be personal friend that did they had given her the part of it, and her recovered having them to find out, and the manager would have been darking a

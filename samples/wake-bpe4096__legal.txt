@@ -1,0 +1,78 @@
+# wake-bpe4096 · prompt 'legal'
+#
+# model      wake/wake-bpe4096/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only Finnegans Wake, BPE-4096 instead of character level
+# corpus     data/wake_clean.txt
+# best_val   5.8768   final_val 7.7704   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     256 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.071  verb5 0.000  novel_words 0.358
+#            vs plain English  verb3 0.052  verb5 0.000  novel_words 0.466
+#            self_repeat 0.000  ttr 0.572  words 697
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+The parties hereto agree that, in the event of any dispute arising under this agreement,, or the annoynexrine of Theophilos came at its spinent of Infelizing kraseous phrase in the suddenkase, stays goat (it less than here, has been zooxed) and once for all overgree and our Bygee and Ottohid's insound while that roaming offensive has its rent from fixtion that means that the marks the head and its domb. So doway, all fireplers we may the loLockpuck.]
+
+So many needles to aye to light its tread of thy whoo. Bloody (bax! Now you'll know how it out to kindly return for the dunnings? Yet pull in the dir and deshape in dance of a mimacent and even to be taken for the unbal where the ding between their mind to dink. Shedxyours under the clotheses and dasifierts orangeaved elring and damming his eyes and dung and duples were smalls with the nextroad and nobody in that thing, who would it, if no lie stir kunt a wake from the wake of a setting parring trout to a setting talot of a woh, giving, a clear, in a frolpayabrobeit, aver of bond, under a cob to beach a frolve, aprosicce, such recogalbula sylike, as others, for life's year after somebody conclude with, it, by y our obsole with on the treasure of our midstances (what the lostfushosoph the go!) the chefry side of ri, the frother of our warcatoors, the cheap, the showl of which the giglain bald, he is melanch in his lot his maiking and spot under his overallsallach deuxee (a hand, is the tell overspeech) the parap avaips of he had exempted, contracted, and complimented in his cause of motion, but with a twent foreignetta cooking upwards the recona of his own mobilatyfilling tops and henceal melt (the holy gaddies, muttered up as he hankriended upon), so ladylike indeconsoriously, seized, in the touching, of the dead wash of his way backhandled, amid the horner of gorgeouseswold reel of a reconet's teet by the after Dame and Bellin and Horrook systooli, some quot's chaste for the ancest archde dead y our ancestral power comprise, with as a quantum of chaste suddio nymonds s (A prosic) for as demoning uti sum ex Nullo, those chutum sirens (my over friedrentlykeman EuSWURradox) Bellig, empy and Acents, Archoliios, with sire sallious pertects.
+
+The had it's tears, baron's a most extinctly ambly infantity when him, as others looked the possible matter of his life's eyes, athemadamulating him, it was wickn't be Midare him in afore, he could rise andurdly always making fare be fondly funny diagon cured and bones for him, even then he would not have been cereployanta spiteouser among mid his times, though like Crab Adam Findius, asmphydneyius, setting on a clubs cuts of all having displied of stepped out interested in sullemnatimated in a collection and republative absenture as by Jeremias, by Jeremias, Legemias, and Jeremias,
+
+Anull,
+
+Cli,
+
+Cuff,
+
+Cake The Jacoickfell,
+
+
+
+Carcusuring the
+Chuff,
+
+Noors by the Summ,
+
+Kee,
+
+Kee,
+
+
+Kickfly hi
+
+Kickm,
+
+
+Kickf
+
+
+KA (HIZah, Y
+
+
+
+
+I
+
+That
+
+IIII
+
+
+Pede
+
+The htI
+
+ZZ
+IZINkeys)
+
+
+The merciousas!
+
+AA Zled put! Hoose by pit grand recon some shorming ever. Backchy hornchdlin in the bass and derry. Bras Firovilla and ja Luse polt changing.
+
+The bum begy, evango is for the pine virginonents of evidence by the baggerful aslament and that is, that its natur of its a genius's own referring of reunge is, characu, there is a hear, but for the view of things that^ , it is a becoming back to the end and things which is only the once ay, it is only once was, never in the difference, all the sounder, the lous and still implus of the long as and still it is only reaches protumbling out to be staunter that, neverthelessness would till that, the point used to be his, that the day and would give it, the law in the rumer of his bungrybrown, ak of his innards (sosh) still personsooklymarted his possibly elling for our own pagan ironed timespourneed self and solution for him then, were all too many for him and after the weekweight of him, first night whilst the spectrem of his soles (PoRhuskar, among the movables, holding the younger!) that obsoleum of finding

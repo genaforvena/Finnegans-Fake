@@ -1,0 +1,48 @@
+# wake-bpe4096 · prompt 'nursery'
+#
+# model      wake/wake-bpe4096/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only Finnegans Wake, BPE-4096 instead of character level
+# corpus     data/wake_clean.txt
+# best_val   5.8768   final_val 7.7704   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     256 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.090  verb5 0.001  novel_words 0.307
+#            vs plain English  verb3 0.062  verb5 0.000  novel_words 0.430
+#            self_repeat 0.000  ttr 0.526  words 724
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Hey diddle diddle, the cat and the fiddle, the cow jumped over the moon.. He was when he was sot to reading his caliciping up whatever the weighed he was fast and tracled. Misois and scratchware. A satisfaction, to his bier waifft to give lofter lore and. An: With tears and mortistras and finis and mortargrained finis, to his pink of drip dropping a word, tell him, as it was i n my godthunder in the sword. For the ethn the schre of the bedsconded from the poignbog to the sched fiddel of his face and the spoil the far. It jennyroached on the unskructed the rude of men; Birdfruitisan's Just has the Grape and the Hymoon of his de Vologicality and the heart's Hoolinger's off his ownsixlafaf and his storenits. The diasbredbuloids may firt aft the faun the fernian rootes and the reng of the hross the fun of the funk of the tree of the macdling. And the funn. His roosolarb of the garerhape of his widowscoom.
+
+TAFF (BONSPON THE
+
+AFF (Chorus) Rivenemper^ he has been past all other to relished the meat mic of Copulace or Miss Smith the ejorg for him^ by Toblean the tweenk.'^
+
+BUTT (alltar's his wartedoffpoker and soldier shoulder to bould should he wait all the humour) when the full buggers the floor i n that would bould the ^^v^-* —'* — ) and a poolary was cutter of the — ;A^^-^
+
+Af — Who e. — Jones! We have Shaunday, Shaun replied under the beast kingdom of his cathairs, tembarrel, what sainted voice, nay, what I can see. Lly in the balge of a glow of a limbush; ! Hail!
+
+(Shem was fairly league long legged!
+
+Howled and drain was stole if he was able to Pap sniff was in his tresbourd on him like a was at his fate and as big paddy and was big hungred starked by a witness and he was only havup (braung) there as some bully (grimsolided the belfrown babeling it was porpoetched and, totting up, what was, under the whole labournext' appeal by the remains of
+
+541
+
+y are made until there was a few live of all the corseudedeged)
+
+aats of the fausterendel from the tripleth and the copy of her hers.
+
+The fall (though he merciously at he had been setting to the unwixed pierced a curt of the opecell, rubbing brogues in locked!) and stolidet his ears like a lowness due was a bit, lash in a'lthe ker's, luntsight of a fives of beconforth, fry, explains, all outings, to converted may his trustreek final, but by metropsectrine, by the semitary of still the suggestion for ten to whom, from whom the might have been meaning was trustee digation from so digation for him having been meaning in lately declassed by a station but tentation with burstation from the map of demblance of coamped station, under heat of vociated with houseful of the hint of padders, beyond the first human creation of his feet and in their gaels of summers, under gehamners, emmered to rise, among the others, 0* Coppinger's road, ace of eighteen bawn clothes priest W.C. Tight and Spook he was in unmail and crazy lasses and spitresuple and warm block and bail to give the Torba's Insmohnny, what two maint and dilte Fred for the bonzoaman while Lough Carmen, our most unknown to whaling all the systembawlish parkeding kings and drawings on him, in most out the justbenders
+
+395
+
+dumption in favour of his own favouration, even the wrangered when he knew the conclusion just as it was not guilmich intent to have been removed, having been received in that, having been known to the ordinary course of a vile in connection of coron (a Scotch, the bout of Liffe Coppercheap, the Earwicker or even the Englesky scraps of a chron, other place of a fellow of a party, beyond the counter of a respondent replen chronosedness, of so none, understantage cavellation, perched only the embrated carcators, liquidheads, regardsproof to be blazine themselves, understalladmix Park, over three Goloplooping sailors, the other terrattiness's traints and performent, 29 2)
+
+I.W.
+
+book the first opical Faints and K. B.L.P. B.D.t. 168, F.D.D.L.fJ.D. S.D.L.L.C.D. J., Venerable P.C. Dam B.P.L.P.D., L.L. A.P, J.P.L.D.D.P, P.A.D.P.L.P.L.P. 1 1 1 1 1 1 Onamaninextacummed with Pacerpbroke. Jve Ruddy

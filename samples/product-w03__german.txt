@@ -1,0 +1,31 @@
+# product of experts, w=0.3 · prompt 'german'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.3)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.7)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.119  verb5 0.000  novel_words 0.082
+#            vs plain English  verb3 0.198  verb5 0.001  novel_words 0.047
+#            self_repeat 0.000  ttr 0.422  words 806
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Es war einmal ein kleines Maedchen, das wohnte am Rande des grossen Waldes.. The course of Faint, when we made a very low, in all fast to the arms of waistcoat to our class, the gaught the work to broad and rubbed, and a slight of store the sailors of mouth, on the sailors of a wooden master like a great shadows. Oh did about it, the tables of the old end! For the mail had passed it, and what is from the great street. The whole infants of the advantage had been from the warling divine the world of the world to great sort of interesting how to introduce the shore.
+
+It was a whale, making the dance of a hollow into the shore. There was hollowly trifled, and I had had to be a simple place of a cloak declared salt in the street of the ocean. But I had a still of delicate medium, but as they declared me some action, could supply, and to stay a little summer and free minutes and capacity, and obeyed to the hamlet, several patriot was the mater of painting and service more and the curious and without earth for all the highest of the substance is the same time. The bolders of it only sweet is to escape from the time before they felt more of summoning and stumbling amused the least light and in the point of the fragment, of the little great from the plain that would disturb me. But what was any pity and seemed to be a cat of going to presently remembered, it was a social ending in front of the butcher of a dance of a bread depart closely of a little molicate and blade of little following disguising his boots. He was pulled by the class, like a trip of change and plain on his cocks of his bulk, coloured in a sense of steal line or spirit of solitary. He but all three or near me people down in the forehead of the mail in the hillside of the windows, as if they were since they were married in him which he was raised and the flooded that for his bowed a bad shirt and a method to be called of spark.
+
+And as I delight, I am sure, indeed my ear, at an apply consequent incompression of him, to be in a different regular at my existence. I have not done, for one may I met him not often so many mind. I don't have been miserable as to write before we are to fall into for my head. I like to be so regretted to one and tell me if I had been of stepping as the door in central ripple and meaning, that I was at while I might be soon still so so much that to be going off on to bed. There is something that we continued to tell you, I considered that man in that most until the morning is business, that the money in the steamer of my own charity, like the rains of the demander with one spirits in a meaning parish of good wood farther in the chest world. But as my beginning of this time was going to do and go out and take it, and when it was a bent over the captain, and now soon are much as stranger, and if it was a thing a thing sense of smoking and waterward, and the county of a motive looking for a person to go on and a fasting to stories that which one of his hands, the innocent the air. A high sense of little constant sound and sat after some honorable to the house, meaning, and with the exercise of all some few scallows, and touching that he could plainly leaned to the man in a weather in the portrait of all his ships. But there was no sight that passenger when the came in a small and sitting day. He did not ask the same packet, and presently prolonged to a pipe in a space of a schoolroom, repeating which the hoops with laps, leaving down to the bottom of the portion of the captain's earth of the sight. When the prisoner had the sealed the other boarded me, by sight of the landlord, the store dead ladder, of the bows of the passage, to a wear and start as a pestilence of passing me so spared up as on a cutlass, and to perhaps in the same silent things of the social attitude, that he might was to his little learned earlier in the barrow, while the most others to person whom he made no effort. I cannot help for his side to speak of my heart before he was in his there. Then he had been on his side, the society of his tental pot 

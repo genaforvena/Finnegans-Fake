@@ -1,0 +1,31 @@
+# product of experts, w=0.5 · prompt 'riverrun-control'
+#
+# method     combined = w*log_softmax(A) + (1-w)*log_softmax(B),
+#            renormalised, then temperature, then top-p. A GEOMETRIC
+#            mean: a character survives only if BOTH experts find it
+#            likely. The arithmetic mean would alternate between the
+#            two voices instead of conjoining them.
+# A (w=0.5)   wake/wake-char257/final — has read only Finnegans Wake
+# B (w=0.5)   wake/eng-char257/final — has read only ordinary English
+# shared     tokenizer.json sha256 9506f482314c08ed — IDENTICAL in both, checked,
+#            vocab 257. Equal sizes would not be enough: the same
+#            index can be a different character and the product would still
+#            run and still print plausible text.
+# best_val   A: 1.8840   final_val 1.9426   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+#            B: 1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens (min of the two); context SLID — past the window this continues from its own tail
+# overlap    vs the Wake       verb3 0.113  verb5 0.000  novel_words 0.127
+#            vs plain English  verb3 0.180  verb5 0.000  novel_words 0.109
+#            self_repeat 0.000  ttr 0.416  words 793
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+riverrun, past Eve and Adam's,, a state of him. His present hair in gaze there that was the layard of the high of an empty charity. Here she could her drooping the wave to hear the soul. The curt of the earth, the prospect with the dress of him and the returned him altogether by dressing the whole profuses of pleasure and listening on the morning. She plainly felt before her or feet, some night the very day are the correction of her present significance. He had on with her strength and hair sweet she would wander if her had brought her never was sparking the river heart in her handsome round a harpin patrician came off her for a few pink and the mastransom of all she had found the short in her own porter for the first evening. Let me strong them were daughters of believe that she lived for near to be with them. That was the better that would come in her time for the book of a brother of childhood never a ballow and a few that she could find that he filled soul. To the best of her with a bush on her hand of a long six or two her sister she was a pain that exclaimed for her cheek on the salute but her breath. Her net lost him her beautiful company and bearers, saying, he first and me to be hated a melting closely below, and he could do a saying to the wind of her shoulder and she was a figure of characters, and then she shall ferve and such a mean of light save with an amented action for complete in it, to be advisible to face his aunt passionate to her on a word to grateful as which she was passed for him, and only in the formality of his eyes, and how more of her eyes and the day well of his friend company man, and her eyes passed with another documents to her own character at prospect from a little behind him, of a surprise and a walk of a cock for the night, directed in a scattering steam starter, looked out in silent like him, she was always exactly secured with him.
+
+Yes, then was to my hand when he gave a crowd of presence, too, I know that was in the court of the coast of a silence the dropping between every sound to be so done with some school, and has that the same one has the produced and land concealed off the perfect of the weather. It was a little for it in the parchdamid of lost on the honour of his porter, dischessed in a promortant of priety and a hopeless completely embark was done.
+
+It was sitting that was altogether in the heart of his head, by dim at the face, and no company more or more than which he was a sound of more gentleman who was like that loose controlling on the earth loveliest had the bungless that had been dishoned and most consolations to the recivile of the world matters, and he lost in a gentlemen grinded towards the land of an iron hands. It had been to make in a way to love the front of a war leap hoveling down at the redden of the cheering of his hillside and hands a whole men, so proposed by some honey at the heavy of the cups of all controllable with their suspicions of fair when she was sitting at the steal where she was looking at her glass that little rendered in the wall of her domination to her meedface. The goats, of little grace, and all over the spot of the wooden hair, her of a pillow. All the grimmed preparate it cut in their number in their mages. And it was in the liberty straighted with a tense of meditation and asleeping as a profound as flitted the table of light side of an arms and she trower out of himself at the steal home for her from his walk of the sea while before was the pulpit store by the common of wine and the sign of the point of the tongue as a book as dream of creature there was the honey of the whole back he was stained by the box and the one good possessions for a crush at meant he had gave me an insignal hook at the place and hearting an empty safe more and night making me a little apparation from the promise of proceeding the grandson, and the white peel of the prize in which stealing ungainst the teacher and everybody who in the grown who was probably because of the subject and perch

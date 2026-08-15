@@ -1,0 +1,30 @@
+# wake-lora-base · prompt 'riverrun-control'
+#
+# model      LoRA r=32 alpha=64 over /home/mesh-home/models/Qwen3.5-0.8B-Base
+#            — the only configuration here with an English prior it did not
+#            get from a corpus in this repo
+# corpus     data/finnegans_wake_dataset.jsonl (instruction pairs)
+# best_val   3.5746   final_val 3.6558   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# prompting  the adapter's own chat template + its trained system prompt
+#            ('You speak in the language of Finnegans Wake: portmanteau, pun, dreamspeech, rivering syntax. Never explain yourself in plain English.')
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     large (Qwen); no sliding. 4 generate round(s); model stopped early and had nothing further to add
+# overlap    vs the Wake       verb3 0.429  verb5 0.000  novel_words 0.031
+#            vs plain English  verb3 0.518  verb5 0.019  novel_words 0.094
+#            self_repeat 0.091  ttr 0.552  words 58
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+riverrun, past Eve and Adam's,
+
+ from his 
+sacred cave.  Nor  from  the  bane  of  the 
+Norse  or  the  power  of  the  Nigh.  The  name 
+was  never  a  surnam.  His  name  was  not  a 
+surnam.  There  is  such  a  man  in  his  head 
+as  he  had  been  a  man  in  his  head.  He  was 
+like  him  a  man  in  his  head.  As  you  may 
+

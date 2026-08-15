@@ -1,0 +1,40 @@
+# eng-char257 · prompt 'german'
+#
+# model      wake/eng-char257/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only ordinary English prose (8 public-domain novels)
+# corpus     data/english_clean.txt
+# best_val   1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.144  verb5 0.000  novel_words 0.085
+#            vs plain English  verb3 0.348  verb5 0.006  novel_words 0.018
+#            self_repeat 0.000  ttr 0.412  words 800
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+Es war einmal ein kleines Maedchen, das wohnte am Rande des grossen Waldes.. The course of building under the forest--"
+
+The old gentleman by the delicacy of honour to Mr. Darnay, for the shoulders, when the little behind the house and had the best of the secret and the best came upon him in parlour, and the latter discovered which were her assembled an apothecary desirable frame and disturbed among the table, and Mr. Casaubon's room said, "I am told that you are always afraid in everything when you could not be so going. In one of these whose are charming acquaintances, and if you don't like to go ashore for you, she will not have been them. You can bear about five miles. If you had not been already, you must not be a spoiled man."
+
+"Why, my dear Basil, you must have some state of your extraordinary degree bells that is like the undergrowth, I tell you that. I will not have a word of true poor distance. I am glad to at all all this care of general coming in. I like you, and as you shall see you from watch yourself, and you talk about a white man in your father, and now you must be the most wicked better than beautiful. It is a good harpooneer. No more than any reason has the young man of a night since is or a simple extremely married and seventeen young ladies. It is the only considerable modest of the commonest sense. It is the passionate effort."
+
+"But you have been my heart to be secret and can treate experience myself. I think I shall never have often my own shaking," said she, near his hoarsehold of a cup of rodigid hair.
+
+"I am common from Sibyl Vane, you may like a work, Mrs. Reed is a compliment of some one else."
+
+"On that party of the party with you," said Mrs. Bennet, who has reasoned much better, but if she looked at him with all the court of Mr. Bingley went up to her own with the carriage to set the more relief, and as if she had not left her friend to be her for age than a present so since to say whether he stopped, and she might tried to my feet, never long, not wanted to her little civility him in my now such compliments. When they met him for it interested to dance him, and the face she could not come hold her, and she could see him on him as offering his tone.
+
+"It will be a story to be by talking to be in his heart at a time; I thought I wish I had been so prepared to be afraid of a little moment as to have supposed her from mentioned."
+
+"It is a very relief to tell you," she said, "and I must be an afraid of the convenience may be the most private delay. I am afraid I was sure. If I could not make it my self of a little lady to me, I have missed my wife, or my mother to be engaged to read about my dissatisfied myself. I have always been so much as you desired to be have childly happened to go into the portrait. And you will not make it there better than I have often you."
+
+"Oh, considering that you will not know what you were to be sure. Why not?"
+
+"No sooner had any reasons with uncomfortable polished part of the master. We are not sensible of the advantage of the neighbourhood. I assure you they would never think of us what it is, and seem such a moment in what she had been mistaken to find out, and he always said that he was one of the officers. All these are not speaking in money. Men were a mistake. Still, I knew that the same force had been self-reported strong under my arm, when I at last night I liked you to come back. This island away the water book, when all I saw no other was forest. In it what the captain's name in the sunshine was with my face, the name of a great canvas sank and next morning after a trouble red broom, the garret most manner of blood, and a sort of sort of explanatory manner, the fishes long could do was charged to clash my fire face, and then put on the river right in the street light and most cannibals round the cutlass space.
+
+In the steam of the fear of the cask, I stood on my reach and met at the same place, before me glad for some time we could see the light on the wheel. In which we had a savage flower up to the coach, and then to punch me wh

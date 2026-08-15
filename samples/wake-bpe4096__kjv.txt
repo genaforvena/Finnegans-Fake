@@ -1,0 +1,80 @@
+# wake-bpe4096 · prompt 'kjv'
+#
+# model      wake/wake-bpe4096/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only Finnegans Wake, BPE-4096 instead of character level
+# corpus     data/wake_clean.txt
+# best_val   5.8768   final_val 7.7704   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     256 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.052  verb5 0.000  novel_words 0.313
+#            vs plain English  verb3 0.035  verb5 0.000  novel_words 0.482
+#            self_repeat 0.010  ttr 0.577  words 726
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+In the beginning God created the heaven and the earth.. It was the clay for be odd tradeys.
+
+290
+
+Some on Nuviahink works and selverendevols.
+
+All (Ithelia never done a nilob oftias with anygo) when she was a sink in the verdery of marrate (delter is pessporting it the hiddenharding of allasdishers had just been sort of the caps from the associated with the purpres of Morgiillery to old mahon in the sour of Lucalizod it was thelyt after the lashers it and that sea and what he was) that sea and who finalally timbering vixes of it has any case in what woman has now named fatal fatal fatal fatal fatal fatal fatal fatal fatal fatal fatal fat of and slip, meggsl. DJomomomomom vaunt to and and wise pizore deter beside that made a loovult woman they dare about whose to have fallen when it has teeth had only her and the ed are; and finished and her
+
+Myorn in her one before meastom Flore, the wonder of tripplipping who adaptist of a whit of his own fat as a shamour she sham she'd and she'd lud nivered down a cock of a tail for her cureignate on a penny
+
+19
+
+1
+
+themetness like aissem's barrushionavoured forty or aiswees of the king's cark, who'll reach to me more a lead her feet down a fallowprime. And wolfet thou wives thee thee wim. Prima, ye! Da, thou! Li! I breach and it is hear, even should not all her. Wildew a bit in a she is. It's too. And the like that Laline, I've fling chastreechly, marry to spin the gloralmost of foster, marry, gleech and flick! Attributo, vick! The oaksader. I know is too well pull. And don't mean about it your patch by, pathaunch nds and goat's leaves Din lok. Lankus, father of course, you'll write us your own, loos. Holy even should be shee your old fellow on the groan on her food. My free of shoebe she's headlight! My old dear onsiety in
+
+152
+
+I
+
+I
+
+pitch at my story, yonder, old Sarofa, old Sarin, in the Mercosho, North of the Foster, He
+
+he Pierce of a Time, Hoary Putileen, Tell a Roman, Clap, He is in the coifting Should Flurkes^ Arch Waterluin, Twitch in the Tun of the Trees, He Persse O'Ro in the Tail^ Look Steep the Trears from Loosenk of my Slips, my Spoken, Awlops In the Foger, The Loom at Annieg Deuce of Englands, Enter Advers, Enter on the Friend Tors, Guinn the Times, When the Foans of Miching Book, F or the Roping^ Turked Torias^ Inter the Lastest Potem^ The Ketde-Griggs, The Lastest Portites Lenk, Theeavingsides^ If those Stand Salved to the Two Senses Aulver Wenagles Was Me American^ Allhoult Boxer Explain^ The Senses Tree was Reap before
+
+Putches on a Wives Vtest dive A Belly, Hoars, To Vottles of Allasia Nurs^ The Lastest^ A Bucking This Battle of a Good Divine Wen my Stream, O' Thee Huscult him a Stream, He Cit Water of Me Cursits on to Companel ve Reap, He Water Gettle, Goad Your Fives Visits Golden Besparecoup even One Water Dave the Flies^ Them, Number Water of Water was Reaping^ Sens of Face^ The Vd West Sleep, To Knew Views Philty of Fingall Tran, His Led by the Fire of Sens of O'Pheline^ All Jake A Boom, How to Dead Polynes O'Pheline Basia for their Bom for Alocahm Tropheroper^ Anna Stops for Wan Week Wan for Finn to His Cibbers^ Lapped by One with the Relikestoons^ Heartim^ Picked^ Bas or the Divorval^ As The Manor lord of My Sames to Belches of Deuce of My Dashing This is a Vent Through and My S order, Skin and Peters^ Allhoult Bestoons^ Them Lips a Ventures of Two Storkters of Two Stairs^ Letting on a Don Lake Whangels of Amourcow and the Fall of a Douchica fumbkisses Place of Deuter and a Corry Waterfield Faut Peter Peter from the Friends^ Magn O'Reilly Gage Po^ ID I Victed him Through (his Galloper, Max, Majusaley's City Sunday Homely daughter, Dusaley Turfannon, Davores of the Belle^ Awake-End-handler and He Water.
+
+Broots of a big faced the penancing Basia for a book,
+
+Gor Tory Islanderpseed Timmying,
+
+Ce Mools is Wholly to Castlepheegreacle Tom,
+
+Cast Dublin Service,
+Castiffs Albelly,
+
+Lucing Jaco,
+
+Centi 1
+
+Cat MompepIKromet,
+
+P,
+SICat red,
+
+Castor,
+Castira Mike,
+Lift in Mun,
+
+Promet,
+Castor,
+
+Castor,
+
+S,
+
+W,
+Theus,
+
+Cast Pike

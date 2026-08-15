@@ -1,0 +1,38 @@
+# eng-char257 · prompt 'kjv'
+#
+# model      wake/eng-char257/final  (final/overfit weights — see README: on a
+#            one-book corpus best-val is an undertrained checkpoint that emits
+#            noise, so the end-of-run model is the one that speaks)
+#            has read only ordinary English prose (8 public-domain novels)
+# corpus     data/english_clean.txt
+# best_val   1.2004   final_val 1.2065   (final > best: this run OVERFIT, which is expected on a one-book corpus and is stated, not hidden)
+# sampling   temp 0.9  top_p 0.95  seed 0  budget 4000 chars
+# window     512 tokens; context SLID — past the window this continues from its own tail, prompt gone
+# overlap    vs the Wake       verb3 0.119  verb5 0.000  novel_words 0.072
+#            vs plain English  verb3 0.259  verb5 0.003  novel_words 0.015
+#            self_repeat 0.000  ttr 0.424  words 783
+#            verb3/verb5 = output word 3-/5-grams found verbatim in that corpus;
+#            novel_words = output word types absent from it. wake/measure.py.
+#
+# generated  2026-08-15 by wake/make_samples.py
+#
+------------------------------------------------------------------------
+In the beginning God created the heaven and the earth.. It was the butches that was scalled in a warling minute, and that the sun of the words were gone, where the crew blew on one side side to the captain's windows, and dead the eddying for the pilgrims under the high starboard. This steamboat of the noises stood the intention of the cabin, and then on the barrow was to dine in the room to the harpooneer without which we were well falling with a stout still leak on the cabin. There were both a perpetual little poor of the mail and punch in wonder a station. The two banks were now burning came behind out into the horns that come and filled us. Then, the cross-rooms were at all once purple rapidly and the stillness of the little waters of the night, was asleep our stream.
+
+I looked forward from the floor of the heart of the cheeks flaxen in the street. The expression of the candle was still ran to be through the window, and a slight looking at the woods, sat up the moment and passed to an odd class in the course of the storm. The short was rather far and gathered into the tormented and the parlour. It had made me be closed about the bed, to pass as soon as the foot of the island, and startling more carried at all the cabin himself at the pilgrim, and the curved long to the poor of his cheek against him. It was on the wood, and stood before him, the foreigner of the whale, and a warning book, and gliding his blue countenance.
+
+The spectators were dropping at the supply returned again, and looked the wall, and began to do with him and down the pilot-house and shining back his chair, seemed as if he had cleaned his head.
+
+A long spring of the monstrous and person was set forward to himself as much which became now he spoke with his shoulder and large lips, and the title head and lit down on the little book in the sea, carried a stout boat like a bargain. He was speaking to say that he was his head. There was nothing he had studied in a hawk of something. Then, he produced the next bed with a fleet, who had something that he had read his business and heard. He seemed to say, he stood wept over the window, but there was nothing before him. He was just enough to be. When he had been looking at him for his door made him, he said, "that that you was a way of impossibility and everything that you have the only consented a lad moment."
+
+"This is the stranger of love, I should be at all, to be severe of them all charmingly conscience." Sometimes, "I cannot cure them to be as right. I believe I shall be mistaken."
+
+"That is not the reason for your promises no man of virtues which is not that it is will not be in the fellow's world. It is to be so so possible to do so. People well. Miss Eliza, that is not force of my presence."
+
+"She has been difficult, and you are supposed me dangerous," said Miss Bennet; "the gentleman will be a consequence is such compliment as I love, and whether I have been sufficient for being a great deal idea of blotter my own informations."
+
+"I am not a good with her."
+
+"It is the appearance of my design. I like that she has a man," said Miss Bingley; "he has made no acquaintance to me, and you will like to come down into the science of the accidents and the novel before, which must be complimented to forget any man of his endures. You must declare the next morning so of the becoming to the house, the evening we remark that I felt the reason before I have noticed them back to live in the present, and only far as I thought the notion of the room, who sat only on the little room was to the management of the portion are on the bench, and even shall nothing but them.
+
+I looked at half some breathe and chat a little light coming with my stern flowering. The man sat closed behind the direction of the deck, and a dash of tribe. The paper did show the risks of my head with it. What was I stood, but I did away a doubt that we found a distinct silence that my back--the thing soul were running up to my wheel, the shadows of the path staircase and dry fore the hour or two fingers
