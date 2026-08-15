@@ -50,6 +50,10 @@ dmypy.json
 # public domain in Ireland/UK/EU but NOT in the US until 2035. Fetch it locally.
 data/*.txt
 data/*.jsonl
+# Raw Project Gutenberg downloads for the plain-English expert. Public domain, so
+# the licence is not the reason — they are a 6MB reproducible download and
+# wake/prepare_english.py --fetch rebuilds them byte-for-byte.
+data/gutenberg/
 # trained weights + logs
 wake/*/
 wake/*.log

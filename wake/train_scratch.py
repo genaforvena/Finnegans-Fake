@@ -26,6 +26,12 @@ p.add_argument("--dropout", type=float, default=0.2)
 p.add_argument("--lr", type=float, default=6e-4)
 p.add_argument("--eval-every", type=int, default=250)
 p.add_argument("--out", default="wake-scratch")
+# The default is the old hardcoded path, so every run recorded in an existing
+# trainlog.json reproduces from its stored args unchanged. The flag exists so a
+# SECOND expert can be trained on ordinary English with the same architecture and
+# the same tokenizer — see wake/prepare_english.py and wake/product_sample.py.
+p.add_argument("--data", default="data/wake_clean.txt",
+               help="corpus, relative to the repo root (default: the Wake)")
 a = p.parse_args()
 
 dev = "cuda" if torch.cuda.is_available() else "cpu"
@@ -34,10 +40,16 @@ torch.manual_seed(1337)
 # ---- data ----------------------------------------------------------------
 tokfile = ROOT / "wake" / f"tokenizer-{a.vocab}.json"
 base = Tokenizer.from_file(str(tokfile))
-text = (ROOT / "data" / "wake_clean.txt").read_text(encoding="utf-8")
+datafile = pathlib.Path(a.data)
+if not datafile.is_absolute():
+    datafile = ROOT / a.data
+if not datafile.exists():
+    raise SystemExit(f"missing corpus: {datafile}")
+text = datafile.read_text(encoding="utf-8")
 ids = torch.tensor(base.encode(text).ids, dtype=torch.long)
 n = int(0.95 * len(ids))
 train_ids, val_ids = ids[:n], ids[n:]
+print(f"corpus: {datafile} ({len(text)} chars)")
 print(f"tokens: train={len(train_ids)} val={len(val_ids)} vocab={base.get_vocab_size()}")
 
 def batch(split):

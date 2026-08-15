@@ -14,14 +14,27 @@ comparisons exist to measure.
 import torch
 
 
-def generate_chars(model, tok, prompt, n_chars, temp=0.85, top_p=0.95, device="cuda"):
+def generate_chars(model, tok, prompt, n_chars, temp=0.85, top_p=0.95, device="cuda",
+                   return_slid=False):
+    """return_slid: also report whether the context was ever truncated.
+
+    Rolling the window is invisible in the output and it changes what the output
+    IS — past the window the model is continuing from a tail of its own text with
+    the prompt gone, which is a different artifact from a single-pass completion.
+    A reader of a committed sample has to be able to tell which one they have, so
+    the fact is returned rather than inferred. Default off: the existing callers
+    unpack a bare string.
+    """
     window = model.config.n_positions
     ids = tok(prompt, return_tensors="pt").input_ids.to(device)
     out = ids
+    slid = False
     while True:
         text = tok.decode(out[0], skip_special_tokens=True)
         if len(text) >= len(prompt) + n_chars:
-            return text[len(prompt):]
+            return (text[len(prompt):], slid) if return_slid else text[len(prompt):]
+        if out.shape[1] > window - 1:
+            slid = True
         ctx = out[:, -(window - 1):]
         with torch.no_grad():
             logits = model(input_ids=ctx).logits[:, -1, :] / max(temp, 1e-5)
