@@ -37,6 +37,19 @@ SYSTEM = ("You speak in the language of Finnegans Wake: portmanteau, pun, "
           "dreamspeech, rivering syntax. Never explain yourself in plain English.")
 
 
+def chat_prompt(user):
+    """Base models ship no chat template and some templates reject a system role,
+    so fall back rather than assume. The -Base variants are half the experiment;
+    a hard dependency on apply_chat_template would silently exclude them."""
+    msgs = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}]
+    for attempt in (msgs, [{"role": "user", "content": SYSTEM + "\n\n" + user}]):
+        try:
+            return tok.apply_chat_template(attempt, tokenize=False, add_generation_prompt=True)
+        except Exception:
+            continue
+    return f"{SYSTEM}\n\n{user}\n"
+
+
 class WakeSet(Dataset):
     """prompt tokens masked to -100; only the Wakese continuation is learned."""
 
@@ -50,10 +63,7 @@ class WakeSet(Dataset):
         conv = self.rows[i]["conversations"]
         user = next(m["content"] for m in conv if m["role"] == "user")
         asst = next(m["content"] for m in conv if m["role"] == "assistant")
-        prompt = tok.apply_chat_template(
-            [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}],
-            tokenize=False, add_generation_prompt=True, enable_thinking=False,
-        )
+        prompt = chat_prompt(user)
         pid = tok(prompt, add_special_tokens=False).input_ids
         aid = tok(asst + tok.eos_token, add_special_tokens=False).input_ids
         ids = (pid + aid)[: a.maxlen]
