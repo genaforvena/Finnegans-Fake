@@ -58,20 +58,42 @@ tokenizer unchanged, the coinage `passencore` becomes two ordinary English fragm
 Rejoining them is the first line of `prepare_corpus.py` and it preserves a large share of the
 wordplay the project exists to study.
 
-## Checkpoint selection is deliberately not early stopping
+## A bug worth keeping in the README
 
-Validation loss measures generalisation to *unseen Joyce*. On a one-book corpus its optimum
-arrives at roughly step 750, while the model still emits punctuation soup:
+Every loss figure this file first carried was produced by a broken objective, and the way it
+was caught is the useful part.
+
+`batch()` returned nanoGPT-style pre-shifted labels (`x = d[j:j+B]`, `y = d[j+1:j+1+B]`).
+But `transformers` shifts labels *itself* — `ForCausalLMLoss` pads and slices
+`labels[..., 1:]`. So the shift happened twice and every run learned to predict token **t+2**
+from position t.
+
+It never raised. Training ran, loss fell, the curves looked plausible, and the inflated
+perplexity supported a confident story about *Finnegans Wake* being statistically
+incompressible. That story was a property of the bug.
+
+Only the generated text exposed it, by coming out looking like every second character had
+been deleted:
 
 ```
-riverrun, past Eve and Adam's, B's'et ting M Mh, N, the ofor, E, that
-the, Aes on S,ed, T theur aire of B, M, F the ofast of Bn.. E, tal,, ag,
+cmcii,ai rpaece nclms nwbde,gil nlr nnaglns udtrmnddes u vnie ote,tmsoe
 ```
 
-Over the same run train loss falls 6.3 → 1.8 while val climbs 6.8 → 9.0. The **overfit
-end-of-run weights are the ones that speak Wakese**. "Do not overfit" is a rule for models
-that must work on new data; this one only ever has to work on a text it already contains.
-Both ends are saved — `wake/<run>/` is best-val, `wake/<run>/final/` is the playable one.
+The tokenizer was checked for exact round-trip first, which ruled out tokenisation and left
+the objective. After the fix, **400 steps beat the 6000 broken ones** (val 6.15 vs 6.80):
+
+```
+riverrun, past Eve and Adam's, when you know it! But you're I'll don't
+I can me, you! With me, I take the Pa's a way for you will be will my
+gough to have being. I am your hear so, I'll you she and I'll not, you be be
+```
+
+English, dislocated on schedule, and `gough` is the model's own coinage — it is not in the
+book. The corpus statistics above are measurements of the text and stand. All perplexity and
+overfitting figures are being remeasured; this section will carry the real ones.
+
+Both ends of each run are saved — `wake/<run>/` is best-val, `wake/<run>/final/` is the
+end-of-run model.
 
 ## Running it
 
