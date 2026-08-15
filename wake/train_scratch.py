@@ -41,11 +41,17 @@ train_ids, val_ids = ids[:n], ids[n:]
 print(f"tokens: train={len(train_ids)} val={len(val_ids)} vocab={base.get_vocab_size()}")
 
 def batch(split):
+    """labels ARE input_ids — transformers' ForCausalLMLoss shifts them itself.
+
+    Handing it a pre-shifted y (the nanoGPT convention) shifts twice, so the model
+    learns to predict token t+2 from position t. It still trains and the loss still
+    falls; the damage only shows in the text, which comes out looking like every
+    other character was deleted. Cost the char-level run a full pass to find.
+    """
     d = train_ids if split == "train" else val_ids
     i = torch.randint(len(d) - a.block - 1, (a.batch,))
     x = torch.stack([d[j:j + a.block] for j in i]).to(dev, non_blocking=True)
-    y = torch.stack([d[j + 1:j + 1 + a.block] for j in i]).to(dev, non_blocking=True)
-    return x, y
+    return x, x
 
 # ---- model ---------------------------------------------------------------
 cfg = GPT2Config(
