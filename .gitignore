@@ -44,3 +44,12 @@ dmypy.json
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
+
+# --- Finnegans Fake: local-only artefacts ---
+# The corpus itself stays off the public repo. Joyce died in 1941, so the text is
+# public domain in Ireland/UK/EU but NOT in the US until 2035. Fetch it locally.
+data/*.txt
+data/*.jsonl
+# trained weights + logs
+wake/*/
+wake/*.log
