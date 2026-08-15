@@ -16,7 +16,8 @@ WAKE = ROOT / "wake"
 
 p = argparse.ArgumentParser()
 p.add_argument("--prompt", default="riverrun, past Eve and Adam's,")
-p.add_argument("--tokens", type=int, default=120)
+p.add_argument("--chars", type=int, default=420,
+               help="budget in CHARACTERS, not tokens — see note in the loop")
 p.add_argument("--temp", type=float, default=0.9)
 p.add_argument("--top-p", type=float, default=0.95)
 p.add_argument("--seed", type=int, default=11)
@@ -44,11 +45,18 @@ for name, path, log in variants():
     torch.manual_seed(a.seed)
     tok = AutoTokenizer.from_pretrained(str(path))
     model = AutoModelForCausalLM.from_pretrained(str(path)).to(dev).eval()
+    # Equal token budgets are NOT equal output across tokenisations: 130 tokens is
+    # ~390 characters at vocab 4096 and ~130 at character level, so a token-budgeted
+    # comparison silently hands the coarse tokenizer three times the text. Budget in
+    # characters and convert per model, measured on the prompt itself.
+    probe = tok(a.prompt, add_special_tokens=False).input_ids
+    chars_per_token = max(len(a.prompt) / max(len(probe), 1), 0.5)
     ids = tok(a.prompt, return_tensors="pt").to(dev)
     with torch.no_grad():
         out = model.generate(
-            **ids, max_new_tokens=a.tokens, do_sample=True, temperature=a.temp,
-            top_p=a.top_p, top_k=0, pad_token_id=tok.eos_token_id or 0,
+            **ids, max_new_tokens=int(a.chars / chars_per_token), do_sample=True,
+            temperature=a.temp, top_p=a.top_p, top_k=0,
+            pad_token_id=tok.eos_token_id or 0,
         )
     n = sum(q.numel() for q in model.parameters()) / 1e6
     meta = ""
