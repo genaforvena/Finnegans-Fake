@@ -113,10 +113,10 @@ coinages absent from the book: `wisheard`, `ephemerries`, `unsheeperted`, `gough
 
 ---
 
-## 5. Bigger tokens learned the book better and spoke worse
+## 5. Reading a verdict out of one sample
 
 **Observed.** BPE-8192 reaches train loss 0.640 against BPE-4096's 1.061 — a decisively
-better fit. Its output:
+tighter fit. A sample from it ran:
 
 ```
 Pussy is it. To speak cloth, Flaria's a romprince, a nuptias grunted and out
@@ -124,12 +124,52 @@ looped. Pussy is she has she has l full promise her quoth's twate. Pussy is
 she can she can't she can't air.
 ```
 
-It locks into repetition. BPE-4096, the worse fit by loss, produces the livelier text and
-invents more.
+**Believed.** That the model "locks into repetition", that it "speaks worse", and that this
+followed from its tighter fit: having memorised the book most closely, it was walking
+memorised paths.
 
-**The lesson.** Training loss ranks the models in the opposite order from the thing being
-optimised for. There is no loss function for *interesting*, so the loss is a diagnostic here
-and never a verdict — the samples decide.
+**What killed it.** Measuring instead of asserting, at n=8 samples per model
+(`wake/measure.py`).
+
+Self-repetition — the fraction of 4-grams in the output that recur within the output — is
+**~0.007 for every variant**, with no separation between them. The repetition was one sample
+at one seed, promoted to a property of the model.
+
+The causal half failed too. If a tight fit meant retracing the book, BPE-8192 should copy the
+most. It has the **lowest** 5-gram verbatim rate of the three BPE models — 0.002 against
+BPE-4096-small's 0.009. Low training loss did not turn into quotation.
+
+**The deeper error.** "Worse" is not an observation. These are texts with different
+properties, and a loss function ranks them on an objective nobody here is optimising for.
+The fix is not a better ranking; it is refusing to rank and publishing the properties.
+
+---
+
+## What the outputs actually are
+
+Eight samples per model, 900 characters each, temperature 0.85, with the book measured the
+same way at the same length as a baseline:
+
+| | self-repeat | verbatim 3-gram | verbatim 5-gram | novel words | type/token |
+|---|---|---|---|---|---|
+| **the book** | 0.000 | 0.995 | 0.994 | 0.252 | 0.702 |
+| `wake-bpe4096` | 0.007 | 0.083 | 0.004 | **0.276** | 0.617 |
+| `wake-bpe4096-small` | 0.009 | 0.105 | 0.009 | 0.240 | 0.594 |
+| `wake-bpe8192` | 0.006 | 0.101 | 0.002 | 0.233 | 0.635 |
+| `wake-char257` | 0.000 | 0.083 | 0.001 | 0.199 | 0.558 |
+
+**Novel words** — the share of word types absent from the rest of the book — is the column
+worth stopping at. Joyce coins at 0.252. A 12M-parameter model trained for twenty minutes on
+one consumer GPU coins at 0.276. The *rate* of invention is reproduced; the **nature** of it
+is not — a model's new word is frequently a broken one, where Joyce's is constructed. Rate
+and kind are different claims and only the first is measured here.
+
+**Type/token ratio** is where all four models differ from the book in the same direction:
+0.56–0.64 against 0.702. They reuse vocabulary more than Joyce does. That this holds across
+four variants that differ in everything else is what makes it look like a property rather
+than an artefact of sampling.
+
+Method notes that the numbers depend on, each of which was wrong first — see entries 7–9.
 
 ---
 
@@ -186,6 +226,47 @@ variants are done learning within about 1000 steps and spend the remaining 5000 
 
 The character and BPE losses are in different units — nats per character against nats per
 token — and are not comparable to each other. Only the columns within a tokenisation are.
+
+---
+
+## 8. A copy-detector set too strict to detect copying
+
+**Observed.** Verbatim overlap with the book, measured on 8-grams, came out at exactly 0.000
+for all four models.
+
+**Believed.** Briefly, that none of them reproduce the book at all.
+
+**What killed it.** A measure that returns the same value for every input is
+indistinguishable from a broken one, so the threshold was swept rather than trusted. On 526
+generated words:
+
+| n-gram | share found in the book |
+|---|---|
+| 2 | 0.453 |
+| 3 | 0.097 |
+| 4 | 0.017 |
+| 5 | 0.004 |
+| 8 | 0.000 |
+
+The copying is real; it lives in short spans. Nearly half of all adjacent word *pairs* come
+from the book. Set the window at eight and every model looks equally original — a clean
+number that means nothing.
+
+---
+
+## 9. A baseline that scored itself zero by construction
+
+**Observed.** Measuring "share of word types not in the book" gave the book 0.004 — as a
+baseline for the models' 0.20–0.28, this made them look wildly inventive.
+
+**What killed it.** A slice of the book was being compared against the vocabulary of the
+whole book, itself included. It cannot contain a word it does not contain. The comparison was
+a tautology dressed as a control.
+
+**Fix.** Each slice is scored against the book *minus that slice*, which is the same question
+the models are asked. The book's real figure is **0.252**, not 0.004 — and that changes the
+finding from "the models invent far more than Joyce" to "they invent at about the same rate",
+which is the interesting version and would have been missed.
 
 ---
 
