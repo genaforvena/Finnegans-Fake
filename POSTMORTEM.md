@@ -80,7 +80,8 @@ better. It was a satisfying claim and it was stated confidently.
 
 **What killed it.** Entry 1. The perplexity was a property of the broken objective. With the
 objective fixed, the same architecture reaches best-val 5.877 on BPE-4096, and the
-character-level model reaches 1.88 nats/char and is *still falling* when the run ends.
+character-level model reaches 1.88 nats/char. (It was also claimed here to be *still falling*
+at the end of the run. It was not — see entry 10.)
 
 **Standing correction.** The hapax rate is a measurement of the text and stands. Every
 perplexity figure from before the fix is void. The interesting residue is a claim the numbers
@@ -213,6 +214,11 @@ chars-per-token on the prompt itself.
 | `wake-bpe4096-small` | 4096 | 4.3M | 4.417 | 5.897 | 6.073 |
 | `wake-bpe8192` | 8192 | 13.9M | 0.640 | 6.454 | 9.025 |
 | `wake-char257` | 257 | 10.9M | 1.487 | **1.884** | 1.943 |
+| `wake-char257-long` | 257 | 10.9M | 0.589 | 1.947 | 2.668 |
+
+(The last row is the same code and the same hyperparameters as the row above it with
+`--iters 24000` instead of 6000. It was run to find the character model's floor and found
+its turning point instead — entry 10.)
 
 Two things in that table are worth more than the samples.
 
@@ -220,9 +226,12 @@ Two things in that table are worth more than the samples.
 using a third of the parameters, and barely overfits (final val 6.07 against 7.77). Nearly
 all the capacity in the larger model goes into memorising, not into learning.
 
-**Only the character model never overfits.** Its validation loss was still falling when the
-budget ran out, which is why it is the one now training on a longer run. The word-level
-variants are done learning within about 1000 steps and spend the remaining 5000 memorising.
+**~~Only the character model never overfits.~~** ~~Its validation loss was still falling when
+the budget ran out, which is why it is the one now training on a longer run.~~ **False, and
+the table above says so: 1.884 best against 1.943 final.** A final val above the best val is
+overfitting, printed in the same row as the claim that there was none. Entry 10. The word-level
+variants are done learning within about 1000 steps and spend the remaining 5000 memorising —
+that part stands, and the character model does the same thing later and from a lower floor.
 
 The character and BPE losses are in different units — nats per character against nats per
 token — and are not comparable to each other. Only the columns within a tokenisation are.
@@ -270,11 +279,74 @@ which is the interesting version and would have been missed.
 
 ---
 
+## 10. The one model that "never overfits", refuted by its own logged final loss
+
+**Observed.** The character model's 6000-step run ended at best val **1.884**. It was written
+up as the only variant that never overfits, still learning when the budget ran out, and put
+back on the GPU for a 24000-step run to find its floor.
+
+**Believed.** That character level was categorically different from word level — that
+predicting letters is a hard enough task to keep a 10.9M-parameter model honest indefinitely.
+
+**What killed it.** The longer run, at the *same* hyperparameters (block 512, batch 24,
+dropout 0.2, 6 layers, lr 6e-4 — only `--iters` changed). Validation bottoms at **iter 4000**
+and rises for the remaining twenty thousand:
+
+| iter | 1000 | 2000 | 3000 | **4000** | 6000 | 10000 | 14000 | 24000 |
+|---|---|---|---|---|---|---|---|---|
+| val | 2.588 | 2.117 | 1.989 | **1.947** | 1.951 | 2.149 | 2.349 | 2.668 |
+
+Train falls to 0.589 in the same span. It is the ordinary curve, arriving later. Four times
+the budget bought a model **37% worse** on validation than the same code at step 4000.
+
+**What makes this entry worth keeping is where the refutation was sitting.** Not in the new
+run — in the table printed directly above the claim, which already read `best val 1.884 |
+final val 1.943`. A final loss above the best loss *is* the overfit, recorded, formatted, and
+published in the same row as the sentence denying it. Nothing was missing. The number was
+read as "how well it did" and never as "which direction it was going", and the four-hour run
+that followed measured something already in the file.
+
+**Standing correction.** No variant here fails to overfit. The character model overfits from
+a lower floor and about four times later than the word-level ones, which is a difference of
+degree and schedule, not of kind.
+
+**Fix in the method, not the code.** A best/final pair is a direction, not two scores: if
+`final > best`, the run overfit, and the only question is when. That comparison is one line
+of arithmetic over `trainlog.json` and is now the first thing read from any completed run.
+
+---
+
+## 11. A download waiter that reported a 7%-complete file as present
+
+**Observed.** A background job was left waiting on two model downloads and returned clean:
+`base+instruct models present`, exit 0. The next step — LoRA — was queued on the strength of
+it.
+
+**Believed.** That both checkpoints were on disk.
+
+**What killed it.** `du`. The base was 1.7 GB and complete; the instruct checkpoint was
+**123 MB of 1.75 GB** and still being pulled by a curl that was very much alive. The waiter
+had tested that the paths existed. They existed from the first byte written.
+
+**Why it is the same error as the rest of this file.** The check was cheap, it was honest
+about what it measured, and what it measured was not the claim. A path exists the instant the
+download starts; a finished download is a *size*, and a usable checkpoint is neither — it is
+one that loads. So the base was not trusted for being 1.7 GB either: it was loaded on CPU,
+0.752B parameters materialised, and asked to continue *riverrun, past Eve and Adam's,* — which
+it did, with `and the first of the great flood. The story of the flood is told in Genesis
+6-9.` That sentence is the artifact. It also happens to be the perfect before-picture for
+what the LoRA is meant to undo.
+
+**Fix.** The chain that starts training now waits on the *process*, then gates on the
+artifact: final weights present for the run it followed, and the base checkpoint over
+1.7 GB, or it refuses to start (`wake/run_lora_after_scratch.sh`).
+
+---
+
 ## Open
 
-- The character-level run's validation loss was **still falling** at the end of its budget. It
-  is the only variant that never overfits, and it has not been trained to convergence.
-- LoRA over a pretrained model is unmeasured, blocked on the download above.
+- LoRA over the Base model is **running** (rank 32, 3 epochs, 4456/138 train/val rows,
+  4457/137 train/val rows, 12.8M trainable of 765M, step-0 val 4.543). Nothing measured yet.
 - Whether a Base model bends further into Wakese than an instruction-tuned one — the suspicion
   is yes, because instruction tuning is training in exactly the coherence we are trying to
   remove. Untested.
