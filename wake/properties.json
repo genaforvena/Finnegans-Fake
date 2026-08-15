@@ -1,0 +1,66 @@
+{
+  "args": {
+    "prompt": "riverrun, past Eve and Adam's,",
+    "samples": 8,
+    "chars": 900,
+    "temp": 0.85,
+    "top_p": 0.95,
+    "seed": 0,
+    "json": "wake/properties.json"
+  },
+  "rows": [
+    {
+      "run": "THE BOOK",
+      "n": 8,
+      "self_repeat": 0.0,
+      "verb3": 0.995,
+      "verb5": 0.994,
+      "novel_words": 0.252,
+      "ttr": 0.702
+    },
+    {
+      "run": "wake-bpe4096",
+      "n": 8,
+      "self_repeat": 0.007,
+      "verb3": 0.083,
+      "verb5": 0.004,
+      "novel_words": 0.276,
+      "ttr": 0.617,
+      "train": 1.061,
+      "best_val": 5.877
+    },
+    {
+      "run": "wake-bpe4096-small",
+      "n": 8,
+      "self_repeat": 0.009,
+      "verb3": 0.105,
+      "verb5": 0.009,
+      "novel_words": 0.24,
+      "ttr": 0.594,
+      "train": 4.417,
+      "best_val": 5.897
+    },
+    {
+      "run": "wake-bpe8192",
+      "n": 8,
+      "self_repeat": 0.006,
+      "verb3": 0.101,
+      "verb5": 0.002,
+      "novel_words": 0.233,
+      "ttr": 0.635,
+      "train": 0.64,
+      "best_val": 6.454
+    },
+    {
+      "run": "wake-char257",
+      "n": 8,
+      "self_repeat": 0.0,
+      "verb3": 0.083,
+      "verb5": 0.001,
+      "novel_words": 0.199,
+      "ttr": 0.558,
+      "train": 1.487,
+      "best_val": 1.884
+    }
+  ]
+}
