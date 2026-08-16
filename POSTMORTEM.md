@@ -343,10 +343,53 @@ artifact: final weights present for the run it followed, and the base checkpoint
 
 ---
 
+## 12. A claim about letters with no denominator
+
+**Observed.** Entry 3's standing correction: *"at the level of letters the book has plenty of
+learnable structure, and at the level of words very little."* The character model's 1.88
+nats/char was the evidence.
+
+**Believed.** That 1.88 was a good number. It reads like one, and it is the figure that
+survived the correction — so it went into the file as the thing entry 3 got *right*.
+
+**What killed it.** A control run that was already on disk and had never been used.
+`eng-char257` — same architecture, same hyperparameters, same 6000 iterations, a corpus
+within 0.22% of the Wake's in size — reaches **1.200** nats/char. The full ladder, recomputed
+from the corpora rather than quoted:
+
+| nats/char | Wake | English |
+|---|---|---|
+| order-0 (letter frequencies) | 3.147 | 3.076 |
+| gzip -9 | 2.630 | 2.090 |
+| xz -9e | 2.298 | 1.720 |
+| char-257 model | **1.884** | **1.200** |
+
+**Standing correction.** The claim is true in two directions and false in a third. The model
+removes 40% of the per-character uncertainty left by letter frequencies alone, and it beats
+`xz -9e` (2.72 against 3.32 bits/char), so the structure is real and the model captures it —
+both halves of "plenty of learnable structure" hold. But the same code on ordinary English
+removes 61%, and the Wake sits **0.99 bits/char worse**. The book has *less* letter-level
+structure than ordinary prose, not more. "Plenty" was never wrong; it was unquantified, and
+the quantity points the other way from the way the sentence leans.
+
+**Why it is the same error as the rest of this file.** A number with no denominator is not a
+measurement, and this one had a denominator sitting in the next directory the whole time. The
+confound was checked and it runs the safe way: the control is an 8-author Gutenberg mixture,
+which should be *harder* than a single author, so the handicap is against the finding rather
+than for it. Both figures are best-val at an equal budget, not floors — per entry 10 the
+Wake's real bottom is near iteration 4000.
+
+---
+
 ## Open
 
-- LoRA over the Base model is **running** (rank 32, 3 epochs, 4456/138 train/val rows,
-  4457/137 train/val rows, 12.8M trainable of 765M, step-0 val 4.543). Nothing measured yet.
-- Whether a Base model bends further into Wakese than an instruction-tuned one — the suspicion
-  is yes, because instruction tuning is training in exactly the coherence we are trying to
-  remove. Untested.
+- LoRA over the Base model **finished**: best val **3.5746** (ppl 35.7) at **epoch 1**, then
+  3.5825 and 3.6558. By this file's own rule (entry 2, entry 10) that is the checkpoint kept
+  and the run overfits from epoch 2 on — three epochs was one too many, and the evidence is in
+  `wake/wake-lora-base/trainlog.json`. What it is *like* to talk to is answered separately by
+  `/wake` in Telegram (`wake/reflex.py`); the loss says only that it stopped improving.
+- Whether a Base model bends further into Wakese than an instruction-tuned one — still
+  untested. The suspicion is yes, because instruction tuning is training in exactly the
+  coherence we are trying to remove. Note that the two runs would not be comparable by val
+  loss alone even if both existed: different bases, different tokenizers, different scales.
+  This needs a judgement on samples or a shared-scale metric, not a number off the trainlog.
