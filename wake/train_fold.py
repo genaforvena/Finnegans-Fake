@@ -50,8 +50,15 @@ a = p.parse_args()
 
 rows = json.loads(pathlib.Path(a.data).read_text())
 rng = random.Random(a.seed)
-rng.shuffle(rows)
-val, pool = rows[:a.n_val], rows[a.n_val:]
+if any("split" in r for r in rows):
+    # frozen split: val must not move when the training set grows, or the
+    # val curve across dataset sizes compares different held-out rows
+    val = [r for r in rows if r.get("split") == "val"]
+    pool = [r for r in rows if r.get("split") != "val"]
+else:
+    rng.shuffle(rows)
+    val, pool = rows[:a.n_val], rows[a.n_val:]
+rng.shuffle(pool)
 train = pool[:a.n] if a.n else pool
 print(f"[data] {len(train)} train / {len(val)} val (of {len(rows)} pairs)")
 
