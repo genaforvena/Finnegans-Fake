@@ -30,15 +30,29 @@ while :; do
   rule=$(( cols < 78 ? cols : 78 ))
   wrap=$(( cols - 2 < 76 ? cols - 2 : 76 ))
 
+  # Clip to the pane width the way the plain sections do — but ANSI-aware, and
+  # on CHARACTERS: bash substring is multibyte-safe where `cut -c` is not, and
+  # these lines carry box-drawing/em-dash bytes. The colour codes are added
+  # AFTER the clip so they never count toward the width.
+  clip(){ printf '%s' "${1:0:$cols}"; }
+
   body=$(
-    printf '\033[1mFINNEGANS FAKE\033[0m  a post-mortem, written while the patient trains\n'
+    # The header and the footer were the only lines the width-clipping skipped,
+    # because they are the ANSI-bearing ones — and the header's plain text is 63
+    # chars, so at any width below that it WRAPPED, cost a second row, and
+    # overflowed the frame by one: exactly the bug this dash was fixed for, one
+    # line up. Measured at 60x14 before this clip: visible row 1 was the orphan
+    # "ins" and the real header sat in scrollback.
+    hdr_a='FINNEGANS FAKE'; hdr_b='  a post-mortem, written while the patient trains'
+    printf '\033[1m%s\033[0m%s\n' "$(clip "$hdr_a")" "${hdr_b:0:$(( cols > ${#hdr_a} ? cols - ${#hdr_a} : 0 ))}"
     printf '%.0s─' $(seq 1 "$rule"); echo
 
     if pgrep -f 'train_scratch\.py' >/dev/null; then
-      printf '\033[32mTRAINING\033[0m  '
-      pgrep -af 'train_scratch\.py' | head -1 | grep -o -- '--out [a-z0-9-]*' | head -1
+      run=$(pgrep -af 'train_scratch\.py' | head -1 | grep -o -- '--out [a-z0-9-]*' | head -1)
+      tag='TRAINING'; rest="  $run"
+      printf '\033[32m%s\033[0m%s\n' "${tag:0:$cols}" "${rest:0:$(( cols > ${#tag} ? cols - ${#tag} : 0 ))}"
     else
-      printf '\033[33midle — no run in flight\033[0m\n'
+      printf '\033[33m%s\033[0m\n' "$(clip 'idle — no run in flight')"
     fi
 
     echo
@@ -84,8 +98,12 @@ PY
   } | head -n "$budget"                 # backstop: the body can never overrun
   # THE LIVENESS LINE. Last row, always printed, and every field in it moves on
   # every render — this is what a visible-only capture hash sees change.
-  printf '\033[2m── %s   frame %d   %dx%d ──\033[0m\n' \
-    "$(date -u +%H:%M:%SZ)" "$frame" "$cols" "$rows"
+  # Clipped like every other line (a wrapped footer costs a second row and
+  # scrolls the header off), and the clock leads it so the changing token is the
+  # part that SURVIVES the clip on a very narrow pane.
+  footer=$(printf '── %s   frame %d   %dx%d ──' \
+    "$(date -u +%H:%M:%SZ)" "$frame" "$cols" "$rows")
+  printf '\033[2m%s\033[0m\n' "${footer:0:$cols}"
 
   sleep 30
 done
