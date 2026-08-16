@@ -68,14 +68,39 @@ if tok.pad_token is None:
     tok.pad_token = tok.eos_token
 
 
+def prompt_ids(src):
+    msgs = [{"role": "user", "content": make_folds.PROMPT + src}]
+    return tok.apply_chat_template(msgs, add_generation_prompt=True, tokenize=True,
+                                   return_dict=True, enable_thinking=False)["input_ids"]
+
+
+shrunk = []
+
+
 def encode(row):
-    """(input_ids, labels) with the prompt masked to -100."""
-    msgs = [{"role": "user", "content": make_folds.PROMPT + row["source"][:6000]}]
-    pre = tok.apply_chat_template(msgs, add_generation_prompt=True, tokenize=True,
-                                  return_dict=True, enable_thinking=False)["input_ids"]
+    """(input_ids, labels) with the prompt masked to -100.
+
+    When the pair does not fit in maxlen the SOURCE gives way, not the fold. The
+    obvious slice — (pre + tgt)[:maxlen] — cuts the tail off the fold instead, so
+    the model is taught to stop mid-sentence, and for a prompt at or past maxlen it
+    leaves zero label tokens and cross_entropy dies on a 0-row logit tensor. The
+    fold is the only thing carrying loss; a shorter board window is a smaller loss
+    than a truncated target. Shrinking the source TEXT (not the token list) keeps
+    the chat template's trailing generation prompt intact, which slicing the token
+    list would cut off.
+    """
+    src = row["source"][:6000]
     tgt = tok(row["summary"] + tok.eos_token, add_special_tokens=False)["input_ids"]
+    pre = prompt_ids(src)
+    n0 = len(src)
+    while len(pre) + len(tgt) > a.maxlen and len(src) > 500:
+        src = src[:int(len(src) * 0.9)]
+        pre = prompt_ids(src)
+    if n0 != len(src):
+        shrunk.append((row["id"], n0, len(src)))
     ids = (pre + tgt)[:a.maxlen]
     labels = ([-100] * len(pre) + tgt)[:a.maxlen]
+    assert any(l != -100 for l in labels), f"{row['id']}: no fold tokens left"
     return ids, labels
 
 
@@ -114,6 +139,8 @@ model.print_trainable_parameters()
 
 dl = DataLoader(Folds(train), batch_size=1, shuffle=True, collate_fn=collate)
 vl = DataLoader(Folds(val), batch_size=1, shuffle=False, collate_fn=collate)
+for wid, n0, n1 in shrunk:
+    print(f"[fit] {wid}: source {n0} -> {n1} chars so the fold fits maxlen={a.maxlen}")
 opt = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=a.lr)
 
 

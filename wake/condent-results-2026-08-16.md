@@ -21,6 +21,13 @@ per character is the answer. No reference summaries — the source is its own.
 > The ladder section's own numbers were measured **before** a window-drift bug was
 > found and are superseded by the post-freeze table in the distillation section;
 > the drift and its fix are documented there.
+>
+> Tripling the teacher data to 144 folds did **not** improve on 47, and re-cutting
+> the extra windows to match the eval distribution — the experiment that had to be
+> run before the negative result could be believed — did not change that: paired,
+> at the same budget, it stays **−0.0018 ± 0.0022** below the 47-fold rung. Hand
+> folds saturate near 47 on this task. See
+> [Re-cutting the extra windows](#re-cutting-the-extra-windows-the-confound-removed-the-answer-unchanged).
 
 ## The headline
 
@@ -386,6 +393,89 @@ two dataset sizes are not nested draws; and the 144-epoch-3 rung scored 38 of 40
 windows because two of its folds fell below the shared budget, which mildly
 favours it.
 
+## Re-cutting the extra windows: the confound removed, the answer unchanged
+
+The obvious next run, done. The 97 extra windows were re-cut with the ordinary
+contiguous cutter instead of from the leftovers, folded by hand again, and the
+144-fold rung retrained at the same budget — same base, same rank, same learning
+rate, same three epochs, same frozen 8-row val split, same 40 held-out windows,
+same 157-token budget, same untrained baseline.
+
+**The distribution confound is gone.** The old extra batch and the new one, on the
+two axes the last section measured:
+
+| window set | lines (median) | distinct authors (median) |
+|---|---|---|
+| train batch 1 (55) | 15 | 9.0 |
+| train batch 2, OLD leftovers (97) | 6 | 5.0 |
+| **train batch 2, RE-CUT (97)** | **15** | **8.0** |
+| eval (40) | 13 | 8.0 |
+| test (8) | 13.5 | 8.5 |
+
+My folds for the re-cut windows are correspondingly no longer terser: 1612 median
+chars at 2.79x compression, against batch 1's 1475 at 2.95x and the old batch 2's
+1310 at 3.19x. Two thirds of the training set is now the same task it is scored
+on.
+
+**It did not clear the gate.** On the same 40 windows at the same budget:
+
+| rung | SIGNAL/novel | paired vs baseline | paired vs the 47-fold rung |
+|---|---|---|---|
+| **47 folds**, epoch 3 | **+0.0154 ± 0.0022** (36/40) | +0.0077 ± 0.0023 (3.3 sem) | — |
+| 144 RE-CUT, epoch 2 | +0.0145 ± 0.0016 (38/40) | +0.0069 ± 0.0019 (3.7 sem) | **−0.0009 ± 0.0022** (−0.4 sem) |
+| 144 RE-CUT, epoch 3 | +0.0135 ± 0.0015 (38/39) | +0.0059 ± 0.0017 (3.4 sem) | **−0.0018 ± 0.0022** (−0.8 sem) |
+| 144 OLD (leftover windows), epoch 3 | +0.0124 ± 0.0016 (37/38) | +0.0050 ± 0.0022 (2.3 sem) | −0.0029 ± 0.0022 (−1.3 sem) |
+| untrained baseline | +0.0076 ± 0.0015 (32/40) | — | — |
+
+The gate was: 144 must beat 47, paired, at the same budget. It does not. Both
+epochs sit below it and both differences are inside their own error bar. Removing
+the confound moved the deficit from −0.0029 to −0.0018 and −0.0009 — the right
+direction, about a third to two thirds of it, and not far enough to change the
+sign. **So the negative result stands on its own now: on this task, at this scale,
+hand-written folds saturate somewhere near 47.** That is a real finding rather than
+an artifact of how I cut the windows, which is exactly what this run was for.
+
+**What the re-cut did change is consistency, not level.** The re-cut rungs are
+tighter and more often positive than either the 47-fold rung or the old 144:
+38/39 and 38/40 windows positive against 36/40, and a spread of ±0.0015 against
+±0.0022, so the same mean is 9.0 sem from zero where the 47-fold rung is 6.7. More
+of the right kind of data made the effect more reliable across windows without
+making it larger. That is worth saying because it is what a distribution fix
+should do, and it is not what the operator asked for.
+
+**Val loss picked wrong for the third independent time.** The re-cut run's val
+curve is monotone — 2.2557, 2.0917, 2.0853 — so it selects epoch 3, while the
+content metric prefers epoch 2 (+0.0145 vs +0.0135). Across dataset sizes it is
+worse still: val at 144 re-cut (2.0853) beats val at 47 (2.2838) by a wide margin
+while the content metric is lower. Three runs, three times pointing at the model
+that carries less.
+
+Caveats, measured not assumed. The 47-fold adapter is still the earlier training
+run, so the two sizes remain non-nested draws — the comparison is between two
+trained models, not between two nested samples. The re-cut 144-epoch-3 rung scored
+39 of 40 windows because one fold fell below the shared budget; the paired figures
+above use only the 39 both rungs scored, and its own aggregate over those 39 is
++0.0135, unchanged. The re-cut windows share no contiguous 4-line run with any
+eval or test window (asserted over all 97), and isolated lines recur because the
+board itself repeats — the re-cut batch's recurring-line fraction is 0.23 median
+against batch 1's 0.32, so it is less repetitive than the set it joins, not more.
+One seed throughout.
+
+### A bug this run exposed in the trainer
+
+The wider windows crashed `train_fold.py` at the first step, and the cause had
+been eating data quietly before that. `encode()` built `(pre + tgt)[:maxlen]`,
+which drops tokens off the tail of the FOLD — the only thing carrying loss — and
+for a prompt at or past `maxlen` leaves zero label tokens, so cross-entropy dies
+on a 0-row logit tensor. Measured across the current 152 pairs: one re-cut row
+crashes it, three have their folds truncated, and **one batch-1 row (t110) has had
+its fold silently truncated since the first run**, so the 47- and old-144-fold
+rungs were both trained on one fold cut mid-sentence. The source now gives way
+instead: the board window is shrunk until the whole fold fits, and the four
+affected rows are named on stdout when it happens. Shrinking the source TEXT
+rather than slicing the token list is deliberate — slicing the tail off the token
+list would remove the chat template's generation prompt.
+
 ## Reproducing
 
 ```bash
@@ -408,6 +498,21 @@ done
 # the 40-window held-out set swaps in by environment, no code change
 export CONDENT_WINDOWS=wake/eval-windows.json CONDENT_FOLDS=wake/eval-folds.json
 .venv-ai/bin/python wake/condent.py --pairs ft47-e3 --budget 157 --n-foreign 6
+
+# the re-cut run: new windows first, ordinary cutter, frozen sets removed by span
+.venv-ai/bin/python wake/recut_windows.py --n 97      # -> wake/recut-windows.json
+.venv-ai/bin/python wake/show_windows.py 0 97         # read them to fold by hand
+.venv-ai/bin/python wake/train_fold.py --n 144 --epochs 3 --out fold-lora-144b
+for ep in ep2 ep3; do
+  .venv-ai/bin/python wake/make_folds.py --rung --adapter fold-lora-144b/$ep \
+                                         --variant ft144b-e${ep#ep}
+done
+for v in ft144b-e3 ft144b-e2 ft47-e3 model; do
+  .venv-ai/bin/python wake/condent.py --pairs $v --budget 157 --n-foreign 6 \
+                                      --out wake/recs-$v.json
+done
+# the gate: paired on the windows both rungs scored, not two aggregates compared
+.venv-ai/bin/python wake/paired.py wake/recs-ft47-e3.json wake/recs-ft144b-e3.json
 ```
 
 Windows are frozen on disk (`test-windows.json`, `eval-windows.json`). Deleting

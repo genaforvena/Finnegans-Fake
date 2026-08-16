@@ -57,3 +57,7 @@ data/gutenberg/
 # trained weights + logs
 wake/*/
 wake/*.log
+
+# Reproducible intermediate: recut_windows.py regenerates it from the live board,
+# and every window it selected is carried verbatim in wake/teacher-folds.json.
+wake/recut-windows.json
