@@ -321,6 +321,71 @@ the student folds are shorter than the teacher's, which is why the budgets diffe
 between the two tables (157 and 183 are the largest each set could fill without
 dropping pairs).
 
+## Tripling the teacher data — a negative result, and a selection error of my own
+
+The operator asked for another hundred folded windows and a retrain. 97 more were
+folded by hand (152 pairs total, 144 train / 8 val) and the LoRA retrained.
+**It did not close the gap. It widened it.**
+
+On the same 40 held-out windows, same 157-token budget, same untrained baseline:
+
+| student | SIGNAL/novel | paired vs baseline | vs the 47-fold student |
+|---|---|---|---|
+| **47 folds**, epoch 3 | **+0.0153 ± 0.0022** (36/40) | **+0.0077 ± 0.0023** (3.3 sem) | — |
+| 144 folds, epoch 3 | +0.0124 ± 0.0016 (37/38) | +0.0050 ± 0.0022 (2.3 sem) | −0.0029 ± 0.0022 (−1.3 sem) |
+| 144 folds, epoch 2 | +0.0101 ± 0.0019 (29/40) | +0.0025 ± 0.0022 (1.1 sem) | −0.0052 ± 0.0019 (−2.7 sem) |
+| untrained baseline | +0.0076 ± 0.0015 (32/40) | — | — |
+
+### The selection error, which is mine
+
+The 97 new windows were cut by removing every board line already claimed by the
+training, eval or test sets and then cutting from the contiguous runs of what was
+left. That guarantees zero overlap — and it silently guarantees something else,
+because the leftover runs are the *gaps between* already-claimed windows:
+
+| window set | lines (median) | distinct authors (median) |
+|---|---|---|
+| train batch 1 (55) | 14 | 8.5 |
+| **train batch 2 (97)** | **6** | **5.0** |
+| eval (40) | 13 | 8.0 |
+| test (8) | 14 | 8.5 |
+
+Two thirds of the training set is now drawn from windows half as wide and half as
+many-voiced as anything it is scored on. My folds for them are correspondingly
+terser (1310 vs 1475 median chars, 3.19x vs 2.95x compression). So the honest
+first reading of the negative result is not "hand-written folds stop helping past
+47" but "I fed it 97 examples of a different task". Re-cutting the extra windows
+to match the evaluation distribution — cutting them *first* and letting the eval
+set take what is left — is the experiment that would actually answer the
+operator's question, and it is the obvious next run.
+
+### What survives the confound
+
+The distribution artifact explains why 144 lost to 47. It does **not** explain
+this, and this is the sharper finding:
+
+**Val loss ranked the worse model higher, on both axes at once.**
+
+- Across dataset size: val loss is markedly *better* at 144 than at 47 (2.1147 vs
+  2.2838) while the content metric is *worse*.
+- Across epochs within 144: val loss picks epoch 2 (2.1147 vs 2.1312) while the
+  content metric prefers epoch 3 by +0.0023.
+
+And the val rows are all batch-1 windows — the *wide* distribution — so this is
+not the artifact talking. The model got measurably better at reproducing my folds
+token by token while producing folds that carry measurably less recoverable
+content. That is the same failure as `own − none` ranking empty folds above full
+ones, promoted from the metric level to the model-selection level: on this task,
+the likelihood a summarizer assigns to a reference summary is not merely a weak
+proxy for whether its own summaries carry information — it points the wrong way.
+Anyone selecting a checkpoint or a dataset size by val loss here selects the
+worse model twice over.
+
+Caveats: one seed; the 47-fold adapter is from the earlier training run, so the
+two dataset sizes are not nested draws; and the 144-epoch-3 rung scored 38 of 40
+windows because two of its folds fell below the shared budget, which mildly
+favours it.
+
 ## Reproducing
 
 ```bash
