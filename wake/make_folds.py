@@ -30,7 +30,9 @@ import argparse, json, pathlib, re, sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import pairs as pairmod
 
-OUT = pathlib.Path(__file__).resolve().parent / "constructed-folds.json"
+import os
+OUT = pathlib.Path(os.environ.get("CONDENT_FOLDS",
+                  pathlib.Path(__file__).resolve().parent / "constructed-folds.json"))
 INSTRUCT = "/home/mesh-home/models/Qwen3.5-0.8B"
 
 # ---------------------------------------------------------------------------
@@ -249,18 +251,27 @@ def entities(text, budget_chars):
     return " ".join(out)[:budget_chars]
 
 
-def model_folds(win_texts, budget_chars):
-    """What the local instruct model produces unaided."""
+# The one prompt. Imported verbatim by train_fold.py so the trained student is
+# asked exactly what the untrained baseline was asked — otherwise the training
+# and a prompt change would be confounded.
+PROMPT = ("Below are lines from an operations message board. Write a single dense "
+          "paragraph summarising what happened: the concrete findings, decisions and "
+          "faults, not the format. Do not list the lines; fold them.\n\n")
+
+
+def model_folds(win_texts, budget_chars, adapter=None):
+    """What the local instruct model produces — optionally with a LoRA on top."""
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
     tok = AutoTokenizer.from_pretrained(INSTRUCT)
     m = AutoModelForCausalLM.from_pretrained(INSTRUCT, dtype=torch.bfloat16).to("cuda").eval()
+    if adapter:
+        from peft import PeftModel
+        m = PeftModel.from_pretrained(m, adapter).eval()
+        print(f"  [adapter] {adapter}")
     out = {}
     for wid, text in win_texts.items():
-        msgs = [{"role": "user", "content":
-                 "Below are lines from an operations message board. Write a single dense "
-                 "paragraph summarising what happened: the concrete findings, decisions and "
-                 "faults, not the format. Do not list the lines; fold them.\n\n" + text[:6000]}]
+        msgs = [{"role": "user", "content": PROMPT + text[:6000]}]
         enc = tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt",
                                       return_dict=True, enable_thinking=False)
         ids = enc["input_ids"].to("cuda")
@@ -276,9 +287,23 @@ def model_folds(win_texts, budget_chars):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-model", action="store_true")
+    ap.add_argument("--rung", action="store_true", help="generate only the model rung")
+    ap.add_argument("--adapter", default=None, help="LoRA to generate the model rung with")
+    ap.add_argument("--variant", default="model", help="key to store the generated rung under")
     a = ap.parse_args()
 
     wins = {w["id"]: w["text"] for w in pairmod.windows()}
+
+    if a.adapter or a.rung:
+        # only regenerate the named rung; everything else on disk is left alone
+        old = json.loads(OUT.read_text()) if OUT.exists() else {}
+        budget = max([len(v.get("abstractive", "")) for v in old.values()] or [0]) or 2000
+        gen = model_folds(wins, budget, adapter=a.adapter)
+        for wid, t in gen.items():
+            old.setdefault(wid, {})[a.variant] = t
+        OUT.write_text(json.dumps(old, ensure_ascii=False, indent=1))
+        print(f"[out] {OUT} :: {a.variant}")
+        return
     absr = {k: clean(v) for k, v in ABSTRACTIVE.items()}
     # every rung gets the same character budget as the authored fold for its
     # window, so the ladder is not a length comparison in disguise

@@ -253,13 +253,28 @@ WINDOWS_N = 8
 WINDOW_CHARS = 4200
 
 
-def windows(n=WINDOWS_N, target_chars=WINDOW_CHARS, max_lines=22):
-    """n disjoint contiguous blocks of board lines, spread across the log.
+import os
+FROZEN = pathlib.Path(os.environ.get("CONDENT_WINDOWS",
+                     pathlib.Path(__file__).resolve().parent / "test-windows.json"))
 
-    Deterministic: same chat.log tail -> same windows, so a fold written against
-    a window keeps pointing at it. Each window is `<author>: <body>` lines, which
-    is what a fold over the board would actually be given.
+
+def windows(n=WINDOWS_N, target_chars=WINDOW_CHARS, max_lines=22):
+    """The 8 evaluation windows, read from a FROZEN snapshot on disk.
+
+    They must be frozen, and this cost a run to learn: chat.log is a fixed
+    3000-line ring, so as the mesh posts, old lines evict and the tail these were
+    cut from slides. Measured over about one hour, all 8 windows had changed —
+    different start times, different lengths. Cutting them live means a fold
+    written at 05:50 is scored against a different window at 07:00, which reads
+    as a foreign summary and collapses the signal; worse, a rung generated just
+    now is matched while an older rung is not, so the comparison silently favours
+    whatever was generated last.
+
+    test-windows.json is therefore the source of truth. Delete it to re-cut from
+    the live board, and every fold on disk becomes stale in the same motion.
     """
+    if FROZEN.exists():
+        return json.loads(FROZEN.read_text())
     board = read_board()[-2500:]
     out, step = [], len(board) // n
     for k in range(n):
@@ -279,6 +294,10 @@ def windows(n=WINDOWS_N, target_chars=WINDOW_CHARS, max_lines=22):
     return out
 
 
+FOLDS = pathlib.Path(os.environ.get("CONDENT_FOLDS",
+                    pathlib.Path(__file__).resolve().parent / "constructed-folds.json"))
+
+
 def load_constructed(variant):
     """Constructed pairs: a board window (source) against a fold written FOR it.
 
@@ -296,7 +315,7 @@ def load_constructed(variant):
 
     Folds live in wake/constructed-folds.json, keyed window -> variant -> text.
     """
-    path = pathlib.Path(__file__).resolve().parent / "constructed-folds.json"
+    path = FOLDS
     if not path.exists():
         raise SystemExit(f"no folds yet: {path}")
     folds = json.loads(path.read_text())
@@ -334,9 +353,18 @@ SETS = {
 
 
 def load(name):
-    if name not in SETS:
-        raise SystemExit(f"unknown pair set '{name}'; have: {', '.join(SETS)}")
-    return SETS[name]()
+    if name in SETS:
+        return SETS[name]()
+    # any rung present in constructed-folds.json is a pair set, so a newly
+    # generated student rung needs no code change to be scored
+    path = FOLDS
+    if path.exists():
+        have = {k for v in json.loads(path.read_text()).values() for k in v}
+        if name in have:
+            return load_constructed(name)
+        raise SystemExit(f"unknown pair set '{name}'; sets: {', '.join(SETS)}; "
+                         f"fold rungs on disk: {', '.join(sorted(have))}")
+    raise SystemExit(f"unknown pair set '{name}'; have: {', '.join(SETS)}")
 
 
 if __name__ == "__main__":
