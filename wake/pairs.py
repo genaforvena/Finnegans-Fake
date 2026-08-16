@@ -20,7 +20,7 @@ about the corpus that the number would otherwise hide.
             time by construction, and a genuine fold rather than a selection.
             This is the pair set that survives the caveat above.
 """
-import pathlib, re, sys
+import json, pathlib, re, sys
 from datetime import datetime, timezone
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -249,7 +249,88 @@ def load_ledger(days=8, min_lines=6):
     return pairs, notes
 
 
-SETS = {"handoff": load_handoff, "session": load_session, "ledger": load_ledger}
+WINDOWS_N = 8
+WINDOW_CHARS = 4200
+
+
+def windows(n=WINDOWS_N, target_chars=WINDOW_CHARS, max_lines=22):
+    """n disjoint contiguous blocks of board lines, spread across the log.
+
+    Deterministic: same chat.log tail -> same windows, so a fold written against
+    a window keeps pointing at it. Each window is `<author>: <body>` lines, which
+    is what a fold over the board would actually be given.
+    """
+    board = read_board()[-2500:]
+    out, step = [], len(board) // n
+    for k in range(n):
+        i, buf, chars = k * step, [], 0
+        while i < len(board) and chars < target_chars and len(buf) < max_lines:
+            ts, win, _tag, body = board[i]
+            line = f"{win}: {body}"
+            buf.append(line)
+            chars += len(line) + 1
+            i += 1
+        out.append({
+            "id": f"w{k:02d}",
+            "text": "\n".join(buf),
+            "n_lines": len(buf),
+            "start": board[k * step][0].isoformat(),
+        })
+    return out
+
+
+def load_constructed(variant):
+    """Constructed pairs: a board window (source) against a fold written FOR it.
+
+    The real summaries we already write scored zero off their quoted words, and a
+    single constructed fold scoring zero would not say whether the fold is poor or
+    the meter is at its limit on this corpus. So the folds come as a LADDER over
+    the same windows, each variant answering a different question, and each
+    variant is its own pair set — foreign donors are always the same variant, or
+    the control would confound genre with content:
+
+      abstractive  a real prose fold, written to carry the window's content
+      extractive   verbatim source lines at the same budget — what copying alone buys
+      entities     the window's slugs/names/numbers, no syntax — is it only the nouns?
+      model        what the local instruct model actually produces — what we could serve
+
+    Folds live in wake/constructed-folds.json, keyed window -> variant -> text.
+    """
+    path = pathlib.Path(__file__).resolve().parent / "constructed-folds.json"
+    if not path.exists():
+        raise SystemExit(f"no folds yet: {path}")
+    folds = json.loads(path.read_text())
+    notes, pairs = [], []
+    wins = {w["id"]: w for w in windows()}
+    missing = []
+    for wid, w in wins.items():
+        text = folds.get(wid, {}).get(variant)
+        if not text:
+            missing.append(wid)
+            continue
+        pairs.append(Pair(name=f"{variant}/{wid}", source=w["text"], summary=text,
+                          meta={"variant": variant, "window": wid,
+                                "n_lines": w["n_lines"], "start": w["start"]}))
+    notes.append(f"variant '{variant}': {len(pairs)} windows "
+                 f"({len(wins)} cut from chat.log, {len(missing)} without a fold)")
+    if pairs:
+        r = [len(p.source) / len(p.summary) for p in pairs]
+        notes.append(f"compression {min(r):.1f}x .. {max(r):.1f}x "
+                     f"(median {sorted(r)[len(r)//2]:.1f}x)")
+    notes.append("foreign donors are the SAME variant from other windows — comparing a "
+                 "fold against a differently-written summary would confound genre with content")
+    return pairs, notes
+
+
+SETS = {
+    "handoff": load_handoff,
+    "session": load_session,
+    "ledger": load_ledger,
+    "abstractive": lambda: load_constructed("abstractive"),
+    "extractive": lambda: load_constructed("extractive"),
+    "entities": lambda: load_constructed("entities"),
+    "model": lambda: load_constructed("model"),
+}
 
 
 def load(name):

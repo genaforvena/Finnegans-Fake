@@ -9,6 +9,13 @@ their source, measured before anyone trains new ones. The measurement is the NLL
 of the source's tokens with and without the summary in context; the delta in nats
 per character is the answer. No reference summaries — the source is its own.
 
+> **Update, same day, after the operator chose "build constructed pairs and measure
+> them".** The constructed run is in [Constructed pairs](#constructed-pairs-the-ladder)
+> below and it changes the reading of everything above. A hand-written fold over the
+> same board *does* carry content this metric can see (+0.0225 nats/char on tokens it
+> never quotes, 7/8 windows). So the zero below is a fact about **what we write**, not
+> a limit of the meter. The local model's own fold still scores zero.
+
 ## The headline
 
 **They do not, beyond the words they literally copy.** Across all three pair sets,
@@ -138,6 +145,88 @@ the handoff set and has twice the pairs.
 remains is the one the task named: there is no **prose** fold over the board, and
 the two prose summaries we do write score zero on content against their own genre.
 
+## Constructed pairs: the ladder
+
+The operator's call was to construct pairs and measure them. A single constructed
+fold scoring zero would not have said whether the fold was poor or the meter was
+at its limit here, so the folds were built as a **ladder over the same eight board
+windows** (`wake/make_folds.py`, folds in `wake/constructed-folds.json`), each rung
+answering a different question. Windows are deterministic cuts of chat.log,
+1001–2262 tokens, scored at 100% coverage.
+
+Only `abstractive` is authored. The other three are derived mechanically so they
+cannot be hand-tuned toward a result.
+
+At budget 219 tokens — the largest all three prose rungs can fill, so no rung is
+padded and none is truncated more than another:
+
+| rung | overlap | own − none | own − foreign | on quoted tokens | **on tokens it never quotes** | sign |
+|---|---|---|---|---|---|---|
+| **abstractive** (hand-written) | 21% | +0.0574 | +0.0491 | +0.1375 | **+0.0225 ± 0.0070** | **7/8** |
+| model (local 0.8B instruct) | 32% | +0.0705 | +0.0561 | +0.2000 | −0.0012 ± 0.0036 | 4/8 |
+| extractive (verbatim sentences) | 50% | +0.1329 | +0.0893 | +0.2672 | −0.0371 ± 0.0121 | 1/8 |
+
+and with `entities` included, at the budget it can fill (126 tokens):
+
+| rung | overlap | own − foreign | on quoted | **on unquoted** | sign |
+|---|---|---|---|---|---|
+| **abstractive** | 17% | +0.0160 | +0.0702 | **+0.0057 ± 0.0040** | 5/8 |
+| entities (identifiers only) | 21% | +0.0304 | +0.2264 | −0.0045 ± 0.0022 | 1/8 |
+| model | 23% | +0.0211 | +0.1140 | −0.0032 ± 0.0020 | 2/8 |
+| extractive | 38% | +0.0320 | +0.1438 | −0.0197 ± 0.0076 | 1/8 |
+
+### What this settles
+
+**The meter is not at its limit on this corpus.** A real prose fold shows
++0.0225 nats/char on tokens it never quotes, 7 of 8 windows positive, 3.2 standard
+errors from zero. Against the harness's own clean-English ceiling (+0.0777, gate A)
+that is 29% — on operations-board prose in two languages, folded ~3x. The earlier
+zero was a measurement of what we write, not of what can be measured.
+
+**And it is dose-dependent.** The same folds over the same windows give +0.0057 at
+budget 126 and +0.0225 at budget 219. More of the fold in context, more of the
+source recovered. Noise does not do that.
+
+**The local model produces fluent nullity, and now that has a number.** Its folds
+read like summaries, quote *more* of the source than the hand-written ones (32%
+overlap against 21%), score higher than them on `own − none` (+0.0705 vs +0.0574) —
+and carry nothing: −0.0012 ± 0.0036, 4/8, indistinguishable from a stranger's fold
+of a different window. This is exactly the failure the design named in advance —
+*a fluent nothing reads well and barely moves recovery NLL* — measured on our own
+material. It also means `own − none` is not merely confounded but actively
+misleading: it ranks the model's folds **above** the ones that carry content.
+
+**The teacher–student gap is now a measurement**, not a suspicion: +0.0225 against
+−0.0012 on identical windows at an identical budget with identical controls.
+
+**Copying scores negative.** Extractive puts +0.2672 on quoted tokens and
+−0.0371 on the rest — worse than a foreign extract, 1/8 positive. Quoting source
+sentences buys a large apparent gain that is entirely quotation, and on the residue
+it leaves it does actual harm relative to generic board prose. Our real board
+`[handoff]` lines are truncated prefixes, i.e. this rung.
+
+**The information is not just the nouns.** `entities` and `abstractive` are matched
+at 21% and 17% overlap, and separate cleanly: −0.0045 against +0.0057 at the same
+budget. Identifiers alone reproduce the ledger control's whole behaviour — a large
+overlap gain (+0.2264, the biggest of any rung) and nothing beyond it. That is the
+ledger finding independently confirmed on constructed material: slugs are copying.
+
+### Reading the cross-rung comparison honestly
+
+The overlap fraction differs by rung (21% / 32% / 50%), so "tokens it never quotes"
+is a *different subset* in each row, and the residue an extractive summary leaves is
+selected to be the part it could not cover. The clean comparisons are therefore the
+ones inside a rung (own vs foreign, same subset, same budget) and the two rungs that
+happen to be overlap-matched (abstractive 17% vs entities 21%). Every claim above is
+one of those two kinds. The rung ordering by `signal.novel` is consistent at both
+budgets, which is what it would not be if the subset selection were driving it.
+
+Other limits: 8 windows, so 7 foreign donors per pair. The folds were written by a
+large model that had read the window — which is the point, since the question was
+whether a *good* fold is visible at all, and it establishes the teacher ceiling the
+0.8B student is being measured against. Whether the signal keeps rising past budget
+219 was not tested; doing so drops the shorter windows and changes the pair set.
+
 ## Reproducing
 
 ```bash
@@ -145,6 +234,12 @@ the two prose summaries we do write score zero on content against their own genr
 .venv-ai/bin/python wake/condent.py --pairs session --n-chunks 4 --n-foreign 6
 .venv-ai/bin/python wake/condent.py --pairs ledger --budget 90 --n-chunks 4 --by axis
 .venv-ai/bin/python wake/condent.py --pairs handoff
+
+.venv-ai/bin/python wake/make_folds.py                         # rebuild the ladder
+for v in abstractive extractive model; do
+  .venv-ai/bin/python wake/condent.py --pairs $v --budget 219 --max-src-tok 2400
+done
+.venv-ai/bin/python wake/condent.py --pairs entities --budget 126 --max-src-tok 2400
 ```
 
 `--dry-run` inventories a pair set without loading the model. The harness is
