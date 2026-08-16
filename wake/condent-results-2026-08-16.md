@@ -227,6 +227,94 @@ whether a *good* fold is visible at all, and it establishes the teacher ceiling 
 0.8B student is being measured against. Whether the signal keeps rising past budget
 219 was not tested; doing so drops the shorter windows and changes the pair set.
 
+## Closing the gap: distilling the fold into the 0.8B
+
+The operator's next call was to train the local model on the hand-written folds.
+55 more board windows were folded by hand (`wake/teacher-folds.json`, ~3x), and a
+LoRA (rank 16) was trained on Qwen3.5-0.8B-Instruct with the loss on the fold
+tokens only and the prompt imported verbatim from `make_folds.py`, so training is
+not confounded with a prompt change. Every epoch was kept: val loss is the wrong
+selector here — the whole finding is that fluent-and-empty scores well on
+likelihood — so the adapters are judged by `condent.py` afterwards.
+
+### First, the run that had to be thrown away
+
+The evaluation windows were being cut live from chat.log on every invocation.
+chat.log is a fixed 3000-line ring: as the mesh posts, old lines evict and the
+tail slides. Measured over about an hour, **all 8 windows had moved** — different
+start times, different lengths, 0/8 identical. Nothing errored. A fold written at
+05:50 was scored against a different window at 07:00, which reads as a foreign
+summary; worse, a rung generated moments ago was matched while an older rung was
+not, so the comparison silently favoured whatever was generated last — which was
+always the student.
+
+It surfaced because the teacher's +0.0225 did not reproduce on a re-run (+0.0035),
+and a 7-token budget change cannot do that. Windows are now frozen to
+`wake/test-windows.json`; 8 of 55 training rows had likewise been paired with a
+drifted source and were repaired; both adapters were retrained. Every number
+below is from after the freeze. This is the same failure the harness's own
+controls are built around — a comparison that looks like content and is really
+an artifact of how the two sides were produced.
+
+### On the 8 test windows, at an equal 183-token budget
+
+| rung | SIGNAL/novel | sem | sign |
+|---|---|---|---|
+| **abstractive** (teacher, hand-written) | **+0.0294** | 0.0045 | 8/8 |
+| **ft47-e3** (student: 47 folds, 3 epochs) | **+0.0147** | 0.0032 | 8/8 |
+| model (untrained baseline) | +0.0060 | 0.0031 | 6/8 |
+| ft12-e2 (12 folds) | +0.0051 | 0.0067 | 3/8 |
+| ft12-e1 (12 folds) | +0.0007 | 0.0071 | 4/8 |
+| extractive (copying) | −0.0408 | 0.0133 | 1/8 |
+
+Paired over the same windows: teacher − baseline **+0.0234 ± 0.0053** (4.4 sem,
+8/8); student − baseline **+0.0088 ± 0.0051** (1.7 sem); teacher − student
+**+0.0147 ± 0.0047** (3.1 sem, 7/8).
+
+### Then on 40 held-out windows, because 8 was underpowered
+
+The student-versus-baseline contrast needs no teacher folds, so it can be run on
+far more windows. 40 fresh windows were cut from the union corpus, disjoint from
+every training window and from the 8 test windows, and frozen
+(`wake/eval-windows.json`). At a 157-token budget:
+
+| rung | SIGNAL/novel | sem | sign |
+|---|---|---|---|
+| ft47-e3 (student) | **+0.0153** | 0.0022 | 36/40 |
+| model (untrained) | +0.0076 | 0.0015 | 32/40 |
+
+**Paired: +0.0077 ± 0.0023, 3.3 sem, 27/40 windows.** The 8-window estimate
+(+0.0088) was right in magnitude and merely underpowered; at n=40 it resolves.
+
+### What this settles, and what it does not
+
+**Training worked, and the effect is real.** 47 hand-written folds roughly double
+the copy-free content signal of the local model — +0.0076 to +0.0153 nats/char —
+established at 3.3 sem on 40 held-out windows. This is the first rung of the
+ladder that moved because of training rather than because of who wrote the text.
+
+**The gap is narrowed, not closed.** On the shared 8-window measurement the
+teacher sits at +0.0294 against the student's +0.0147: training recovered about a
+third of the teacher−baseline gap and the teacher is still ahead by 3.1 sem. The
+honest headline is *half the teacher*, not *matched*.
+
+**Data, not epochs, is the axis that moved it.** 12 folds produced nothing
+(+0.0007 and +0.0051, indistinguishable from baseline; paired −0.0053 ± 0.0083).
+And the epoch curve is flat — measured at a 111-token budget on the test windows,
+epochs 1/2/3 give +0.0081, +0.0039, +0.0048 over baseline, all between 0.8 and
+1.8 sem with no trend. So the gain came from having enough examples, not from
+training longer on few, and there is no evidence for picking a particular epoch.
+
+**Val loss would have picked wrong-ish, and could not have seen this at all.**
+Training loss fell monotonically (3.08 → 2.45 → 2.31 → 2.28) while the copy-free
+content signal did not track it. The selection had to be made by this metric.
+
+Limits: one seed, one rank, one base model; the teacher rung exists only on the 8
+test windows, so *half the teacher* rests on 8 paired windows rather than 40; and
+the student folds are shorter than the teacher's, which is why the budgets differ
+between the two tables (157 and 183 are the largest each set could fill without
+dropping pairs).
+
 ## Reproducing
 
 ```bash
@@ -240,7 +328,20 @@ for v in abstractive extractive model; do
   .venv-ai/bin/python wake/condent.py --pairs $v --budget 219 --max-src-tok 2400
 done
 .venv-ai/bin/python wake/condent.py --pairs entities --budget 126 --max-src-tok 2400
+
+# distillation: train, generate the student rung, score it
+.venv-ai/bin/python wake/train_fold.py --n 47 --epochs 3 --out fold-lora-47
+.venv-ai/bin/python wake/make_folds.py --rung --adapter fold-lora-47/ep3 --variant ft47-e3
+.venv-ai/bin/python wake/condent.py --pairs ft47-e3 --budget 183 --max-src-tok 2400
+
+# the 40-window held-out set swaps in by environment, no code change
+export CONDENT_WINDOWS=wake/eval-windows.json CONDENT_FOLDS=wake/eval-folds.json
+.venv-ai/bin/python wake/condent.py --pairs ft47-e3 --budget 157 --n-foreign 6
 ```
+
+Windows are frozen on disk (`test-windows.json`, `eval-windows.json`). Deleting
+either re-cuts from the live board and makes every fold beside it stale in the
+same motion — see the drift note above.
 
 `--dry-run` inventories a pair set without loading the model. The harness is
 pair-agnostic: it takes `(source_text, summary_text)` and knows nothing else, so
