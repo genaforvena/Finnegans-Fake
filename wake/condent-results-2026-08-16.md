@@ -9,12 +9,18 @@ their source, measured before anyone trains new ones. The measurement is the NLL
 of the source's tokens with and without the summary in context; the delta in nats
 per character is the answer. No reference summaries — the source is its own.
 
-> **Update, same day, after the operator chose "build constructed pairs and measure
-> them".** The constructed run is in [Constructed pairs](#constructed-pairs-the-ladder)
-> below and it changes the reading of everything above. A hand-written fold over the
-> same board *does* carry content this metric can see (+0.0225 nats/char on tokens it
-> never quotes, 7/8 windows). So the zero below is a fact about **what we write**, not
-> a limit of the meter. The local model's own fold still scores zero.
+> **Update, same day.** Two later runs change the reading of everything above.
+> A hand-written fold over the same board *does* carry content this metric sees —
+> **+0.0294 nats/char** on tokens it never quotes, 8/8 windows — so the zero below
+> is a fact about **what we write**, not a limit of the meter. And training the
+> local 0.8B on 47 such folds roughly **doubles** its own copy-free signal
+> (+0.0076 → +0.0153, 3.3 sem over 40 held-out windows), reaching about half the
+> teacher. See [Constructed pairs](#constructed-pairs-the-ladder) and
+> [Closing the gap](#closing-the-gap-distilling-the-fold-into-the-08b).
+>
+> The ladder section's own numbers were measured **before** a window-drift bug was
+> found and are superseded by the post-freeze table in the distillation section;
+> the drift and its fix are documented there.
 
 ## The headline
 
