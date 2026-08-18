@@ -25,7 +25,12 @@ for s in $SEEDS; do
   out="wake/fold-lora-144s$s"; var="ft144s$s-e3"
   if [ -d "$out/ep3" ]; then say "seed $s: adapter exists, skipping train"; else
     say "seed $s: train n=144 epochs=3 -> $out"
-    "$PY" wake/train_fold.py --n 144 --epochs 3 --seed "$s" --out "$out" 2>&1 | tee -a "$LOG"
+    # --out is resolved against train_fold.py's OWN directory (outdir = HERE / a.out), NOT the cwd.
+    # Passing the repo-relative "wake/fold-lora-144s1" therefore wrote the adapter to
+    # wake/wake/fold-lora-144s1 and the generate step died 17 minutes later on a missing
+    # adapter_config.json. Strip the prefix for the flag; every other path here is cwd-relative.
+    "$PY" wake/train_fold.py --n 144 --epochs 3 --seed "$s" --out "${out#wake/}" 2>&1 | tee -a "$LOG"
+    [ -d "$out/ep3" ] || { say "seed $s: FAILED -- no $out/ep3 after training"; exit 1; }
   fi
   say "seed $s: generate rung $var from $out/ep3 over the 40 eval windows"
   "$PY" wake/make_folds.py --rung --adapter "$out/ep3" --variant "$var" 2>&1 | tail -45 | tee -a "$LOG"
