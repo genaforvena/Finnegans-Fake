@@ -46,6 +46,14 @@ p.add_argument("--lr", type=float, default=1e-4)
 p.add_argument("--rank", type=int, default=16)
 p.add_argument("--maxlen", type=int, default=2048)
 p.add_argument("--seed", type=int, default=0)
+# Replicating a rung means holding the DATA fixed while the TRAINING draw varies, and one seed
+# cannot do both: --n 47 now draws 47 rows out of a 144-row pool, so changing the seed to get a
+# second training also changes which 47 rows it trains on -- two variables, one knob. At n=144 the
+# two happen to decouple (pool[:144] is the whole pool whatever the shuffle), which is why the
+# seed-spread run could use --seed alone; at any smaller n it does not. --data-seed pins the row
+# draw so --seed varies only the run.
+p.add_argument("--data-seed", type=int, default=None,
+               help="seed for the ROW draw only; defaults to --seed (pin it to replicate a rung)")
 a = p.parse_args()
 
 # --seed must control the RUN, not merely which rows are drawn. It did not. torch was never
@@ -61,7 +69,7 @@ torch.manual_seed(a.seed)
 torch.cuda.manual_seed_all(a.seed)
 
 rows = json.loads(pathlib.Path(a.data).read_text())
-rng = random.Random(a.seed)
+rng = random.Random(a.seed if a.data_seed is None else a.data_seed)
 if any("split" in r for r in rows):
     # frozen split: val must not move when the training set grows, or the
     # val curve across dataset sizes compares different held-out rows

@@ -1,0 +1,153 @@
+# The run-to-run spread the ladder was read through
+
+Task `seed-spread` (owner: wake), 2026-08-18. Driver: `wake/run-seed-spread.sh`.
+Four independent trainings of the **same 144 rows**, scored on the **same 40 frozen
+eval windows** at the same 157-token budget with the same 6 foreign donors as
+`db416ad`. Model: `Qwen3.5-0.8B-Base` scored, `Qwen3.5-0.8B-Instruct` + LoRA r16
+trained, one RTX 3060.
+
+The question: every comparison this lane has published is a difference of ~0.002
+nats/char between rungs trained **once each**. How much of that is the training
+draw?
+
+## First, the reason it could not be asked before
+
+`train_fold.py` seeded `random.Random(a.seed)` — the row draw — and **never seeded
+torch**. Every other script in `wake/` seeds it, including `train_scratch.py` next
+door. So the LoRA init, the dropout masks and the DataLoader's shuffle came from an
+unseeded global generator while `trainlog.json` recorded `"seed": 0` for all four
+rungs on the ladder.
+
+Measured, not inferred. Two runs, same `--seed 0`, same `--n 12`, identical
+`[data]` line and identical step-0 val 3.0860 — `lora_B` is zero-init, so step-0
+**is** the base model and cannot discriminate — diverged by epoch 1:
+
+| | epoch-1 train | epoch-1 val |
+|---|---|---|
+| unseeded, run A | 3.1562 | 2.7637 |
+| unseeded, run B | 3.1642 | 2.7705 |
+| **seeded**, run C | 3.1621 | 2.7772 |
+| **seeded**, run D | 3.1622 | 2.7784 |
+| seeded, `--seed 7` | 2.9179 | 2.7668 |
+
+Seeding removes the draw variance (80x on train loss) and leaves CUDA reduction
+nondeterminism, which is a floor, not a knob. A different seed moves the run far
+further than either residual. Fixed in `faaea27`.
+
+`n=144` is what makes the experiment clean: `pool[:144]` takes **all** 144 training
+rows whatever the shuffle, so the data is identical across seeds by construction
+and the only thing varying is the training draw.
+
+## The spread
+
+Aggregate SIGNAL/novel on the 38 windows common to all six scored sets:
+
+| rung | training | SIGNAL/novel | positive |
+|---|---|---|---|
+| untrained base | — | +0.0078 ± 0.0015 | 31/38 |
+| 47 folds, ep3 | one draw | +0.0155 ± 0.0023 | 34/38 |
+| 144 folds, ep3 | seed 0 (unseeded code) | +0.0132 ± 0.0015 | 37/38 |
+| 144 folds, ep3 | seed 1 | +0.0136 ± 0.0016 | 36/38 |
+| 144 folds, ep3 | seed 2 | +0.0135 ± 0.0015 | 37/38 |
+| 144 folds, ep3 | seed 3 | **+0.0107** ± 0.0013 | 33/38 |
+
+**sd 0.00140 across the four, range 0.00295.** Note the shape of it: three of the
+four cluster inside 0.0004 and the fourth sits 0.0028 below them. Read after three
+runs this looked like a spread far smaller than the effect under test — that
+reading was published here in an interim board line and the fourth run falsified
+it. Three agreeing runs are not a spread measurement; they are three draws that
+happened to agree.
+
+## What that does to the published verdict
+
+The gate `db416ad` turned on was: 144 must beat 47, paired, same windows, same
+budget. Re-run once per training:
+
+| training | (144 rung) − (47 rung), paired | |
+|---|---|---|
+| seed 0 | −0.0023 ± 0.0022 | −1.0 sem, 19/38 positive |
+| seed 1 | −0.0019 ± 0.0023 | −0.8 sem, 18/38 |
+| seed 2 | −0.0021 ± 0.0021 | −1.0 sem, 17/38 |
+| seed 3 | **−0.0049** ± 0.0022 | **−2.2 sem**, 15/38 |
+
+**The sign survives replication — all four are negative.** The strength does not:
+the verdict's own spread is sd 0.00140 and its range 0.00295 **exceeds** the
+±0.0022 error bar that was published beside it. One of the four trainings would
+have licensed "144 significantly loses to 47" at 2.2 sem; the other three would
+have called it inside the bar. Same code, same data, same eval set, same budget.
+
+The same swing hits the claim that training works at all:
+
+| training | (144 rung) − (untrained base), paired |
+|---|---|
+| 47 folds | +0.0077 ± 0.0024 (+3.2 sem) |
+| seed 0 | +0.0054 ± 0.0017 (+3.2 sem) |
+| seed 1 | +0.0058 ± 0.0021 (+2.7 sem) |
+| seed 2 | +0.0056 ± 0.0016 (+3.4 sem) |
+| seed 3 | +0.0028 ± 0.0018 (+1.6 sem) |
+
+Every rung beats the untrained base, so *that* finding holds; but seed 3 alone
+would have been written up as "barely moved" while its three siblings read 2.7–3.4
+sem.
+
+## A single window's reading is dominated by which training you ran
+
+Per-window sd across the four trainings: **median 0.0059, max 0.0139.** For scale,
+the per-window 144-vs-47 differences have sd 0.0136. So the noise the aggregate
+averages away is, window by window, about as large as the difference being
+measured. Anything read off one window under one training is not a measurement.
+
+## Val loss ranks the loser again — now between replicates
+
+The four differ only in the training draw, so this is the cleanest instance yet:
+
+| training | val ep1 / ep2 / ep3 | content, ep3 |
+|---|---|---|
+| seed 0 | 2.2557 / 2.0917 / 2.0853 | +0.0132 |
+| seed 1 | 2.2345 / 2.0900 / 2.0719 | +0.0136 |
+| seed 2 | 2.2298 / 2.0818 / **2.1011** | +0.0135 |
+| seed 3 | 2.2403 / 2.0946 / 2.0864 | **+0.0107** |
+
+By val loss at ep3 the order is s1 < seed0 < s3 < s2; by the content metric it is
+s1 > s2 > seed0 > s3. Val puts **s2 last and s3 third**, while the content metric
+puts s2 second and s3 last — and that pair carries the largest content gap of the
+four (0.0135 vs 0.0107). Val's own best epoch also moves with the draw: three runs
+are monotone to ep3, s2 turns back up at ep3. Selecting an epoch or a run by val
+loss remains the wrong instrument, and its wrongness is not a property of a
+dataset size — it shows up between runs that differ in nothing else.
+
+## What this settles, and what it does not
+
+- **Settled: the training-noise term is missing from every published error bar
+  here, and it is not small.** A single-rung aggregate carries sd ≈ 0.0014 of it; a
+  difference between two independently trained rungs carries ≈ 0.0020, which is the
+  size of the effects being compared. Every future comparison at this scale needs
+  replication, and its bar must include this term.
+- **Settled: the direction of the 144-vs-47 result.** Four independent trainings,
+  four negative paired differences. Doubling the hand-written teacher data does not
+  improve this rung, and the earlier negative result is not an artifact of one
+  unlucky draw.
+- **NOT settled: how far 144 sits below 47.** −0.0019 and −0.0049 are both in the
+  measured range, so "how much worse" has no answer yet at n=4.
+- **NOT settled: the 47 rung's own spread.** It is one draw, and the gate is a
+  difference of two rungs, so half of the gate's training noise is still unmeasured.
+  Replicating it needs the row draw held fixed while the training draw varies, and
+  `--seed` alone cannot do it: at `--n 47` the pool is 144 rows, so seeds 0 and 7
+  share only **15 of their 47 rows** — a second training would also be a different
+  training set. (At n=144 the two decouple by construction: the drawn set is
+  identical across seeds, which is what made this experiment clean.) That is what
+  `--data-seed` is for (this commit).
+- Limits unchanged from `db416ad`: one rank, one base model, one epoch policy, and
+  the teacher rung exists only on the 8 test windows.
+
+## Reproducing
+
+```bash
+SEEDS="1 2 3" ./wake/run-seed-spread.sh        # ~25 min per seed on a 3060
+# per-rung and paired, on the windows both sides scored:
+.venv-ai/bin/python wake/paired.py wake/recs-ft47-e3.json wake/recs-ft144s3-e3.json
+```
+
+The driver resumes: a seed whose `ep3` adapter already exists is not retrained.
+Note that python's stdout is block-buffered through the driver's `tee`, so a
+stage's lines land in a burst when it ends — a frozen log mtime is not a stall.
