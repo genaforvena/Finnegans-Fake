@@ -48,6 +48,18 @@ p.add_argument("--maxlen", type=int, default=2048)
 p.add_argument("--seed", type=int, default=0)
 a = p.parse_args()
 
+# --seed must control the RUN, not merely which rows are drawn. It did not. torch was never
+# seeded in this file -- every other script in this directory seeds it, including train_scratch.py
+# next door -- so the LoRA init, the dropout masks and the DataLoader's shuffle all came from an
+# unseeded global generator while trainlog.json faithfully recorded "seed": 0. Measured 2026-08-18:
+# two runs, same --seed 0, same --n 12, identical [data] line and identical step-0 val 3.0860,
+# diverged to epoch-1 val 2.7637 vs 2.7705. So no two rungs on the ladder were ever replicates, and
+# the -0.0018 gap between the 47- and 144-fold rungs was read across runs whose run-to-run spread
+# had never been measured. A recorded parameter that does not control what it names is worse than
+# an absent one: it reads as a controlled experiment.
+torch.manual_seed(a.seed)
+torch.cuda.manual_seed_all(a.seed)
+
 rows = json.loads(pathlib.Path(a.data).read_text())
 rng = random.Random(a.seed)
 if any("split" in r for r in rows):
@@ -137,7 +149,10 @@ model = get_peft_model(model, LoraConfig(
                     "gate_proj", "up_proj", "down_proj"]))
 model.print_trainable_parameters()
 
-dl = DataLoader(Folds(train), batch_size=1, shuffle=True, collate_fn=collate)
+# the shuffle draws from its OWN generator, not the global one, so batch order is fixed by the
+# seed even if something upstream consumes the global stream
+dl = DataLoader(Folds(train), batch_size=1, shuffle=True, collate_fn=collate,
+                generator=torch.Generator().manual_seed(a.seed))
 vl = DataLoader(Folds(val), batch_size=1, shuffle=False, collate_fn=collate)
 for wid, n0, n1 in shrunk:
     print(f"[fit] {wid}: source {n0} -> {n1} chars so the fold fits maxlen={a.maxlen}")
