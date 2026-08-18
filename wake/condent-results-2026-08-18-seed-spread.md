@@ -151,3 +151,82 @@ SEEDS="1 2 3" ./wake/run-seed-spread.sh        # ~25 min per seed on a 3060
 The driver resumes: a seed whose `ep3` adapter already exists is not retrained.
 Note that python's stdout is block-buffered through the driver's `tee`, so a
 stage's lines land in a burst when it ends — a frozen log mtime is not a stall.
+
+---
+
+# Replicating the OTHER side: the negative result does not survive it
+
+Same day, second batch. The section above replicated the 144 rung four times and
+concluded that the sign of the 144-vs-47 gap "survives replication, four for four".
+That conclusion was drawn with **one side of the comparison unreplicated** — which
+is the same error the section is about, committed one level up. The 47 rung was one
+draw, and a difference of two rungs carries the training noise of both.
+
+`PREFIX=t N=47` reproduces its training set exactly rather than approximately:
+batch 1 is the 55 `t` windows, the frozen split holds 8 of them as val and 47 as
+train (checked — all 8 val rows are `t` rows, and `t`-train is exactly 47), so the
+drawn set is the whole pool whatever the shuffle. Three trainings, same rows, same
+eval, same budget.
+
+## On the 34 windows every scored set shares
+
+| rung | | |
+|---|---|---|
+| untrained base | +0.0075 ± 0.0015 | 28/34 |
+| **ft47-e3 (published)** | **+0.0165** ± 0.0024 | 31/34 |
+| 47 rows, seed 1 | +0.0124 ± 0.0019 | 31/34 |
+| 47 rows, seed 2 | +0.0113 ± 0.0017 | 30/34 |
+| 47 rows, seed 3 | +0.0150 ± 0.0024 | 30/34 |
+| 144 rows, seed 0 | +0.0130 ± 0.0017 | 33/34 |
+| 144 rows, seed 1 | +0.0142 ± 0.0018 | 32/34 |
+| 144 rows, seed 2 | +0.0133 ± 0.0016 | 33/34 |
+| 144 rows, seed 3 | +0.0104 ± 0.0014 | 29/34 |
+
+**The published 47 rung is a high draw.** Its three replicates mean +0.0129 with
+sd 0.00178; the published one sits at +0.0165, **+0.0036 above them, 1.9 replicate
+sd.** Nothing was wrong with it — it is one sample from a distribution whose width
+nobody had measured.
+
+## The gate, with both sides replicated
+
+| (144 rung) − (47 rung) | result |
+|---|---|
+| vs the **published** 47 rung, 4 pairings | −0.0035, −0.0023, −0.0031, −0.0061 — mean **−0.0038**, up to −2.7 sem |
+| vs the 47 **replicates**, 12 pairings | mean **−0.0002**, sd 0.0022, range [−0.0046, +0.0029], **negative in 6 of 12** |
+
+Family means: 144 gives +0.0127, 47 gives +0.0129, difference **−0.0002 ± 0.0014**.
+
+**So "144 folds lose to 47" was four draws of one rung measured against a single
+high draw of the other.** With both sides replicated the difference is zero and its
+sign is a coin flip — 6 of 12 pairings negative is exactly chance. The claim in
+`4a07481` and `db416ad`, and the "the sign survives replication" line above, are all
+withdrawn.
+
+What survives, and is now on seven independent trainings: **the folding behaviour
+distils.** Every rung beats the untrained base — +0.0029 to +0.0090, 1.5 to 3.5 sem
+— and the two corpus sizes are indistinguishable from each other.
+
+## The error bar this lane should have been using
+
+Training noise is sd 0.00140 for a 144 rung and sd 0.00178 for a 47 rung, so a
+difference between two singly-trained rungs carries **±0.00226 from the training
+draw alone**. Folded with the window-sampling sem of about 0.0022, the honest bar on
+a one-run-vs-one-run comparison is **±0.0032**, not ±0.0022. `db416ad`'s −0.0018 is
+0.6 sem against that — it was never a result. A comparison at this scale needs both
+sides replicated; a single pair of runs cannot resolve 0.002 no matter how many
+windows it is averaged over.
+
+## What to do about it
+
+The effect sizes this lane cares about are ~0.002–0.008 and the per-comparison floor
+is ~0.0032. Two ways out, and they compose: **replicate both sides** (3 runs a side
+divides the training term by √3, to ±0.0013) and **widen the eval set** (the window
+term is sem over 40 windows). Neither is a code change; both are runs. What must not
+happen again is a rung comparison reported from one training per side.
+
+## Reproducing
+
+```bash
+PREFIX=t N=47 TAG=47r SEEDS="1 2 3" APPEND=1 ./wake/run-seed-spread.sh
+SEEDS="1 2 3" ./wake/run-seed-spread.sh          # the 144 family (N defaults to 144)
+```
