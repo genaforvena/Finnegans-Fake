@@ -25,7 +25,7 @@ and reproducible rather than hand-tuned.
   python make_folds.py            # all variants (loads the local model)
   python make_folds.py --no-model # skip the model rung
 """
-import argparse, json, pathlib, re, sys
+import argparse, datetime, json, pathlib, re, sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import pairs as pairmod
@@ -284,6 +284,46 @@ def model_folds(win_texts, budget_chars, adapter=None):
     return out
 
 
+PROVENANCE = pathlib.Path(__file__).resolve().parent / "rung-provenance.json"
+
+
+def record_provenance(variant, adapter):
+    """Write which TRAINING generated this rung, at generation time.
+
+    paired.py refuses a between-rung delta unless each side carries >= 3 distinct
+    trainings, and it counts DISTINCT trainings, not files — two epochs of one run
+    are one draw. That count is only as good as this record, and a rung it cannot
+    trace is refused rather than assumed. Reconstructing it later from directory
+    names is a convention, not evidence; written here it is a fact recorded by the
+    process that made the artifact.
+    """
+    entry = {"training": None, "adapter": None, "train": None,
+             "evidence": f"written by make_folds.py at generation time "
+                         f"{datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}"}
+    if adapter:
+        ap = pathlib.Path(adapter).resolve()
+        entry["adapter"] = str(ap)
+        entry["training"] = str(ap.parent)           # the run; ep1/ep2/ep3 share it
+        tl = ap.parent / "trainlog.json"
+        if tl.exists():
+            log = json.loads(tl.read_text())
+            args = log.get("args", {})
+            entry["train"] = {k: args.get(k) for k in
+                              ("seed", "data_seed", "n", "epochs", "data")}
+            entry["train"]["n_train"] = log.get("n_train")
+        else:
+            entry["evidence"] += f" (no {tl} on disk: train args unknown)"
+    else:
+        entry["evidence"] += " (no --adapter: the UNTRAINED base rung, no training draw)"
+    doc = json.loads(PROVENANCE.read_text()) if PROVENANCE.exists() else {}
+    doc.setdefault("_note", "variant -> the training that generated its folds. paired.py's "
+                            "replication gate counts DISTINCT 'training' values per side; two "
+                            "epochs of one run share a training and are one draw, not two.")
+    doc.setdefault("variants", {})[variant] = entry
+    PROVENANCE.write_text(json.dumps(doc, ensure_ascii=False, indent=1))
+    print(f"[provenance] {variant} <- {entry['training'] or 'untrained base'}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-model", action="store_true")
@@ -303,6 +343,7 @@ def main():
             old.setdefault(wid, {})[a.variant] = t
         OUT.write_text(json.dumps(old, ensure_ascii=False, indent=1))
         print(f"[out] {OUT} :: {a.variant}")
+        record_provenance(a.variant, a.adapter)
         return
     absr = {k: clean(v) for k, v in ABSTRACTIVE.items()}
     # every rung gets the same character budget as the authored fold for its
@@ -318,6 +359,7 @@ def main():
         print("[model] generating with", INSTRUCT)
         for wid, t in model_folds(wins, max(budget.values())).items():
             folds[wid]["model"] = t
+        record_provenance("model", None)
 
     if OUT.exists():                       # keep rungs we are not regenerating
         old = json.loads(OUT.read_text())

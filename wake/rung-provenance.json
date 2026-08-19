@@ -1,0 +1,128 @@
+{
+ "_note": "variant -> the training that generated its folds. paired.py's replication gate counts DISTINCT 'training' values per side; two epochs of one run share a training and are one draw, not two. Entries are written at generation time by make_folds.py; the ones marked 'naming convention' were backfilled 2026-08-19 for rungs that predate that.",
+ "variants": {
+  "ft144b-e2": {
+   "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-144b",
+   "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-144b/ep2",
+   "train": {
+    "seed": 0,
+    "data_seed": null,
+    "n": 144,
+    "epochs": 3,
+    "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds.json",
+    "n_train": 144
+   },
+   "evidence": "naming convention ft<TAG>-e<K> <-> wake/fold-lora-<TAG>/ep<K>; no generation log on disk"
+  },
+  "ft144b-e3": {
+   "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-144b",
+   "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-144b/ep3",
+   "train": {
+    "seed": 0,
+    "data_seed": null,
+    "n": 144,
+    "epochs": 3,
+    "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds.json",
+    "n_train": 144
+   },
+   "evidence": "naming convention ft<TAG>-e<K> <-> wake/fold-lora-<TAG>/ep<K>; no generation log on disk"
+  },
+  "ft144s1-e3": {
+   "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-144s1",
+   "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-144s1/ep3",
+   "train": {
+    "seed": 1,
+    "data_seed": null,
+    "n": 144,
+    "epochs": 3,
+    "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds.json",
+    "n_train": 144
+   },
+   "evidence": "wake/seed-spread.log 2026-08-18T15:49:57Z"
+  },
+  "ft144s2-e3": {
+   "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-144s2",
+   "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-144s2/ep3",
+   "train": {
+    "seed": 2,
+    "data_seed": null,
+    "n": 144,
+    "epochs": 3,
+    "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds.json",
+    "n_train": 144
+   },
+   "evidence": "wake/seed-spread.log 2026-08-18T16:13:57Z"
+  },
+  "ft144s3-e3": {
+   "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-144s3",
+   "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-144s3/ep3",
+   "train": {
+    "seed": 3,
+    "data_seed": null,
+    "n": 144,
+    "epochs": 3,
+    "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds.json",
+    "n_train": 144
+   },
+   "evidence": "wake/seed-spread.log 2026-08-18T16:39:55Z"
+  },
+  "ft47-e3": {
+   "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-47",
+   "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-47/ep3",
+   "train": {
+    "seed": 0,
+    "data_seed": null,
+    "n": 47,
+    "epochs": 3,
+    "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds.json",
+    "n_train": 47
+   },
+   "evidence": "naming convention ft<TAG>-e<K> <-> wake/fold-lora-<TAG>/ep<K>; no generation log on disk"
+  },
+  "ft47rs1-e3": {
+   "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-47rs1",
+   "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-47rs1/ep3",
+   "train": {
+    "seed": 1,
+    "data_seed": null,
+    "n": 47,
+    "epochs": 3,
+    "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds-t.json",
+    "n_train": 47
+   },
+   "evidence": "wake/seed-spread.log 2026-08-18T17:35:24Z"
+  },
+  "ft47rs2-e3": {
+   "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-47rs2",
+   "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-47rs2/ep3",
+   "train": {
+    "seed": 2,
+    "data_seed": null,
+    "n": 47,
+    "epochs": 3,
+    "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds-t.json",
+    "n_train": 47
+   },
+   "evidence": "wake/seed-spread.log 2026-08-18T17:50:21Z"
+  },
+  "ft47rs3-e3": {
+   "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-47rs3",
+   "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-47rs3/ep3",
+   "train": {
+    "seed": 3,
+    "data_seed": null,
+    "n": 47,
+    "epochs": 3,
+    "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds-t.json",
+    "n_train": 47
+   },
+   "evidence": "wake/seed-spread.log 2026-08-18T18:04:07Z"
+  },
+  "model": {
+   "training": null,
+   "adapter": null,
+   "train": null,
+   "evidence": "make_folds.py --variant model is generated with no --adapter: the UNTRAINED base rung, greedy decode, so it carries no training draw at all"
+  }
+ }
+}

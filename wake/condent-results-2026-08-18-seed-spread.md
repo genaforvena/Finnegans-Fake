@@ -144,7 +144,9 @@ dataset size — it shows up between runs that differ in nothing else.
 
 ```bash
 SEEDS="1 2 3" ./wake/run-seed-spread.sh        # ~25 min per seed on a 3060
-# per-rung and paired, on the windows both sides scored:
+# per-rung and paired, on the windows both sides scored. NOTE: this 1-vs-1 form is
+# now REFUSED by paired.py's replication gate — see the section at the end; it is
+# the exact comparison that was withdrawn. Pass all replicates with --a/--b.
 .venv-ai/bin/python wake/paired.py wake/recs-ft47-e3.json wake/recs-ft144s3-e3.json
 ```
 
@@ -224,9 +226,46 @@ divides the training term by √3, to ±0.0013) and **widen the eval set** (the 
 term is sem over 40 windows). Neither is a code change; both are runs. What must not
 happen again is a rung comparison reported from one training per side.
 
+## The rule above is now a gate, not this paragraph
+
+Written down, a rule like that is honoured until someone is in a hurry — and the
+comparison it forbids is exactly the cheap one (two files already on disk). So
+`paired.py` **refuses to print a between-rung delta unless both sides carry ≥3
+distinct trainings**, and prints why instead. The per-rung aggregates still print:
+a single-rung reading is a measurement, it is their *difference* that is not.
+
+Three details it would be vacuous without:
+
+- It counts **distinct trainings, not files**. Two epochs of one run are one draw,
+  and `recs-ft144b-e2` + `recs-ft144b-e3` would otherwise read as two replicates.
+  The mapping variant → training lives in `rung-provenance.json`, written by
+  `make_folds.py` at generation time (the nine rungs that predate that are
+  backfilled and say so in their `evidence` field).
+- **A rung it cannot trace is refused**, not assumed. Missing provenance is not a
+  pass.
+- The **untrained base is exempt** — it is greedy decode with no adapter, so it
+  carries no training draw and there is nothing to replicate. The trained side of
+  such a comparison is still gated.
+
+When it does print, the bar is the folded one this section argues for: window sem
+⊕ each side's training draw sd/√k, with the three components named in the output
+so the training term can never be dropped again. `paired.py --test` drives the gate
+red and green on the scored sets in the tree (1-vs-1 refused, 3-vs-1 refused,
+3-vs-3 printed, untraceable refused, base-vs-3 printed, base-vs-1 refused); with
+`MIN_TRAININGS = 1` it goes 3/7.
+
+Recomputed through the gate, the reversal reproduces: 47 family +0.0129 (sd 0.00188),
+144 family +0.0126 (sd 0.00202), **paired −0.0003 ± 0.0020, negative in 5 of 9
+one-run-vs-one-run pairings.**
+
 ## Reproducing
 
 ```bash
 PREFIX=t N=47 TAG=47r SEEDS="1 2 3" APPEND=1 ./wake/run-seed-spread.sh
 SEEDS="1 2 3" ./wake/run-seed-spread.sh          # the 144 family (N defaults to 144)
+
+# the comparison, both sides replicated (a 1-vs-1 pairing is refused by design):
+.venv-ai/bin/python wake/paired.py \
+  --a wake/recs-ft47rs{1,2,3}-e3.json --label-a 47 \
+  --b wake/recs-ft144s{1,2,3}-e3.json --label-b 144
 ```
