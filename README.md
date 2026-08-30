@@ -139,6 +139,45 @@ hyperparameters. It is the only loss comparison in this repo where nothing else 
 once the difference means what it looks like: ordinary English is more predictable than
 *Finnegans Wake*.
 
+## The models
+
+`python wake/pack_release.py` builds every shippable checkpoint into `release/` as a
+self-contained Hugging Face repo — model card written from the run's own
+`trainlog.json` rather than from prose, legacy `torch_dtype`/`tokenizer_class` keys
+written back beside the transformers-5 ones, LoRA `base_model_name_or_path` rewritten
+from a local path to a hub id, and **every directory loaded and sampled from before it
+is called done**. `python wake/push_release.py --owner <you> --dry-run` says exactly
+what would be uploaded and where.
+
+| repo | params | best val | shares as |
+|---|---|---|---|
+| `finnegans-fake-char257` | 10,942,848 | 1.8840 | private |
+| `english-char257` | 10,942,848 | 1.2004 | **public, CC0** |
+| `finnegans-fake-bpe4096` | 12,318,720 | 5.8768 | private |
+| `finnegans-fake-lora-qwen3.5-0.8b` | 12,779,520 (adapter) | 3.5746 | private |
+| `finnegans-fake-folds-lora` | 6,389,760 (adapter) | — | **never** |
+
+Three of those figures are not comparable to each other and the table is arranged to
+make that visible rather than to rank: `bpe4096`'s 5.88 is a loss over 4096 symbols
+where `char257`'s 1.88 is a loss over 257, so the BPE model is not four times worse —
+it is being scored in a different unit. Only rows one and two share a tokenizer, and
+that pair is the whole point of the second model.
+
+**Two of the five do not go public, for two unrelated reasons.**
+
+The Wake-derived weights are private because Joyce is public domain in the EU, the UK
+and Ireland but not in the US until 2035, and the hub is US-hosted. Whether weights
+are a derivative work of their training text is unsettled; this project takes the
+conservative reading, which is the same reason its CC0 has always covered the code and
+never the weights. `--force-public` flips it in one flag if you disagree.
+
+`finnegans-fake-folds-lora` is different and harder: it is trained on the operator
+mesh's own internal board log. 47 rows over 3 epochs is squarely the regime where a
+LoRA reproduces its training data on demand, so publishing the adapter publishes the
+log. That one is refused in `push_release.py` itself rather than left to a flag —
+`--force-public` cannot reach it — because a rule that lives only at the call site is
+a rule that survives exactly until someone is in a hurry.
+
 ## Running it
 
 The corpus is **not distributed here**. Joyce died in 1941, so the text is public domain in
@@ -182,4 +221,6 @@ this project's CC0 cannot reach them.
 
 ## Licence
 
-CC0. The code is public domain. The book is Joyce's problem, and yours.
+CC0 **on the code**, which is public domain. It does not reach the trained
+weights — those are a derivative of the source text, and `release/` is gitignored
+for the same reason `wake/*/` is. The book is Joyce's problem, and yours.

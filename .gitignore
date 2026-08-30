@@ -64,3 +64,8 @@ wake/recut-windows.json
 wake/*.out
 # PREFIX subsets of the teacher corpus written by run-seed-spread.sh — derived, one line of code
 wake/teacher-folds-*.json
+
+# Packaged models built by wake/pack_release.py. Weights, so out for the same reason
+# wake/*/ is out — and release/finnegans-fake-folds-lora is trained on the operator
+# mesh's own board log, which must not reach a public remote at all.
+release/
