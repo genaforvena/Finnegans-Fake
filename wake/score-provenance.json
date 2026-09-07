@@ -1,0 +1,249 @@
+{
+  "schema": 1,
+  "generated_from": "wake/attest_scores.py",
+  "variants": {
+    "ft144b-e2": {
+      "score_file": "wake/recs-ft144b-e2.json",
+      "score_sha256": "27615ef335f7f8d92b240e26064e32988c0d7d042192b7370b1b0764f59f7378",
+      "score_commit": "db416ad733d3b1e5e7ff137584a9ceffb1906fb1",
+      "producer": "wake/condent.py",
+      "producer_sha256_at_score_commit": "634d1ae0e0144e2d1ba85ea2fff5611c905211862d9417635a176faff0c92903",
+      "pairs": "ft144b-e2",
+      "model": "/home/mesh-home/models/Qwen3.5-0.8B-Base",
+      "budget": 157,
+      "n_records": 40,
+      "training": {
+        "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-144b",
+        "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-144b/ep2",
+        "train": {
+          "seed": 0,
+          "data_seed": null,
+          "n": 144,
+          "epochs": 3,
+          "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds.json",
+          "n_train": 144
+        },
+        "evidence": "naming convention ft<TAG>-e<K> <-> wake/fold-lora-<TAG>/ep<K>; no generation log on disk"
+      },
+      "status": "attested"
+    },
+    "ft144b-e3": {
+      "score_file": "wake/recs-ft144b-e3.json",
+      "score_sha256": "3c4fac11329296b355b3bc187baca4a54ed90828783c178f19c8d617235a8431",
+      "score_commit": "db416ad733d3b1e5e7ff137584a9ceffb1906fb1",
+      "producer": "wake/condent.py",
+      "producer_sha256_at_score_commit": "634d1ae0e0144e2d1ba85ea2fff5611c905211862d9417635a176faff0c92903",
+      "pairs": "ft144b-e3",
+      "model": "/home/mesh-home/models/Qwen3.5-0.8B-Base",
+      "budget": 157,
+      "n_records": 39,
+      "training": {
+        "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-144b",
+        "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-144b/ep3",
+        "train": {
+          "seed": 0,
+          "data_seed": null,
+          "n": 144,
+          "epochs": 3,
+          "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds.json",
+          "n_train": 144
+        },
+        "evidence": "naming convention ft<TAG>-e<K> <-> wake/fold-lora-<TAG>/ep<K>; no generation log on disk"
+      },
+      "status": "attested"
+    },
+    "ft144s1-e3": {
+      "score_file": "wake/recs-ft144s1-e3.json",
+      "score_sha256": "8076b6da454c11cb17fe60bb32e0198419f5b91439636318a2c4fbbdbf1c1f09",
+      "score_commit": "2f723e7fa79517100b57459fb133d6987a8ed1cb",
+      "producer": "wake/condent.py",
+      "producer_sha256_at_score_commit": "634d1ae0e0144e2d1ba85ea2fff5611c905211862d9417635a176faff0c92903",
+      "pairs": "ft144s1-e3",
+      "model": "/home/mesh-home/models/Qwen3.5-0.8B-Base",
+      "budget": 157,
+      "n_records": 39,
+      "training": {
+        "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-144s1",
+        "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-144s1/ep3",
+        "train": {
+          "seed": 1,
+          "data_seed": null,
+          "n": 144,
+          "epochs": 3,
+          "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds.json",
+          "n_train": 144
+        },
+        "evidence": "wake/seed-spread.log 2026-08-18T15:49:57Z"
+      },
+      "status": "attested"
+    },
+    "ft144s2-e3": {
+      "score_file": "wake/recs-ft144s2-e3.json",
+      "score_sha256": "bbf81af317ea56770b69935ace31b318fde1b3f28c22374d9287ddf51516d4f7",
+      "score_commit": "2f723e7fa79517100b57459fb133d6987a8ed1cb",
+      "producer": "wake/condent.py",
+      "producer_sha256_at_score_commit": "634d1ae0e0144e2d1ba85ea2fff5611c905211862d9417635a176faff0c92903",
+      "pairs": "ft144s2-e3",
+      "model": "/home/mesh-home/models/Qwen3.5-0.8B-Base",
+      "budget": 157,
+      "n_records": 39,
+      "training": {
+        "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-144s2",
+        "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-144s2/ep3",
+        "train": {
+          "seed": 2,
+          "data_seed": null,
+          "n": 144,
+          "epochs": 3,
+          "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds.json",
+          "n_train": 144
+        },
+        "evidence": "wake/seed-spread.log 2026-08-18T16:13:57Z"
+      },
+      "status": "attested"
+    },
+    "ft144s3-e3": {
+      "score_file": "wake/recs-ft144s3-e3.json",
+      "score_sha256": "8bd9d5c1d6ae0095e9a7d1b8ca4244409be0ddb8048018e2abc731f87c0d5b98",
+      "score_commit": "2f723e7fa79517100b57459fb133d6987a8ed1cb",
+      "producer": "wake/condent.py",
+      "producer_sha256_at_score_commit": "634d1ae0e0144e2d1ba85ea2fff5611c905211862d9417635a176faff0c92903",
+      "pairs": "ft144s3-e3",
+      "model": "/home/mesh-home/models/Qwen3.5-0.8B-Base",
+      "budget": 157,
+      "n_records": 40,
+      "training": {
+        "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-144s3",
+        "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-144s3/ep3",
+        "train": {
+          "seed": 3,
+          "data_seed": null,
+          "n": 144,
+          "epochs": 3,
+          "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds.json",
+          "n_train": 144
+        },
+        "evidence": "wake/seed-spread.log 2026-08-18T16:39:55Z"
+      },
+      "status": "attested"
+    },
+    "ft47-e3": {
+      "score_file": "wake/recs-ft47-e3.json",
+      "score_sha256": "f811adcf89455b1d663abb98baf399ab6f0f53b0e3e37b5fa0320956de2c4194",
+      "score_commit": "db416ad733d3b1e5e7ff137584a9ceffb1906fb1",
+      "producer": "wake/condent.py",
+      "producer_sha256_at_score_commit": "634d1ae0e0144e2d1ba85ea2fff5611c905211862d9417635a176faff0c92903",
+      "pairs": "ft47-e3",
+      "model": "/home/mesh-home/models/Qwen3.5-0.8B-Base",
+      "budget": 157,
+      "n_records": 40,
+      "training": {
+        "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-47",
+        "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-47/ep3",
+        "train": {
+          "seed": 0,
+          "data_seed": null,
+          "n": 47,
+          "epochs": 3,
+          "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds.json",
+          "n_train": 47
+        },
+        "evidence": "naming convention ft<TAG>-e<K> <-> wake/fold-lora-<TAG>/ep<K>; no generation log on disk"
+      },
+      "status": "attested"
+    },
+    "ft47rs1-e3": {
+      "score_file": "wake/recs-ft47rs1-e3.json",
+      "score_sha256": "53b46a6599e580103806a41d1717c83cc5efe5515133710a9b8e7ddc2d22edc9",
+      "score_commit": "2f723e7fa79517100b57459fb133d6987a8ed1cb",
+      "producer": "wake/condent.py",
+      "producer_sha256_at_score_commit": "634d1ae0e0144e2d1ba85ea2fff5611c905211862d9417635a176faff0c92903",
+      "pairs": "ft47rs1-e3",
+      "model": "/home/mesh-home/models/Qwen3.5-0.8B-Base",
+      "budget": 157,
+      "n_records": 40,
+      "training": {
+        "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-47rs1",
+        "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-47rs1/ep3",
+        "train": {
+          "seed": 1,
+          "data_seed": null,
+          "n": 47,
+          "epochs": 3,
+          "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds-t.json",
+          "n_train": 47
+        },
+        "evidence": "wake/seed-spread.log 2026-08-18T17:35:24Z"
+      },
+      "status": "attested"
+    },
+    "ft47rs2-e3": {
+      "score_file": "wake/recs-ft47rs2-e3.json",
+      "score_sha256": "3fdd4f6299ad89a05fa56c3128b9091c6b7778cfb65b5f8cf800625b91f62eed",
+      "score_commit": "2f723e7fa79517100b57459fb133d6987a8ed1cb",
+      "producer": "wake/condent.py",
+      "producer_sha256_at_score_commit": "634d1ae0e0144e2d1ba85ea2fff5611c905211862d9417635a176faff0c92903",
+      "pairs": "ft47rs2-e3",
+      "model": "/home/mesh-home/models/Qwen3.5-0.8B-Base",
+      "budget": 157,
+      "n_records": 37,
+      "training": {
+        "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-47rs2",
+        "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-47rs2/ep3",
+        "train": {
+          "seed": 2,
+          "data_seed": null,
+          "n": 47,
+          "epochs": 3,
+          "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds-t.json",
+          "n_train": 47
+        },
+        "evidence": "wake/seed-spread.log 2026-08-18T17:50:21Z"
+      },
+      "status": "attested"
+    },
+    "ft47rs3-e3": {
+      "score_file": "wake/recs-ft47rs3-e3.json",
+      "score_sha256": "1671ac057e323447ebbc89fea71f608a505dd2827afa46386ff618e671a8fe44",
+      "score_commit": "2f723e7fa79517100b57459fb133d6987a8ed1cb",
+      "producer": "wake/condent.py",
+      "producer_sha256_at_score_commit": "634d1ae0e0144e2d1ba85ea2fff5611c905211862d9417635a176faff0c92903",
+      "pairs": "ft47rs3-e3",
+      "model": "/home/mesh-home/models/Qwen3.5-0.8B-Base",
+      "budget": 157,
+      "n_records": 37,
+      "training": {
+        "training": "/home/mesh-home/finnegans-fake/wake/fold-lora-47rs3",
+        "adapter": "/home/mesh-home/finnegans-fake/wake/fold-lora-47rs3/ep3",
+        "train": {
+          "seed": 3,
+          "data_seed": null,
+          "n": 47,
+          "epochs": 3,
+          "data": "/home/mesh-home/finnegans-fake/wake/teacher-folds-t.json",
+          "n_train": 47
+        },
+        "evidence": "wake/seed-spread.log 2026-08-18T18:04:07Z"
+      },
+      "status": "attested"
+    },
+    "model": {
+      "score_file": "wake/recs-model.json",
+      "score_sha256": "c34c9e455f5e03fb6b73f1fbffbc5ab5604843eec9644f175708b48c107f31ce",
+      "score_commit": "db416ad733d3b1e5e7ff137584a9ceffb1906fb1",
+      "producer": "wake/condent.py",
+      "producer_sha256_at_score_commit": "634d1ae0e0144e2d1ba85ea2fff5611c905211862d9417635a176faff0c92903",
+      "pairs": "model",
+      "model": "/home/mesh-home/models/Qwen3.5-0.8B-Base",
+      "budget": 157,
+      "n_records": 40,
+      "training": {
+        "training": null,
+        "adapter": null,
+        "train": null,
+        "evidence": "make_folds.py --variant model is generated with no --adapter: the UNTRAINED base rung, greedy decode, so it carries no training draw at all"
+      },
+      "status": "attested"
+    }
+  }
+}

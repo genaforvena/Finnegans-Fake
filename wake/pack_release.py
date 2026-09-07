@@ -30,11 +30,11 @@ WAKE = ROOT / "wake"
 
 # --- what ships -------------------------------------------------------------
 # `share`: public   -> nothing in the training data is encumbered
-#          private  -> derivative of a text under US copyright until 2035
+#          private  -> withheld; nothing currently uses it, kept as a working switch
 #          local    -> trained on the mesh's own board log; does not leave this node
 SPECS = {
     "finnegans-fake-char257": dict(
-        src="wake-char257", kind="causal", share="private",
+        src="wake-char257", kind="causal", share="public",
         title="Finnegans Fake — character-level",
         blurb="A 10.9M-parameter GPT-2 that has read exactly one book: *Finnegans Wake*.",
     ),
@@ -46,12 +46,12 @@ SPECS = {
                "It exists to be the *only* controlled comparison in the project."),
     ),
     "finnegans-fake-bpe4096": dict(
-        src="wake-bpe4096", kind="causal", share="private",
+        src="wake-bpe4096", kind="causal", share="public",
         title="Finnegans Fake — BPE-4096",
         blurb="The same book through a 4096-token BPE vocabulary trained on the book itself.",
     ),
     "finnegans-fake-lora-qwen3.5-0.8b": dict(
-        src="wake-lora-base", kind="peft", share="private",
+        src="wake-lora-base", kind="peft", share="public",
         base_hub="Qwen/Qwen3.5-0.8B-Base",
         title="Finnegans Fake — LoRA on Qwen3.5-0.8B-Base",
         blurb="A LoRA that answers back in English-but-dislocated, rather than from scratch.",
@@ -217,7 +217,7 @@ CORPUS = textwrap.dedent("""\
 
 def card(slug, spec, tl, ver, cfg=None):
     L, share = [], spec["share"]
-    lic = "cc0-1.0" if share == "public" else "other"
+    lic = "cc0-1.0"
     tags = ["finnegans-wake", "tiny-language-model", "text-generation"]
     if spec["kind"] == "peft":
         tags += ["lora", "peft"]
@@ -229,16 +229,16 @@ def card(slug, spec, tl, ver, cfg=None):
           "tags:"] + [f"- {t}" for t in tags] + ["---", ""]
     L += [f"# {spec['title']}", "", spec["blurb"], ""]
 
-    if share == "private":
+    if spec["src"].startswith("wake-"):
         L += [textwrap.dedent("""\
-            > **Why this repo is not public.** The weights are trained on the full text of
-            > *Finnegans Wake*. Joyce died in 1941, so the book is public domain in Ireland,
-            > the UK and the EU — but not in the United States until 2035, and this hub is
-            > US-hosted. Whether trained weights are a derivative work of their training text
-            > is unsettled; the project takes the conservative reading, which is why its CC0
-            > covers the code and never the weights. The *code* that produces this model is
-            > public domain and the corpus is yours to supply.
+            > **On the book.** These weights are trained on the full text of *Finnegans Wake*.
+            > Joyce died in 1941, so the book is public domain in Ireland, the UK and the EU —
+            > in the United States it is not, until 2035. Whether trained weights are a
+            > derivative work of their training text is unsettled either way. The corpus is not
+            > redistributed with the code; the code is CC0 and you supply the book.
             """), ""]
+    if share == "private":
+        L += ["> **This repo is private.** It is shared deliberately rather than published.", ""]
     if share == "local":
         L += [textwrap.dedent("""\
             > **Do not publish this adapter.** It is trained on the operator mesh's own

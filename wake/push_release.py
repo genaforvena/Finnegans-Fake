@@ -35,7 +35,7 @@ def main():
     ap.add_argument("--only", action="append", default=None)
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--force-public", action="store_true",
-                    help="publish the copyright-encumbered repos publicly too. "
+                    help="legacy compatibility switch; share=public is already public. "
                          "Never reaches share=local.")
     a = ap.parse_args()
 

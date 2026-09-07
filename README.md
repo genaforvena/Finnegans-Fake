@@ -151,10 +151,10 @@ what would be uploaded and where.
 
 | repo | params | best val | shares as |
 |---|---|---|---|
-| `finnegans-fake-char257` | 10,942,848 | 1.8840 | private |
+| `finnegans-fake-char257` | 10,942,848 | 1.8840 | public, CC0 |
 | `english-char257` | 10,942,848 | 1.2004 | **public, CC0** |
-| `finnegans-fake-bpe4096` | 12,318,720 | 5.8768 | private |
-| `finnegans-fake-lora-qwen3.5-0.8b` | 12,779,520 (adapter) | 3.5746 | private |
+| `finnegans-fake-bpe4096` | 12,318,720 | 5.8768 | public, CC0 |
+| `finnegans-fake-lora-qwen3.5-0.8b` | 12,779,520 (adapter) | 3.5746 | public, CC0 |
 | `finnegans-fake-folds-lora` | 6,389,760 (adapter) | — | **never** |
 
 Three of those figures are not comparable to each other and the table is arranged to
@@ -163,20 +163,14 @@ where `char257`'s 1.88 is a loss over 257, so the BPE model is not four times wo
 it is being scored in a different unit. Only rows one and two share a tokenizer, and
 that pair is the whole point of the second model.
 
-**Two of the five do not go public, for two unrelated reasons.**
-
-The Wake-derived weights are private because Joyce is public domain in the EU, the UK
-and Ireland but not in the US until 2035, and the hub is US-hosted. Whether weights
-are a derivative work of their training text is unsettled; this project takes the
-conservative reading, which is the same reason its CC0 has always covered the code and
-never the weights. `--force-public` flips it in one flag if you disagree.
+The Wake-derived artifacts follow the operator's project-level CC0 direction. The legal
+status of trained weights can vary by jurisdiction; this repository states the training
+source and does not redistribute the book, so consumers can make their own decision.
 
 `finnegans-fake-folds-lora` is different and harder: it is trained on the operator
 mesh's own internal board log. 47 rows over 3 epochs is squarely the regime where a
 LoRA reproduces its training data on demand, so publishing the adapter publishes the
-log. That one is refused in `push_release.py` itself rather than left to a flag —
-`--force-public` cannot reach it — because a rule that lives only at the call site is
-a rule that survives exactly until someone is in a hurry.
+log. `push_release.py` refuses it unconditionally; no caller flag can override that boundary.
 
 ## Running it
 
@@ -210,17 +204,33 @@ arithmetic on nonsense. `product_sample.py` refuses to run unless the two `token
 files hash equal — equal vocab *sizes* are not a shared vocabulary, and the mismatched version
 would still run and still print plausible text.
 
+## Base versus Instruct
+
+The remaining question from the original experiment was whether the raw Base checkpoint bends
+further into Wakese than the instruction-tuned checkpoint. The controlled five-prompt probe is
+checked in at [`docs/base-vs-instruct-2026-09-07.md`](docs/base-vs-instruct-2026-09-07.md), with
+the complete generated artifact at [`wake/base-instruct-results.json`](wake/base-instruct-results.json).
+It uses identical plain-text inputs, seed, sampling settings, and character target; it compares
+output properties, not incomparable validation losses. It finds lower self-repetition in Base
+(0.164 vs 0.391) while the Wake-novel rate is effectively tied (0.108 vs 0.102). A matched
+Instruct Wake-LoRA was not claimed: its attempted training stopped at CUDA OOM because the shared
+GPU was occupied.
+
+The historical fold scores have a separate checked provenance index in
+[`wake/score-provenance.json`](wake/score-provenance.json); quote them with their rung/run IDs,
+not as a bare “47 vs 144” number.
+
 LoRA over a small pretrained model, for something that answers back in English-but-dislocated:
 
 ```bash
 python wake/train_lora.py --base Qwen/Qwen3.5-0.8B-Base --epochs 3
 ```
 
-Trained weights are also kept out of the repo: they are a derivative of the source text, so
-this project's CC0 cannot reach them.
+Trained weights are kept out of git and packaged separately under `release/`; the release
+manifest is the source of truth for what may be shared.
 
 ## Licence
 
-CC0 **on the code**, which is public domain. It does not reach the trained
-weights — those are a derivative of the source text, and `release/` is gitignored
-for the same reason `wake/*/` is. The book is Joyce's problem, and yours.
+CC0 covers the code and the public release artifacts selected in `release/MANIFEST.json`.
+`release/` and `wake/*/` remain gitignored because they are generated model files. The book
+is not redistributed; you supply it locally.

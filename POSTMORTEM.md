@@ -388,8 +388,10 @@ Wake's real bottom is near iteration 4000.
   and the run overfits from epoch 2 on — three epochs was one too many, and the evidence is in
   `wake/wake-lora-base/trainlog.json`. What it is *like* to talk to is answered separately by
   `/wake` in Telegram (`wake/reflex.py`); the loss says only that it stopped improving.
-- Whether a Base model bends further into Wakese than an instruction-tuned one — still
-  untested. The suspicion is yes, because instruction tuning is training in exactly the
-  coherence we are trying to remove. Note that the two runs would not be comparable by val
-  loss alone even if both existed: different bases, different tokenizers, different scales.
-  This needs a judgement on samples or a shared-scale metric, not a number off the trainlog.
+- Whether a Base model bends further into Wakese than an instruction-tuned one — **answered as a
+  bounded raw-checkpoint probe**, not as a LoRA-vs-LoRA loss claim. Under five identical plain-text
+  prompts and a 600-character target, Base mean self-repeat was 0.164 versus Instruct 0.391 and
+  mean Wake-novel word rate was 0.108 versus 0.102. The artifact and method are in
+  `docs/base-vs-instruct-2026-09-07.md` and `wake/base-instruct-results.json`. A matched Instruct
+  Wake-LoRA remains unrun because the 2026-09-07 attempt hit CUDA OOM with the shared GPU already
+  occupied; that is an explicit limitation, not an implied result.

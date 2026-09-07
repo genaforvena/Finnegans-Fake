@@ -1,0 +1,271 @@
+{
+  "method": {
+    "same_plain_text_prompts": true,
+    "same_seed": 0,
+    "same_character_budget": 600,
+    "temperature": 0.9,
+    "top_p": 0.95,
+    "interpretation": "properties, not a loss ranking"
+  },
+  "generated_at": "2026-09-07T00:25:36.377023+00:00",
+  "git": {
+    "commit": "55344cdbf743b3ccf10a797b030a3d2500995662",
+    "dirty": true
+  },
+  "corpora": {
+    "wake": {
+      "path": "data/wake_clean.txt",
+      "sha256": "81b4473a9cf75a8ff2ce1b310c3534a805cd1985aff18c58ecac2e5e684804e1"
+    },
+    "english": {
+      "path": "data/english_clean.txt",
+      "sha256": "13c7f44ecc89d87fc02a718f25a938107f1b28f05fcf8f890385d70661ae6820"
+    }
+  },
+  "models": {
+    "base": {
+      "path": "/home/mesh-home/models/Qwen3.5-0.8B-Base",
+      "config_sha256": "b90b86f35c8e6925ef74ee04d0e758f0a845c83a42089ad82bbaa948de9b4204",
+      "tokenizer_sha256": "fe000e3ed39ed12b8d2481d527d44f93c65d37e87645d2dcc80d1bf9d50d2927",
+      "samples": {
+        "recipe": {
+          "prompt": "Preheat the oven to 180 degrees and butter a shallow dish.",
+          "text": "\n1.69L and 1.44L\nThe oil is not allowed to be heated above 180 degrees.\n2.21L and 1.86L\nThe oil is allowed to be heated above 180 degrees.\n3.53L and 1.49L\nThe oil is not allowed to be heated above 180 degrees.\n1.82L and 1.08L\nThe oil is allowed to be heated above 180 degrees.\n1.43L and 1.04L\nThe oil is not allowed to be heated above 180 degrees.\n2.48L and",
+          "chars": 357,
+          "metrics": {
+            "wake": {
+              "words": 65,
+              "self_repeat": 0.742,
+              "verb3": 0.079,
+              "verb5": 0.0,
+              "novel_words": 0.0,
+              "ttr": 0.185
+            },
+            "english": {
+              "words": 65,
+              "self_repeat": 0.742,
+              "verb3": 0.127,
+              "verb5": 0.0,
+              "novel_words": 0.0,
+              "ttr": 0.185
+            }
+          }
+        },
+        "weather": {
+          "prompt": "Rain will spread from the west overnight, with gusts of forty miles an hour along the coast.",
+          "text": " I'd been expecting this, and I'm glad to see it. And I'm hoping we can still find the land in question, but it will be a long, arduous and very dangerous journey. We'll have to work hard to get where we have to go.\nI'm not going to take long to convince Mr. Brown and Mrs. Brown that I want a long trip to a very far and distant land, especially in a country where the roads are so far apart.\nMr. and Mrs. Brown are going to start a family and have many children. So, they've decided to send me away to the United States of America, where I'm going to be a nurse, and where I'll be taking care of",
+          "chars": 597,
+          "metrics": {
+            "wake": {
+              "words": 122,
+              "self_repeat": 0.0,
+              "verb3": 0.117,
+              "verb5": 0.008,
+              "novel_words": 0.014,
+              "ttr": 0.582
+            },
+            "english": {
+              "words": 122,
+              "self_repeat": 0.0,
+              "verb3": 0.2,
+              "verb5": 0.0,
+              "novel_words": 0.014,
+              "ttr": 0.582
+            }
+          }
+        },
+        "legal": {
+          "prompt": "The parties hereto agree that, in the event of any dispute arising under this agreement,",
+          "text": " they will try to resolve the dispute through a binding arbitration agreement.\nThe program is a small one, so the audience has no reason to get lost.\nThe average price of this car is approximately 200,000 RMB.\nThis is a beautiful building.\nI'm not sure what I could do to be in this position again.\nThe European Parliament and the European Commission have been conducting extensive research on this subject and have been working on proposals to address the problem.\nWith the aim of improving the competitiveness of the local fishing sector, the Fisheries Development Programme (FDp), coordinated with the Department of Fisheries and Fisheries Management, aims to promote the development of modern fisheries, the management of fisheries stocks and the enhancement",
+          "chars": 762,
+          "metrics": {
+            "wake": {
+              "words": 121,
+              "self_repeat": 0.0,
+              "verb3": 0.034,
+              "verb5": 0.0,
+              "novel_words": 0.221,
+              "ttr": 0.636
+            },
+            "english": {
+              "words": 121,
+              "self_repeat": 0.0,
+              "verb3": 0.092,
+              "verb5": 0.0,
+              "novel_words": 0.208,
+              "ttr": 0.636
+            }
+          }
+        },
+        "abstract": {
+          "prompt": "We report the observation of a periodic signal in the residuals, significant at the three-sigma level.",
+          "text": " The periodicity is 10.1 ms, which corresponds to a frequency of $5.56 \\\\times 10^{-2}$ Hz. This signal is related to the phase-locked-loop (PLL) oscillation, which is a characteristic of the system.\nA. In the last paragraph, do you agree with the statement?\nB. Describe two other periodic signals that are characteristic of the system.\nC. If two periodic signals are characteristic of the system, what might you conclude about the relationship between them?\nD. Do you agree with the statement: “The frequency of the periodic signals are quite close to each other?”\n\n<think>\nI need to address this question step by step. The statement is about",
+          "chars": 643,
+          "metrics": {
+            "wake": {
+              "words": 105,
+              "self_repeat": 0.059,
+              "verb3": 0.029,
+              "verb5": 0.0,
+              "novel_words": 0.121,
+              "ttr": 0.552
+            },
+            "english": {
+              "words": 105,
+              "self_repeat": 0.059,
+              "verb3": 0.019,
+              "verb5": 0.0,
+              "novel_words": 0.155,
+              "ttr": 0.552
+            }
+          }
+        },
+        "domestic": {
+          "prompt": "I got home late and the front door was already open.",
+          "text": " I was looking through the open door as I tried to get the door closed.\nA. A.\nB. B.\nC. C.\nD. D.\nAnswer: A\n\nWhat is the best answer for \\\"To get a second chance.\\\nA. reformation\nB. rehabilitation\nC. recovery\nD. remediation\nAnswer: The phrase \"to get a second chance\" suggests an action aimed at improving someone's situation after a previous negative experience. This concept involves helping someone recover or regain something they lost.\n\nAmong the options:\n\n- \"Reformation\" refers to the process of changing a person’s behavior or beliefs, but it is less commonly used in the context of personal setbacks.\n-",
+          "chars": 609,
+          "metrics": {
+            "wake": {
+              "words": 104,
+              "self_repeat": 0.02,
+              "verb3": 0.078,
+              "verb5": 0.0,
+              "novel_words": 0.186,
+              "ttr": 0.673
+            },
+            "english": {
+              "words": 104,
+              "self_repeat": 0.02,
+              "verb3": 0.108,
+              "verb5": 0.0,
+              "novel_words": 0.1,
+              "ttr": 0.673
+            }
+          }
+        }
+      }
+    },
+    "instruct": {
+      "path": "/home/mesh-home/models/Qwen3.5-0.8B",
+      "config_sha256": "b90b86f35c8e6925ef74ee04d0e758f0a845c83a42089ad82bbaa948de9b4204",
+      "tokenizer_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "samples": {
+        "recipe": {
+          "prompt": "Preheat the oven to 180 degrees and butter a shallow dish.",
+          "text": " I'd like to make some fresh tortillas, so I need to find some substitute for corn. Are you able to produce tortillas using corn? - There are many options available for making tortillas using other materials.\nIs there anything you can put inside that is not a food item?\n- No, there are no things you can put inside a food item that is not a food item.\n- No, there are no things you can put inside a food item that is not a food item.\n- No, there are no things you can put inside a food item that is not a food item.\n- No, there are no things you can put inside a food item that is not a food item.\n- No",
+          "chars": 603,
+          "metrics": {
+            "wake": {
+              "words": 121,
+              "self_repeat": 0.5,
+              "verb3": 0.134,
+              "verb5": 0.0,
+              "novel_words": 0.105,
+              "ttr": 0.314
+            },
+            "english": {
+              "words": 121,
+              "self_repeat": 0.5,
+              "verb3": 0.16,
+              "verb5": 0.0,
+              "novel_words": 0.079,
+              "ttr": 0.314
+            }
+          }
+        },
+        "weather": {
+          "prompt": "Rain will spread from the west overnight, with gusts of forty miles an hour along the coast.",
+          "text": " I'd been expecting this weather and I'm glad to see it!\nRain will spread from the west overnight, with gusts of forty miles an hour along the coast. I'd been expecting this weather and I'm glad to see it!\nRain will spread from the west overnight, with gusts of forty miles an hour along the coast. I'd been expecting this weather and I'm glad to see it!\nRain will spread from the west overnight, with gusts of forty miles an hour along the coast. I'd been expecting this weather and I'm glad to see it!\nRain will spread from the west overnight, with gusts of forty miles an hour along the coast. I'd been expecting this weather and I'm glad",
+          "chars": 641,
+          "metrics": {
+            "wake": {
+              "words": 120,
+              "self_repeat": 0.761,
+              "verb3": 0.0,
+              "verb5": 0.0,
+              "novel_words": 0.037,
+              "ttr": 0.225
+            },
+            "english": {
+              "words": 120,
+              "self_repeat": 0.761,
+              "verb3": 0.102,
+              "verb5": 0.0,
+              "novel_words": 0.037,
+              "ttr": 0.225
+            }
+          }
+        },
+        "legal": {
+          "prompt": "The parties hereto agree that, in the event of any dispute arising under this agreement,",
+          "text": " they shall be bound by the provision of a written contract for the settlement of such disputes between them.\nThis paper analyzes the problem of the use of the word \\\"\\\"\\\"\\\"\\\"\nThe problem of the use of the word \\\"\\\"\\\"\\\"\\\"\nThis paper analyzes the problem of the use of the word \\\"\\\"\\\"\\\"\\\"\nThe problem of the use of the word \\\"\\\"\\\"\\\"\\\"\nThe problem of the use of the word \\\"\\\"\\\"\\\"\\\"\nThe problem of the use of the word \\\"\\\"\\\"\\\"\\\"\nThe problem of the use of the word \\\"\\\"\\\"\\\"\\\"\nThe problem of the use of the word \\\"\\\"\\\"\\\"\\\"\nThe problem of the use of the word \\\"\\\"\\\"",
+          "chars": 559,
+          "metrics": {
+            "wake": {
+              "words": 97,
+              "self_repeat": 0.649,
+              "verb3": 0.284,
+              "verb5": 0.0,
+              "novel_words": 0.087,
+              "ttr": 0.237
+            },
+            "english": {
+              "words": 97,
+              "self_repeat": 0.649,
+              "verb3": 0.305,
+              "verb5": 0.0,
+              "novel_words": 0.043,
+              "ttr": 0.237
+            }
+          }
+        },
+        "abstract": {
+          "prompt": "We report the observation of a periodic signal in the residuals, significant at the three-sigma level.",
+          "text": " We interpret it as the result of a random walk process in the direction of the observed signal, where the direction is aligned with the vector $2\\pi\\delta\\lambda$. The signal is approximately centered around $\\lambda \\approx 0.677$.\nWe define the parameter space of interest as\n$$\\mathcal{P}_{\\text{int}}=\\{0 \\le \\delta\\lambda \\le \\lambda_{\\text{max}}\\}.$$\nIn this case, the signal is shifted along the parameter space and we have a mean direction $\\delta\\lambda = 0$ with mean height $\\mu(\\delta\\lambda) = 0$. The maximum value $\\mu(\\delta\\lambda) = ",
+          "chars": 552,
+          "metrics": {
+            "wake": {
+              "words": 87,
+              "self_repeat": 0.0,
+              "verb3": 0.059,
+              "verb5": 0.0,
+              "novel_words": 0.188,
+              "ttr": 0.552
+            },
+            "english": {
+              "words": 87,
+              "self_repeat": 0.0,
+              "verb3": 0.082,
+              "verb5": 0.012,
+              "novel_words": 0.333,
+              "ttr": 0.552
+            }
+          }
+        },
+        "domestic": {
+          "prompt": "I got home late and the front door was already open.",
+          "text": " I was looking through the open door. I see what appears to be a white fluffy dog, a little white dog.\nWait, but the white fluffy dog... what are you really looking at?\nWhat is the best answer for this?\n(A) 2020\n(B) 2020s\n(C) 2020s\n(D) 2020s\n\n<think>\n\n</think>\n\nBased on the visual evidence in the prompt, the author is describing a **white fluffy dog**. The text explicitly asks, \"What are you really looking at?\" and provides a list of options labeled (A) through (D), but only (B) and (C) actually use the word \"2",
+          "chars": 516,
+          "metrics": {
+            "wake": {
+              "words": 94,
+              "self_repeat": 0.044,
+              "verb3": 0.087,
+              "verb5": 0.0,
+              "novel_words": 0.093,
+              "ttr": 0.574
+            },
+            "english": {
+              "words": 94,
+              "self_repeat": 0.044,
+              "verb3": 0.174,
+              "verb5": 0.0,
+              "novel_words": 0.111,
+              "ttr": 0.574
+            }
+          }
+        }
+      }
+    }
+  }
+}
