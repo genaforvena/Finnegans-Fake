@@ -269,3 +269,14 @@ SEEDS="1 2 3" ./wake/run-seed-spread.sh          # the 144 family (N defaults to
   --a wake/recs-ft47rs{1,2,3}-e3.json --label-a 47 \
   --b wake/recs-ft144s{1,2,3}-e3.json --label-b 144
 ```
+
+## Recheck against the untrained base (2026-09-12)
+
+Recomputed the 47-fold family against the untrained base through the replication gate, using the
+35 windows shared by all three 47-fold trainings and the base score. The family mean is
+**+0.0129 ± 0.0016** SIGNAL/novel; the base is **+0.0071 ± 0.0015**. Paired as base − 47, the
+difference is **−0.0058 ± 0.0019** (−3.1 sem; 25/35 windows favor the trained family). The
+training-draw term is included in the bar: sd 0.00178 across three runs, or ±0.00103 on the
+family mean. The command was `python3 wake/paired.py --a wake/recs-ft47rs1-e3.json
+wake/recs-ft47rs2-e3.json wake/recs-ft47rs3-e3.json --label-a 47 --b wake/recs-model.json
+--label-b base`.
