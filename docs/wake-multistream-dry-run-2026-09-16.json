@@ -1,0 +1,22 @@
+{
+  "status": "DRY_RUN_PASS",
+  "target": "/home/mesh-home/finnegans-fake/wake/multistream-target.jsonl",
+  "target_sha256": "ab89781f7257db1741f48d963cff588a4101a9ef915a5efd2e12c3d19b62c947",
+  "windows": 8,
+  "atoms": 74,
+  "streams": 31,
+  "annotation_gate": "BLOCKED: independent human annotation required",
+  "gpu_prerequisite": {
+    "minimum_free_vram_mib": 5600,
+    "observed": true,
+    "status": "BLOCKED",
+    "readings": [
+      {
+        "free_vram_mib": 3438,
+        "utilization_percent": 0
+      }
+    ]
+  },
+  "training": "not launched",
+  "checked_at": "2026-09-16T04:35:21.518637+00:00"
+}
